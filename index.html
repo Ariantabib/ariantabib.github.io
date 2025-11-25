@@ -206,7 +206,6 @@
         };
 
         // --- PROJECT GENERATION HELPER ---
-        // Generates gallery arrays based on your file structure
         const generateGallery = (id, count, hasIndex = true) => {
             if (!hasIndex) return [`./images/project${id}-gallery.jpg`];
             return Array.from({ length: count }, (_, i) => `./images/project${id}-gallery${i + 1}.jpg`);
@@ -217,7 +216,7 @@
             { 
                 id: 1, order: 1, 
                 title: { en: "Experience Narrative Center", fa: "مرکز خرید روایت تجربه" }, 
-                desc: { en: "This large-scale commercial complex transcends the traditional retail model by offering a narrative-driven journey. Defined by a fluid, Zaha Hadid-inspired parametric facade, the project features a "Cultural Tower" where each floor immerses visitors in the atmosphere of a different world culture. The design prioritizes optimized circulation and a dynamic spatial experience.", fa: "این مجتمع تجاری بزرگ‌مقیاس با ارائه یک سفر روایت‌محور، فراتر از مدل‌های سنتی خرده‌فروشی عمل می‌کند. این پروژه که با یک نمای پارامتریک سیال و الهام‌گرفته از زاها حدید تعریف می‌شود، دارای یک "برج فرهنگی" است که در آن هر طبقه بازدیدکنندگان را در اتمسفر فرهنگ متفاوتی از جهان غرق می‌کند. طراحی بر سیرکولاسیون بهینه و تجربه فضایی پویا اولویت دارد." },
+                desc: { en: "This large-scale commercial complex transcends the traditional retail model by offering a narrative-driven journey. Defined by a fluid, Zaha Hadid-inspired parametric facade, the project features a 'Cultural Tower' where each floor immerses visitors in the atmosphere of a different world culture. The design prioritizes optimized circulation and a dynamic spatial experience.", fa: "این مجتمع تجاری بزرگ‌مقیاس با ارائه یک سفر روایت‌محور، فراتر از مدل‌های سنتی خرده‌فروشی عمل می‌کند. این پروژه که با یک نمای پارامتریک سیال و الهام‌گرفته از زاها حدید تعریف می‌شود، دارای یک 'برج فرهنگی' است که در آن هر طبقه بازدیدکنندگان را در اتمسفر فرهنگ متفاوتی از جهان غرق می‌کند. طراحی بر سیرکولاسیون بهینه و تجربه فضایی پویا اولویت دارد." },
                 tags: ["arch"], loc: "Tehran, Saadat Abad", img: "./images/project1-img.jpg", 
                 gallery: generateGallery(1, 6)
             },
@@ -259,21 +258,21 @@
             { 
                 id: 7, order: 7, 
                 title: { en: "Modern BedRoom 1", fa: "طراحی اتاق خواب مدرن 1" }, 
-                desc: { en: "An executive residential project in Mahmudabad that masters the challenge of a non-orthogonal, curved floor plan. The interior design embraces the architecture’s fluidity, using custom furniture and organic lines to create a sophisticated, modern coastal retreat. A neutral palette combined with rich textures creates an atmosphere of understated luxury.", fa: "یک پروژه مسکونی اجرایی در محمودآباد که بر چالش یک پلان منحنی و غیرگونیا غلبه می‌کند. طراحی داخلی با استفاده از مبلمان سفارشی و خطوط ارگانیک، سیالیت معماری را در آغوش می‌گیرد تا یک پناهگاه ساحلی مدرن و شیک خلق کند. پالت رنگی خنثی در ترکیب با بافت‌های غنی، فضایی از لوکس بودن بی‌پیرایه را ایجاد می‌کند." },
+                desc: { en: "Exploration of modern bedroom aesthetics using AI and digital tools.", fa: "کاوش در زیبایی‌شناسی اتاق خواب مدرن با استفاده از هوش مصنوعی و ابزارهای دیجیتال." },
                 tags: ["ai", "interior", "exec"], loc: "Virtual", img: "./images/project7-img.jpg", 
                 gallery: generateGallery(7, 5)
             },
             { 
                 id: 8, order: 8, 
                 title: { en: "Modern BedRoom 2", fa: "طراحی اتاق خواب مدرن 2" }, 
-                desc: { en: "An executive residential project in Mahmudabad that masters the challenge of a non-orthogonal, curved floor plan. The interior design embraces the architecture’s fluidity, using custom furniture and organic lines to create a sophisticated, modern coastal retreat. A neutral palette combined with rich textures creates an atmosphere of understated luxury.", fa: "یک پروژه مسکونی اجرایی در محمودآباد که بر چالش یک پلان منحنی و غیرگونیا غلبه می‌کند. طراحی داخلی با استفاده از مبلمان سفارشی و خطوط ارگانیک، سیالیت معماری را در آغوش می‌گیرد تا یک پناهگاه ساحلی مدرن و شیک خلق کند. پالت رنگی خنثی در ترکیب با بافت‌های غنی، فضایی از لوکس بودن بی‌پیرایه را ایجاد می‌کند." },
+                desc: { en: "A conceptual approach to bedroom design focusing on warmth and minimalism.", fa: "رویکردی مفهومی به طراحی اتاق خواب با تمرکز بر گرما و مینیمالیسم." },
                 tags: ["sketch", "interior", "exec"], loc: "Sketchbook", img: "./images/project8-img.jpg", 
                 gallery: generateGallery(8, 5)
             },
             { 
                 id: 9, order: 9, 
                 title: { en: "Modern BathRoom", fa: "سرویس بهداشتی مدرن" }, 
-                desc: { en: "An executive residential project in Mahmudabad that masters the challenge of a non-orthogonal, curved floor plan. The interior design embraces the architecture’s fluidity, using custom furniture and organic lines to create a sophisticated, modern coastal retreat. A neutral palette combined with rich textures creates an atmosphere of understated luxury.", fa: "یک پروژه مسکونی اجرایی در محمودآباد که بر چالش یک پلان منحنی و غیرگونیا غلبه می‌کند. طراحی داخلی با استفاده از مبلمان سفارشی و خطوط ارگانیک، سیالیت معماری را در آغوش می‌گیرد تا یک پناهگاه ساحلی مدرن و شیک خلق کند. پالت رنگی خنثی در ترکیب با بافت‌های غنی، فضایی از لوکس بودن بی‌پیرایه را ایجاد می‌کند." },
+                desc: { en: "High-end bathroom design featuring luxury materials and fixtures.", fa: "طراحی سرویس بهداشتی سطح بالا با استفاده از متریال و شیرآلات لوکس." },
                 tags: ["arch", "exec", "interior"], loc: "Shiraz", img: "./images/project9-img.jpg", 
                 gallery: generateGallery(9, 5)
             },
@@ -881,6 +880,8 @@
                                     </p>
                                     
                                     <div className="border-t border-white/10 pt-6 grid grid-cols-2 gap-4 text-xs text-white/40 font-mono">
+                                        <div>ORDER: {selectedProject.order}</div>
+                                        <div>TAGS: {selectedProject.tags.join(', ').toUpperCase()}</div>
                                         <div>ROLE: Lead Architect</div>
                                         <div>STATUS: Completed</div>
                                     </div>
