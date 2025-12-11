@@ -188,11 +188,11 @@
 
         // --- ICONS ---
         const Icons = {
-            Close: () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 6L6 18M6 6l12 12"/></svg>,
+            Close: () => <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 6L6 18M6 6l12 12"/></svg>,
             Menu: () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>,
             ArrowDown: () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>,
-            ArrowRight: () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 18l6-6-6-6"/></svg>,
-            ArrowLeft: () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M15 18l-6-6 6-6"/></svg>,
+            ArrowRight: () => <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M9 18l6-6-6-6"/></svg>,
+            ArrowLeft: () => <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M15 18l-6-6 6-6"/></svg>,
             Download: () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>,
             Instagram: () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>,
             Linkedin: () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>,
@@ -894,25 +894,36 @@
                     {/* --- MODAL --- */}
                     {selectedProject && (
                         <div 
-                            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/95 backdrop-blur-md animate-fade-in"
+                            className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-xl animate-fade-in" // Blurred & Darkened background
                             onClick={handleBackdropClick}
                         >
-                            {/* Fixed size container */}
-                            <div 
-                                className="relative w-full max-w-7xl h-[90vh] md:h-[85vh] bg-[#0A0A0A] border border-white/10 shadow-2xl flex flex-col md:flex-row rounded-lg overflow-hidden" 
-                                onClick={(e) => e.stopPropagation()}
+                            {/* Navigation Buttons (Global) - for modern feel, placed on screen edges */}
+                            <button 
+                                onClick={prevMedia}
+                                className="absolute left-4 top-1/2 -translate-y-1/2 p-4 text-white/50 hover:text-white hover:scale-110 transition-all z-50 hidden md:block"
                             >
+                                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1"><path d="M15 18l-6-6 6-6"/></svg>
+                            </button>
+                            <button 
+                                onClick={nextMedia}
+                                className="absolute right-4 top-1/2 -translate-y-1/2 p-4 text-white/50 hover:text-white hover:scale-110 transition-all z-50 hidden md:block"
+                            >
+                                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1"><path d="M9 18l6-6-6-6"/></svg>
+                            </button>
+
+                            <div className="w-full h-full max-w-[1920px] p-4 md:p-12 flex flex-col md:flex-row gap-8 items-center justify-center relative pointer-events-none">
+                                {/* Pointer events none on wrapper to let clicks pass through to backdrop if needed, but auto on children */}
                                 
+                                {/* Close Button - Top Right of Screen */}
                                 <button 
-                                    className="absolute top-4 right-4 z-50 p-2 bg-black/50 hover:bg-accent text-white rounded-full transition-colors backdrop-blur-md"
+                                    className="absolute top-6 right-6 z-50 text-white/50 hover:text-white transition-colors pointer-events-auto"
                                     onClick={() => setSelectedProject(null)}
-                                    onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)}
                                 >
                                     <Icons.Close />
                                 </button>
 
-                                {/* Media Section: Flex-1 to take available space */}
-                                <div className="relative flex-1 bg-black flex items-center justify-center overflow-hidden group">
+                                {/* Media Section - Frameless, Free */}
+                                <div className="flex-1 w-full h-[50vh] md:h-full flex items-center justify-center relative pointer-events-auto" onClick={(e) => e.stopPropagation()}>
                                     
                                     {isImageLoading && (
                                         <div className="absolute inset-0 flex items-center justify-center z-10">
@@ -925,74 +936,67 @@
                                             src={selectedProject.video} 
                                             controls 
                                             autoPlay 
-                                            className="w-full h-full object-contain transition-opacity duration-300"
+                                            className="max-w-full max-h-full w-auto h-auto object-contain shadow-2xl transition-opacity duration-300"
                                             onLoadedData={handleImageLoad}
                                         ></video>
                                     ) : (
                                         <img 
                                             src={selectedProject.gallery[modalImageIndex]} 
                                             onLoad={handleImageLoad}
-                                            className={`w-full h-full object-contain transition-opacity duration-300 ${isImageLoading ? 'opacity-0' : 'opacity-100'}`}
+                                            className={`max-w-full max-h-full w-auto h-auto object-contain shadow-2xl transition-opacity duration-300 ${isImageLoading ? 'opacity-0' : 'opacity-100'}`}
                                             alt="Project Detail" 
                                         />
                                     )}
                                     
+                                    {/* Mobile Navigation (inside image area) */}
                                     {(selectedProject.gallery.length + (selectedProject.video ? 1 : 0)) > 1 && (
-                                        <>
+                                        <div className="md:hidden contents">
                                             <button 
                                                 onClick={prevMedia}
-                                                className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 p-2 md:p-3 bg-black/30 hover:bg-accent text-white backdrop-blur-md rounded-full transition-all cursor-none opacity-100 md:opacity-0 md:group-hover:opacity-100 z-20"
-                                                onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)}
+                                                className="absolute left-2 top-1/2 -translate-y-1/2 p-2 bg-black/30 hover:bg-accent text-white backdrop-blur-md rounded-full transition-all"
                                             >
                                                 <Icons.ArrowLeft />
                                             </button>
                                             <button 
                                                 onClick={nextMedia}
-                                                className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 p-2 md:p-3 bg-black/30 hover:bg-accent text-white backdrop-blur-md rounded-full transition-all cursor-none opacity-100 md:opacity-0 md:group-hover:opacity-100 z-20"
-                                                onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)}
+                                                className="absolute right-2 top-1/2 -translate-y-1/2 p-2 bg-black/30 hover:bg-accent text-white backdrop-blur-md rounded-full transition-all"
                                             >
                                                 <Icons.ArrowRight />
                                             </button>
-                                            
-                                            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-20">
-                                                {selectedProject.gallery.map((_, idx) => (
-                                                    <div 
-                                                        key={idx} 
-                                                        className={`w-1.5 h-1.5 rounded-full transition-all ${idx === modalImageIndex ? 'bg-accent w-4' : 'bg-white/50'}`}
-                                                    ></div>
-                                                ))}
-                                                {selectedProject.video && (
-                                                    <div 
-                                                        className={`w-1.5 h-1.5 rounded-full transition-all ${selectedProject.gallery.length === modalImageIndex ? 'bg-accent w-4' : 'bg-white/50'}`}
-                                                    ></div>
-                                                )}
-                                            </div>
-                                        </>
+                                        </div>
                                     )}
                                 </div>
 
-                                {/* Info Section: Fixed width sidebar */}
+                                {/* Info Section - Framed Card */}
                                 <div 
-                                    className={`w-full md:w-[400px] flex-shrink-0 bg-[#111] border-l border-white/10 flex flex-col max-h-[40%] md:max-h-full ${isRTL ? 'border-r border-l-0 order-first md:order-last' : ''}`}
+                                    className={`w-full md:w-[400px] lg:w-[450px] max-h-[40vh] md:max-h-[80vh] flex flex-col bg-[#111] border border-white/10 shadow-2xl rounded-sm overflow-hidden pointer-events-auto ${isRTL ? 'text-right font-fa' : 'text-left'}`}
                                     dir={isRTL ? 'rtl' : 'ltr'}
+                                    onClick={(e) => e.stopPropagation()} // Prevent close on click
                                 >
-                                    <div className="p-6 md:p-8 overflow-y-auto flex-1 modal-scroll">
-                                        <span className="text-accent text-xs uppercase tracking-widest mb-2 block">{selectedProject.loc}</span>
-                                        <h2 className={`text-xl md:text-3xl font-bold mb-4 md:mb-6 text-white leading-tight ${isRTL ? 'font-fa' : ''}`}>{selectedProject.title[lang]}</h2>
-                                        <p className={`text-secondary leading-loose text-xs md:text-sm mb-6 md:mb-8 ${isRTL ? 'font-fa' : ''}`}>
-                                            {selectedProject.desc[lang]}
-                                        </p>
+                                    {/* Scrollable Content */}
+                                    <div className="p-8 md:p-10 overflow-y-auto flex-1 modal-scroll flex flex-col">
+                                        <span className="text-accent text-xs uppercase tracking-[0.2em] mb-4 block opacity-80">{selectedProject.loc}</span>
+                                        <h2 className={`text-3xl md:text-4xl font-bold mb-8 text-white leading-tight ${isRTL ? 'font-fa' : ''}`}>{selectedProject.title[lang]}</h2>
                                         
-                                        <div className="border-t border-white/10 pt-6 grid grid-cols-1 gap-2 md:gap-4 text-xs text-white/40 font-mono hidden md:grid">
-                                            <div>ROLE: Lead Architect</div>
-                                            <div>STATUS: Completed</div>
-                                            <div>TAGS: {selectedProject.tags.join(', ').toUpperCase()}</div>
+                                        {/* Description with more line height */}
+                                        <div className={`text-secondary text-sm md:text-base leading-[2.5] ${isRTL ? 'font-fa' : ''}`}>
+                                           {selectedProject.desc[lang]}
+                                        </div>
+
+                                        {/* Spacer to push metadata down */}
+                                        <div className="mt-auto pt-12"></div> 
+
+                                        {/* Metadata at bottom */}
+                                        <div className="border-t border-white/10 pt-6 grid grid-cols-1 gap-3 text-xs text-white/40 font-mono tracking-wider">
+                                            <div className="flex justify-between"><span>ROLE:</span> <span className="text-white/70">Lead Architect</span></div>
+                                            <div className="flex justify-between"><span>STATUS:</span> <span className="text-white/70">Completed</span></div>
+                                            <div className="flex justify-between"><span>TAGS:</span> <span className="text-white/70">{selectedProject.tags.join(', ').toUpperCase()}</span></div>
                                         </div>
                                     </div>
 
-                                    {/* Fixed Bottom Action Area (AR Button) */}
+                                    {/* AR Button if needed */}
                                     {selectedProject.hasAR && (
-                                        <div className="p-4 md:p-6 border-t border-white/10 bg-[#111]">
+                                        <div className="p-6 border-t border-white/10 bg-[#111]">
                                             <button className="w-full py-3 bg-accent/10 border border-accent text-accent hover:bg-accent hover:text-black transition-all font-bold tracking-widest uppercase text-xs rounded flex items-center justify-center gap-2 group">
                                                 <span>{lang === 'en' ? 'View in AR' : 'واقعیت مجازی سه بعدی'}</span>
                                                 <Icons.AR />
