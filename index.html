@@ -43,9 +43,9 @@
     }
     </script>
     
-    <!-- React & ReactDOM -->
-    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <!-- React & ReactDOM (Updated to Specific Version 18.2.0 to fix version mismatch error) -->
+    <script crossorigin src="https://unpkg.com/react@18.2.0/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
     
     <!-- Babel -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -134,6 +134,12 @@
             backdrop-filter: blur(2px);
         }
 
+        /* Scrollbar for Modal Sidebar */
+        .modal-scroll::-webkit-scrollbar { width: 4px; }
+        .modal-scroll::-webkit-scrollbar-track { background: #111; }
+        .modal-scroll::-webkit-scrollbar-thumb { background: #333; border-radius: 2px; }
+        .modal-scroll::-webkit-scrollbar-thumb:hover { background: #C1A365; }
+
         /* --- Noise Overlay --- */
         .noise {
             position: fixed;
@@ -182,18 +188,19 @@
 
         // --- ICONS ---
         const Icons = {
-            Close: () => <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M18 6L6 18M6 6l12 12"/></svg>,
+            Close: () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 6L6 18M6 6l12 12"/></svg>,
             Menu: () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>,
             ArrowDown: () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>,
-            ArrowRight: () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>,
-            ArrowLeft: () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>,
+            ArrowRight: () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 18l6-6-6-6"/></svg>,
+            ArrowLeft: () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M15 18l-6-6 6-6"/></svg>,
             Download: () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>,
             Instagram: () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>,
             Linkedin: () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>,
             Youtube: () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.33 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>,
             Send: () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>, // Telegram
             Mail: () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>,
-            Phone: () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+            Phone: () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>,
+            AR: () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M2 8V5a3 3 0 0 1 3-3h3"/><path d="M2 16v3a3 3 0 0 0 3 3h3"/><path d="M22 8V5a3 3 0 0 0-3-3h-3"/><path d="M22 16v3a3 3 0 0 1-3 3h-3"/><path d="M12 8l-4 2 4 2 4-2-4-2z"/><path d="M8 10v4l4 2 4-2v-4"/></svg>
         };
 
         // --- CONTENT & DATA ---
@@ -288,14 +295,14 @@
                 id: 1, order: 1, 
                 title: { en: "Experience Narrative Center", fa: "مرکز خرید روایت تجربه" }, 
                 desc: { en: "This large-scale commercial complex transcends the traditional retail model by offering a narrative-driven journey. Defined by a fluid, Zaha Hadid-inspired parametric facade, the project features a 'Cultural Tower' where each floor immerses visitors in the atmosphere of a different world culture. The design prioritizes optimized circulation and a dynamic spatial experience.", fa: "این مجتمع تجاری بزرگ‌مقیاس با ارائه یک سفر روایت‌محور، فراتر از مدل‌های سنتی خرده‌فروشی عمل می‌کند. این پروژه که با یک نمای پارامتریک سیال و الهام‌گرفته از زاها حدید تعریف می‌شود، دارای یک 'برج فرهنگی' است که در آن هر طبقه بازدیدکنندگان را در اتمسفر فرهنگ متفاوتی از جهان غرق می‌کند. طراحی بر سیرکولاسیون بهینه و تجربه فضایی پویا اولویت دارد." },
-                tags: ["arch"], loc: "Tehran, Saadat Abad", img: "./images/project1-img.jpg", 
+                tags: ["arch"], loc: "Tehran, Saadat Abad", img: "./images/project1-img.jpg", hasAR: true,
                 gallery: generateGallery(1, 6)
             },
             { 
                 id: 2, order: 2, 
                 title: { en: "Specialized Eye Hospital", fa: "بیمارستان تخصصی چشم‌" }, 
                 desc: { en: "Located in East Tehran, this specialized ophthalmology hospital merges advanced medical functionality with patient-centric design. The building’s tiered, terraced form integrates green spaces and balconies on every level, utilizing sustainable principles to create a healing environment that maximizes natural light and connects patients with nature.", fa: "این بیمارستان تخصصی چشم‌پزشکی در شرق تهران، عملکرد پیشرفته پزشکی را با طراحی بیمار-محور ادغام می‌کند. فرم پلکانی و لایه‌لایه ساختمان، فضاهای سبز و بالکن‌ها را در هر طبقه یکپارچه کرده و با استفاده از اصول پایداری، محیطی شفابخش ایجاد می‌کند که نور طبیعی را به حداکثر رسانده و بیماران را با طبیعت پیوند می‌دهد." },
-                tags: ["interior", "exec", "arch"], loc: "Tehran, Hakimieh", img: "./images/project2-img.jpg", 
+                tags: ["interior", "exec", "arch"], loc: "Tehran, Hakimieh", img: "./images/project2-img.jpg", hasAR: true,
                 gallery: generateGallery(2, 4)
             },
             { 
@@ -431,27 +438,6 @@
                 tags: ["exec", "interior"], loc: "Tehran, Opal Mall", img: "./images/project21-img.jpg", 
                 gallery: generateGallery(21, 11)
             },
-            // { 
-            //     id: 22, order: 22, 
-            //     title: { en: "Project 22", fa: "پروژه ۲۲" }, 
-            //     desc: { en: "Placeholder description for Project 22.", fa: "توضیحات آزمایشی برای پروژه ۲۲." },
-            //     tags: ["cgi"], loc: "Tabriz", img: "./images/project22-img.jpg", 
-            //     gallery: generateGallery(22, 3)
-            // },
-            // { 
-            //     id: 23, order: 23, 
-            //     title: { en: "Project 23", fa: "پروژه ۲۳" }, 
-            //     desc: { en: "Placeholder description for Project 23.", fa: "توضیحات آزمایشی برای پروژه ۲۳." },
-            //     tags: ["ads", "sketch"], loc: "Studio", img: "./images/project23-img.jpg", 
-            //     gallery: generateGallery(23, 3)
-            // },
-            // { 
-            //     id: 24, order: 24, 
-            //     title: { en: "Project 24", fa: "پروژه ۲۴" }, 
-            //     desc: { en: "Placeholder description for Project 24.", fa: "توضیحات آزمایشی برای پروژه ۲۴." },
-            //     tags: ["arch"], loc: "Ramsar", img: "./images/project24-img.jpg", 
-            //     gallery: generateGallery(24, 3)
-            // },
             { 
                 id: 25, order: 25, 
                 title: { en: "Culinary Precision in Midnight Black", fa: "دقت آشپزی در قابی به رنگ شب" }, 
@@ -566,7 +552,6 @@
             },
         ];
 
-        // UPDATED SOCIAL LINKS with specific details
         const socialLinks = [
             { icon: <Icons.Mail />, label: "Email", href: "mailto:arian.tabib@gmail.com", text: "arian.tabib@gmail.com" },
             { icon: <Icons.Phone />, label: "Mobile", href: "tel:+989392263236", text: "+98 939 226 3236" },
@@ -582,7 +567,6 @@
             "./images/hero3.jpg"
         ];
 
-        // --- APP ---
         const App = () => {
             const [lang, setLang] = useState('en');
             const [currentSlide, setCurrentSlide] = useState(0);
@@ -590,7 +574,7 @@
             const [selectedProject, setSelectedProject] = useState(null);
             const [menuOpen, setMenuOpen] = useState(false);
             const [modalImageIndex, setModalImageIndex] = useState(0);
-            const [isImageLoading, setIsImageLoading] = useState(false); // New state for loading
+            const [isImageLoading, setIsImageLoading] = useState(false);
             
             const cursorDotRef = useRef(null);
             const cursorOutlineRef = useRef(null);
@@ -599,7 +583,6 @@
             const timeline = timelineData[lang];
             const isRTL = lang === 'fa';
 
-            // --- Logic ---
             useEffect(() => {
                 const moveCursor = (e) => {
                     const { clientX: x, clientY: y } = e;
@@ -636,7 +619,6 @@
                 document.getElementById('work').scrollIntoView({ behavior: 'smooth' });
             };
             
-            // New Helper for Smooth Scroll on Nav Links
             const handleNavClick = (e, targetId) => {
                 e.preventDefault();
                 const element = document.getElementById(targetId);
@@ -651,7 +633,7 @@
                 if (selectedProject) {
                     const totalMedia = selectedProject.gallery.length + (selectedProject.video ? 1 : 0);
                     setModalImageIndex((prev) => (prev + 1) % totalMedia);
-                    setIsImageLoading(true); // Set loading on change
+                    setIsImageLoading(true);
                 }
             };
 
@@ -660,14 +642,14 @@
                 if (selectedProject) {
                     const totalMedia = selectedProject.gallery.length + (selectedProject.video ? 1 : 0);
                     setModalImageIndex((prev) => (prev - 1 + totalMedia) % totalMedia);
-                    setIsImageLoading(true); // Set loading on change
+                    setIsImageLoading(true);
                 }
             };
 
             const openProject = (project) => {
                 setSelectedProject(project);
                 setModalImageIndex(0);
-                setIsImageLoading(true); // Set loading on open
+                setIsImageLoading(true);
             };
 
             const handleImageLoad = () => {
@@ -694,7 +676,6 @@
                     {/* --- HEADER --- */}
                     <header className="fixed top-0 w-full z-40 py-6 header-fade transition-all duration-500">
                         <div className="container mx-auto px-6 md:px-12 flex justify-between items-center">
-                            {/* Logo Image */}
                             <a href="#" onClick={scrollToTop} className="z-50 block w-12 h-12 cursor-none" onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)}>
                                 <img 
                                     src="./images/logo.png" 
@@ -704,7 +685,6 @@
                                 />
                             </a>
 
-                            {/* Nav */}
                             <nav className="hidden md:flex items-center gap-8">
                                 {Object.entries(t.nav).map(([key, label]) => (
                                     <a key={key} href={`#${key}`} onClick={(e) => handleNavClick(e, key)} className="text-xs font-bold uppercase tracking-widest text-white/70 hover:text-white transition-colors" onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)}>
@@ -712,7 +692,6 @@
                                     </a>
                                 ))}
                                 
-                                {/* Download Button (Desktop) */}
                                 <a 
                                     href="./docs/portfolio.pdf" 
                                     download 
@@ -747,7 +726,6 @@
                                 <a key={key} href={`#${key}`} onClick={(e) => handleNavClick(e, key)} className="text-2xl text-white font-light">{label}</a>
                             ))}
                             
-                            {/* Download Button (Mobile) */}
                             <a 
                                 href="./docs/portfolio.pdf" 
                                 download 
@@ -876,7 +854,6 @@
                                         {t.about.bio}
                                     </p>
 
-                                    {/* TIMELINE: WORK EXPERIENCE */}
                                     <div className="mt-16">
                                         <h3 className={`text-xl font-bold text-white mb-8 border-b border-white/10 pb-2 ${isRTL ? 'font-fa' : ''}`}>{t.about.expTitle}</h3>
                                         <div className={`space-y-8 relative ${isRTL ? 'border-r mr-2 pr-8' : 'border-l ml-2 pl-8'} border-white/10`}>
@@ -891,7 +868,6 @@
                                         </div>
                                     </div>
 
-                                    {/* TIMELINE: EDUCATION */}
                                     <div className="mt-16">
                                         <h3 className={`text-xl font-bold text-white mb-8 border-b border-white/10 pb-2 ${isRTL ? 'font-fa' : ''}`}>{t.about.eduTitle}</h3>
                                         <div className={`space-y-8 relative ${isRTL ? 'border-r mr-2 pr-8' : 'border-l ml-2 pl-8'} border-white/10`}>
@@ -918,26 +894,28 @@
                     {/* --- MODAL --- */}
                     {selectedProject && (
                         <div 
-                            className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-8 bg-black/95 backdrop-blur-sm animate-fade-in"
+                            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/95 backdrop-blur-md animate-fade-in"
                             onClick={handleBackdropClick}
                         >
-                            {/* Modal Content Container - Now adapts to content size */}
-                            <div className="relative bg-bg border border-white/10 shadow-2xl overflow-hidden flex flex-col md:flex-row max-h-full max-w-full transition-all duration-300 ease-in-out">
+                            {/* Fixed size container */}
+                            <div 
+                                className="relative w-full max-w-7xl h-[90vh] md:h-[85vh] bg-[#0A0A0A] border border-white/10 shadow-2xl flex flex-col md:flex-row rounded-lg overflow-hidden" 
+                                onClick={(e) => e.stopPropagation()}
+                            >
                                 
                                 <button 
-                                    className="absolute top-4 right-4 z-30 text-white hover:text-accent p-2 rounded-full backdrop-blur-md bg-black/50"
+                                    className="absolute top-4 right-4 z-50 p-2 bg-black/50 hover:bg-accent text-white rounded-full transition-colors backdrop-blur-md"
                                     onClick={() => setSelectedProject(null)}
                                     onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)}
                                 >
                                     <Icons.Close />
                                 </button>
 
-                                {/* Media Section (Adaptive) */}
-                                <div className="relative group flex-shrink-0 bg-black flex items-center justify-center min-h-[200px]">
+                                {/* Media Section: Flex-1 to take available space */}
+                                <div className="relative flex-1 bg-black flex items-center justify-center overflow-hidden group">
                                     
                                     {isImageLoading && (
                                         <div className="absolute inset-0 flex items-center justify-center z-10">
-                                            {/* Simple CSS Spinner */}
                                             <div className="w-10 h-10 border-4 border-accent border-t-transparent rounded-full animate-spin"></div>
                                         </div>
                                     )}
@@ -947,19 +925,14 @@
                                             src={selectedProject.video} 
                                             controls 
                                             autoPlay 
-                                            // Video also needs to be constrained
-                                            className="max-w-[calc(100vw-32px)] md:max-w-[calc(100vw-384px)] max-h-[calc(100vh-64px)] w-auto h-auto object-contain"
+                                            className="w-full h-full object-contain transition-opacity duration-300"
                                             onLoadedData={handleImageLoad}
                                         ></video>
                                     ) : (
                                         <img 
                                             src={selectedProject.gallery[modalImageIndex]} 
                                             onLoad={handleImageLoad}
-                                            // CSS constraints to ensure it fits viewport but keeps aspect ratio
-                                            // Mobile max-w: 100vw - 32px padding
-                                            // Desktop max-w: 100vw - 64px padding - 320px sidebar = 100vw - 384px
-                                            // Max-h: 100vh - 64px padding
-                                            className={`max-w-[calc(100vw-32px)] md:max-w-[calc(100vw-384px)] max-h-[calc(100vh-64px)] w-auto h-auto object-contain transition-opacity duration-300 ${isImageLoading ? 'opacity-0' : 'opacity-100'}`}
+                                            className={`w-full h-full object-contain transition-opacity duration-300 ${isImageLoading ? 'opacity-0' : 'opacity-100'}`}
                                             alt="Project Detail" 
                                         />
                                     )}
@@ -968,14 +941,14 @@
                                         <>
                                             <button 
                                                 onClick={prevMedia}
-                                                className="absolute left-4 top-1/2 -translate-y-1/2 p-3 bg-black/30 hover:bg-accent text-white backdrop-blur-md rounded-full transition-all cursor-none opacity-0 group-hover:opacity-100"
+                                                className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 p-2 md:p-3 bg-black/30 hover:bg-accent text-white backdrop-blur-md rounded-full transition-all cursor-none opacity-100 md:opacity-0 md:group-hover:opacity-100 z-20"
                                                 onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)}
                                             >
                                                 <Icons.ArrowLeft />
                                             </button>
                                             <button 
                                                 onClick={nextMedia}
-                                                className="absolute right-4 top-1/2 -translate-y-1/2 p-3 bg-black/30 hover:bg-accent text-white backdrop-blur-md rounded-full transition-all cursor-none opacity-0 group-hover:opacity-100"
+                                                className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 p-2 md:p-3 bg-black/30 hover:bg-accent text-white backdrop-blur-md rounded-full transition-all cursor-none opacity-100 md:opacity-0 md:group-hover:opacity-100 z-20"
                                                 onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)}
                                             >
                                                 <Icons.ArrowRight />
@@ -998,22 +971,34 @@
                                     )}
                                 </div>
 
-                                {/* Info Section */}
+                                {/* Info Section: Fixed width sidebar */}
                                 <div 
-                                    className={`w-full md:w-[320px] p-6 flex flex-col bg-surface border-l border-white/10 overflow-y-auto ${isRTL ? 'text-right font-fa border-r border-l-0' : 'text-left'}`} 
+                                    className={`w-full md:w-[400px] flex-shrink-0 bg-[#111] border-l border-white/10 flex flex-col max-h-[40%] md:max-h-full ${isRTL ? 'border-r border-l-0 order-first md:order-last' : ''}`}
                                     dir={isRTL ? 'rtl' : 'ltr'}
-                                    style={{ flexShrink: 0 }} // Prevent shrinking
                                 >
-                                    <span className="text-accent text-xs uppercase tracking-widest mb-2">{selectedProject.loc}</span>
-                                    <h2 className="text-2xl md:text-3xl font-bold mb-6 text-white">{selectedProject.title[lang]}</h2>
-                                    <p className="text-secondary leading-loose text-sm mb-auto">
-                                        {selectedProject.desc[lang]}
-                                    </p>
-                                    
-                                    <div className="border-t border-white/10 pt-6 mt-8 grid grid-cols-1 gap-4 text-xs text-white/40 font-mono">
-                                        <div>ROLE: Lead Architect</div>
-                                        <div>STATUS: Completed</div>
+                                    <div className="p-6 md:p-8 overflow-y-auto flex-1 modal-scroll">
+                                        <span className="text-accent text-xs uppercase tracking-widest mb-2 block">{selectedProject.loc}</span>
+                                        <h2 className={`text-xl md:text-3xl font-bold mb-4 md:mb-6 text-white leading-tight ${isRTL ? 'font-fa' : ''}`}>{selectedProject.title[lang]}</h2>
+                                        <p className={`text-secondary leading-loose text-xs md:text-sm mb-6 md:mb-8 ${isRTL ? 'font-fa' : ''}`}>
+                                            {selectedProject.desc[lang]}
+                                        </p>
+                                        
+                                        <div className="border-t border-white/10 pt-6 grid grid-cols-1 gap-2 md:gap-4 text-xs text-white/40 font-mono hidden md:grid">
+                                            <div>ROLE: Lead Architect</div>
+                                            <div>STATUS: Completed</div>
+                                            <div>TAGS: {selectedProject.tags.join(', ').toUpperCase()}</div>
+                                        </div>
                                     </div>
+
+                                    {/* Fixed Bottom Action Area (AR Button) */}
+                                    {selectedProject.hasAR && (
+                                        <div className="p-4 md:p-6 border-t border-white/10 bg-[#111]">
+                                            <button className="w-full py-3 bg-accent/10 border border-accent text-accent hover:bg-accent hover:text-black transition-all font-bold tracking-widest uppercase text-xs rounded flex items-center justify-center gap-2 group">
+                                                <span>{lang === 'en' ? 'View in AR' : 'واقعیت مجازی سه بعدی'}</span>
+                                                <Icons.AR />
+                                            </button>
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                         </div>
