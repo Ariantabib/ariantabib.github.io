@@ -16,7 +16,7 @@
     <meta property="og:url" content="https://arian-tabib.github.io/portfolio/">
     <meta property="og:title" content="Arian Tabib | Architect & 3D Visualizer">
     <meta property="og:description" content="Explore the architectural and visualization works of Arian Tabib. Bridging conceptual innovation with technical precision.">
-    <meta property="og:image" content="https://arian-tabib.github.io/portfolio/images/cover-preview.jpg"> <!-- Make sure to upload a cover image named cover-preview.jpg -->
+    <meta property="og:image" content="https://arian-tabib.github.io/portfolio/images/cover-preview.jpg">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
@@ -25,7 +25,7 @@
     <meta property="twitter:description" content="Explore the architectural and visualization works of Arian Tabib.">
     <meta property="twitter:image" content="https://arian-tabib.github.io/portfolio/images/cover-preview.jpg">
 
-    <!-- Structured Data (Schema.org) for AI & Google -->
+    <!-- Structured Data -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -43,7 +43,7 @@
     }
     </script>
     
-    <!-- React & ReactDOM (Updated to Specific Version 18.2.0 to fix version mismatch error) -->
+    <!-- React & ReactDOM -->
     <script crossorigin src="https://unpkg.com/react@18.2.0/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
     
@@ -53,86 +53,25 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Fonts: Oxanium (EN) & Vazirmatn (Fallback for Kalameh FA) -->
+    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@200;300;400;500;600;700&family=Vazirmatn:wght@100;300;400;500;700&display=swap" rel="stylesheet">
 
     <style>
-        /* --- Typography Configuration --- */
-        
-        /* Local Fonts Setup */
-        @font-face {
-            font-family: 'Kalameh';
-            src: url('./fonts/KALAMEH-THIN.woff2') format('woff2');
-            font-weight: 100;
-            font-style: normal;
-            font-display: swap;
-        }
-        @font-face {
-            font-family: 'Kalameh';
-            src: url('./fonts/KALAMEH-REGULAR.woff2') format('woff2');
-            font-weight: 400;
-            font-style: normal;
-            font-display: swap;
-        }
-        @font-face {
-            font-family: 'Kalameh';
-            src: url('./fonts/KALAMEH-BOLD.woff2') format('woff2');
-            font-weight: 700;
-            font-style: normal;
-            font-display: swap;
-        }
-        @font-face {
-            font-family: 'Kalameh';
-            src: url('./fonts/KALAMEH-BLACK.woff2') format('woff2');
-            font-weight: 900;
-            font-style: normal;
-            font-display: swap;
-        }
+        /* Fonts Setup */
+        @font-face { font-family: 'Kalameh'; src: url('./fonts/KALAMEH-THIN.woff2') format('woff2'); font-weight: 100; font-display: swap; }
+        @font-face { font-family: 'Kalameh'; src: url('./fonts/KALAMEH-REGULAR.woff2') format('woff2'); font-weight: 400; font-display: swap; }
+        @font-face { font-family: 'Kalameh'; src: url('./fonts/KALAMEH-BOLD.woff2') format('woff2'); font-weight: 700; font-display: swap; }
+        @font-face { font-family: 'Kalameh'; src: url('./fonts/KALAMEH-BLACK.woff2') format('woff2'); font-weight: 900; font-display: swap; }
 
-        html {
-            scroll-behavior: smooth;
-        }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Oxanium', sans-serif; background-color: #050505; color: #ffffff; overflow-x: hidden; cursor: none; }
+        .font-fa { font-family: 'Kalameh', 'Vazirmatn', Tahoma, sans-serif; }
 
-        body {
-            font-family: 'Oxanium', sans-serif;
-            background-color: #050505;
-            color: #ffffff;
-            overflow-x: hidden;
-            cursor: none;
-        }
-
-        .font-fa {
-            font-family: 'Kalameh', 'Vazirmatn', Tahoma, sans-serif;
-        }
-
-        /* --- Custom Cursor --- */
-        .cursor-dot, .cursor-outline {
-            position: fixed;
-            top: 0;
-            left: 0;
-            transform: translate(-50%, -50%);
-            border-radius: 50%;
-            z-index: 9999;
-            pointer-events: none;
-        }
-        .cursor-dot {
-            width: 6px;
-            height: 6px;
-            background-color: #fff;
-        }
-        .cursor-outline {
-            width: 40px;
-            height: 40px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            transition: width 0.2s, height 0.2s, background-color 0.2s;
-        }
-        body.hovering .cursor-outline {
-            width: 60px;
-            height: 60px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-color: transparent;
-            backdrop-filter: blur(2px);
-        }
+        /* Cursor */
+        .cursor-dot, .cursor-outline { position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; z-index: 9999; pointer-events: none; }
+        .cursor-dot { width: 6px; height: 6px; background-color: #fff; }
+        .cursor-outline { width: 40px; height: 40px; border: 1px solid rgba(255, 255, 255, 0.3); transition: width 0.2s, height 0.2s, background-color 0.2s; }
+        body.hovering .cursor-outline { width: 60px; height: 60px; background-color: rgba(255, 255, 255, 0.1); border-color: transparent; backdrop-filter: blur(2px); }
 
         /* Scrollbar for Modal Sidebar */
         .modal-scroll::-webkit-scrollbar { width: 4px; }
@@ -140,40 +79,17 @@
         .modal-scroll::-webkit-scrollbar-thumb { background: #333; border-radius: 2px; }
         .modal-scroll::-webkit-scrollbar-thumb:hover { background: #C1A365; }
 
-        /* --- Noise Overlay --- */
-        .noise {
-            position: fixed;
-            inset: 0;
-            z-index: 50;
-            opacity: 0.03;
-            pointer-events: none;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-        }
-
-        /* Scrollbar */
-        ::-webkit-scrollbar { width: 5px; }
-        ::-webkit-scrollbar-thumb { background: #444; border-radius: 2px; }
-        ::-webkit-scrollbar-track { background: #050505; }
-
-        /* Header Gradient Fade */
-        .header-fade {
-            background: linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.6) 50%, transparent 100%);
-        }
+        /* Header Fade */
+        .header-fade { background: linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.6) 50%, transparent 100%); }
+        .noise { position: fixed; inset: 0; z-index: 50; opacity: 0.03; pointer-events: none; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"); }
     </style>
     
     <script>
         tailwind.config = {
             theme: {
                 extend: {
-                    colors: {
-                        bg: '#050505',
-                        surface: '#101010',
-                        accent: '#C1A365',
-                        secondary: '#999999'
-                    },
-                    spacing: {
-                        '128': '32rem',
-                    }
+                    colors: { bg: '#050505', surface: '#101010', accent: '#C1A365', secondary: '#999999' },
+                    spacing: { '128': '32rem' }
                 }
             }
         }
@@ -188,16 +104,16 @@
 
         // --- ICONS ---
         const Icons = {
-            Close: () => <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 6L6 18M6 6l12 12"/></svg>,
+            Close: () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 6L6 18M6 6l12 12"/></svg>,
             Menu: () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>,
             ArrowDown: () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>,
-            ArrowRight: () => <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M9 18l6-6-6-6"/></svg>,
-            ArrowLeft: () => <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M15 18l-6-6 6-6"/></svg>,
+            ArrowRight: () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 18l6-6-6-6"/></svg>,
+            ArrowLeft: () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M15 18l-6-6 6-6"/></svg>,
             Download: () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>,
             Instagram: () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>,
             Linkedin: () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>,
             Youtube: () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.33 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>,
-            Send: () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>, // Telegram
+            Send: () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>,
             Mail: () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>,
             Phone: () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>,
             AR: () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M2 8V5a3 3 0 0 1 3-3h3"/><path d="M2 16v3a3 3 0 0 0 3 3h3"/><path d="M22 8V5a3 3 0 0 0-3-3h-3"/><path d="M22 16v3a3 3 0 0 1-3 3h-3"/><path d="M12 8l-4 2 4 2 4-2-4-2z"/><path d="M8 10v4l4 2 4-2v-4"/></svg>
@@ -209,16 +125,7 @@
                 nav: { work: "Projects", about: "About", contact: "Connect" },
                 download: "Download Portfolio",
                 hero: { name: "ARIAN TABIB", sub: "ARCHITECT & VISUALIZER" },
-                filters: { 
-                    all: "All", 
-                    arch: "Architecture", 
-                    interior: "Interior Design", 
-                    ai: "AI Projects",
-                    exec: "Executive",
-                    cgi: "3D Modeling",
-                    sketch: "Sketches",
-                    ads: "Product Ads"
-                },
+                filters: { all: "All", arch: "Architecture", interior: "Interior Design", ai: "AI Projects", exec: "Executive", cgi: "3D Modeling", sketch: "Sketches", ads: "Product Ads" },
                 contact: { title: "Let's Build Your Vision" },
                 about: {
                     title: "The Architect",
@@ -232,16 +139,7 @@
                 nav: { work: "پروژه‌ها", about: "درباره من", contact: "ارتباط" },
                 download: "دانلود پورتفولیو",
                 hero: { name: "آرین طبیب", sub: "معمار و تصویرساز" },
-                filters: { 
-                    all: "همه", 
-                    arch: "پروژه های معماری", 
-                    interior: "طراحی داخلی", 
-                    ai: "پروژه های هوش مصنوعی",
-                    exec: "پروژه های اجرایی",
-                    cgi: "مدل سازی سه بعدی",
-                    sketch: "اسکیس",
-                    ads: "تبلیغات محصولات"
-                },
+                filters: { all: "همه", arch: "پروژه های معماری", interior: "طراحی داخلی", ai: "پروژه های هوش مصنوعی", exec: "پروژه های اجرایی", cgi: "مدل سازی سه بعدی", sketch: "اسکیس", ads: "تبلیغات محصولات" },
                 contact: { title: "بیایید رویایی بسازیم" },
                 about: {
                     title: "درباره من",
@@ -253,7 +151,6 @@
             }
         };
 
-        // TIMELINE DATA
         const timelineData = {
             en: {
                 experience: [
@@ -283,13 +180,11 @@
             }
         };
 
-        // --- PROJECT GENERATION HELPER ---
         const generateGallery = (id, count, hasIndex = true) => {
             if (!hasIndex) return [`./images/project${id}-gallery.jpg`];
             return Array.from({ length: count }, (_, i) => `./images/project${id}-gallery${i + 1}.jpg`);
         };
 
-        // PROJECTS DATA
         const projects = [
             { 
                 id: 1, order: 1, 
@@ -897,20 +792,6 @@
                             className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-xl animate-fade-in" // Blurred & Darkened background
                             onClick={handleBackdropClick}
                         >
-                            {/* Navigation Buttons (Global) - for modern feel, placed on screen edges */}
-                            <button 
-                                onClick={prevMedia}
-                                className="absolute left-4 top-1/2 -translate-y-1/2 p-4 text-white/50 hover:text-white hover:scale-110 transition-all z-50 hidden md:block"
-                            >
-                                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1"><path d="M15 18l-6-6 6-6"/></svg>
-                            </button>
-                            <button 
-                                onClick={nextMedia}
-                                className="absolute right-4 top-1/2 -translate-y-1/2 p-4 text-white/50 hover:text-white hover:scale-110 transition-all z-50 hidden md:block"
-                            >
-                                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1"><path d="M9 18l6-6-6-6"/></svg>
-                            </button>
-
                             <div className="w-full h-full max-w-[1920px] p-4 md:p-12 flex flex-col md:flex-row gap-8 items-center justify-center relative pointer-events-none">
                                 {/* Pointer events none on wrapper to let clicks pass through to backdrop if needed, but auto on children */}
                                 
@@ -948,22 +829,36 @@
                                         />
                                     )}
                                     
-                                    {/* Mobile Navigation (inside image area) */}
+                                    {/* Unified Navigation Buttons (Inside Image Area) */}
                                     {(selectedProject.gallery.length + (selectedProject.video ? 1 : 0)) > 1 && (
-                                        <div className="md:hidden contents">
+                                        <>
                                             <button 
                                                 onClick={prevMedia}
-                                                className="absolute left-2 top-1/2 -translate-y-1/2 p-2 bg-black/30 hover:bg-accent text-white backdrop-blur-md rounded-full transition-all"
+                                                className="absolute left-4 top-1/2 -translate-y-1/2 p-3 bg-black/50 text-white/70 hover:text-white hover:bg-black/80 backdrop-blur-md rounded-full transition-all z-20 cursor-pointer"
                                             >
                                                 <Icons.ArrowLeft />
                                             </button>
                                             <button 
                                                 onClick={nextMedia}
-                                                className="absolute right-2 top-1/2 -translate-y-1/2 p-2 bg-black/30 hover:bg-accent text-white backdrop-blur-md rounded-full transition-all"
+                                                className="absolute right-4 top-1/2 -translate-y-1/2 p-3 bg-black/50 text-white/70 hover:text-white hover:bg-black/80 backdrop-blur-md rounded-full transition-all z-20 cursor-pointer"
                                             >
                                                 <Icons.ArrowRight />
                                             </button>
-                                        </div>
+                                            
+                                            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-20">
+                                                {selectedProject.gallery.map((_, idx) => (
+                                                    <div 
+                                                        key={idx} 
+                                                        className={`w-1.5 h-1.5 rounded-full transition-all ${idx === modalImageIndex ? 'bg-accent w-4' : 'bg-white/50'}`}
+                                                    ></div>
+                                                ))}
+                                                {selectedProject.video && (
+                                                    <div 
+                                                        className={`w-1.5 h-1.5 rounded-full transition-all ${selectedProject.gallery.length === modalImageIndex ? 'bg-accent w-4' : 'bg-white/50'}`}
+                                                    ></div>
+                                                )}
+                                            </div>
+                                        </>
                                     )}
                                 </div>
 
