@@ -489,6 +489,7 @@
             
             const cursorDotRef = useRef(null);
             const cursorOutlineRef = useRef(null);
+            const modelViewerRef = useRef(null); // Add ref for model viewer
 
             const t = content[lang];
             const timeline = timelineData[lang];
@@ -520,6 +521,29 @@
                 }, 4500);
                 return () => clearInterval(interval);
             }, []);
+
+            // Use effect to handle model loading state
+            useEffect(() => {
+                const modelViewer = modelViewerRef.current;
+                if (showAR && modelViewer) {
+                    setIsImageLoading(true); // Start loading when AR view is shown
+                    
+                    const handleLoad = () => {
+                        setIsImageLoading(false);
+                    };
+                    
+                    modelViewer.addEventListener('load', handleLoad);
+                    
+                    // Also handle error or if it's already loaded
+                    if (modelViewer.loaded) {
+                        setIsImageLoading(false);
+                    }
+
+                    return () => {
+                        modelViewer.removeEventListener('load', handleLoad);
+                    };
+                }
+            }, [showAR, selectedProject]);
 
             const scrollToTop = (e) => {
                 e.preventDefault();
@@ -834,10 +858,13 @@
                                     {showAR && selectedProject.hasAR ? (
                                         <div className="w-full h-full relative">
                                             <model-viewer
+                                                ref={modelViewerRef}
                                                 src={selectedProject.modelGLB}
                                                 ios-src={selectedProject.modelUSDZ}
                                                 ar
                                                 ar-modes="webxr scene-viewer quick-look"
+                                                ar-scale="auto" // Allow automatic scaling
+                                                ar-placement="floor" // Suggest floor placement
                                                 camera-controls
                                                 auto-rotate
                                                 shadow-intensity="1"
@@ -853,7 +880,9 @@
                                                     right: '16px',
                                                     padding: '8px 16px',
                                                     fontWeight: 'bold',
-                                                    cursor: 'pointer'
+                                                    cursor: 'pointer',
+                                                    zIndex: 50, // Ensure it's clickable
+                                                    pointerEvents: 'auto'
                                                 }}>
                                                     👋 {lang === 'en' ? 'Activate AR' : 'فعال‌سازی واقعیت افزوده'}
                                                 </button>
