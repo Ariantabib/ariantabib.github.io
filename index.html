@@ -202,8 +202,8 @@
                 title: { en: "Experience Narrative Center", fa: "مرکز خرید روایت تجربه" }, 
                 desc: { en: "This large-scale commercial complex transcends the traditional retail model by offering a narrative-driven journey. Defined by a fluid, Zaha Hadid-inspired parametric facade, the project features a 'Cultural Tower' where each floor immerses visitors in the atmosphere of a different world culture. The design prioritizes optimized circulation and a dynamic spatial experience.", fa: "این مجتمع تجاری بزرگ‌مقیاس با ارائه یک سفر روایت‌محور، فراتر از مدل‌های سنتی خرده‌فروشی عمل می‌کند. این پروژه که با یک نمای پارامتریک سیال و الهام‌گرفته از زاها حدید تعریف می‌شود، دارای یک 'برج فرهنگی' است که در آن هر طبقه بازدیدکنندگان را در اتمسفر فرهنگ متفاوتی از جهان غرق می‌کند. طراحی بر سیرکولاسیون بهینه و تجربه فضایی پویا اولویت دارد." },
                 tags: ["arch"], loc: "Tehran, Saadat Abad", img: "./images/project1-img.jpg", hasAR: true,
-                modelGLB: "https://modelviewer.dev/shared-assets/models/Astronaut.glb", // PLACEHOLDER: Replace with ./models/project1.glb
-                modelUSDZ: "https://modelviewer.dev/shared-assets/models/Astronaut.usdz", // PLACEHOLDER: Replace with ./models/project1.usdz
+                modelGLB: "./models/project1.glb", 
+                modelUSDZ: "./models/project1.usdz", 
                 gallery: generateGallery(1, 6)
             },
             { 
@@ -211,8 +211,8 @@
                 title: { en: "Specialized Eye Hospital", fa: "بیمارستان تخصصی چشم‌" }, 
                 desc: { en: "Located in East Tehran, this specialized ophthalmology hospital merges advanced medical functionality with patient-centric design. The building’s tiered, terraced form integrates green spaces and balconies on every level, utilizing sustainable principles to create a healing environment that maximizes natural light and connects patients with nature.", fa: "این بیمارستان تخصصی چشم‌پزشکی در شرق تهران، عملکرد پیشرفته پزشکی را با طراحی بیمار-محور ادغام می‌کند. فرم پلکانی و لایه‌لایه ساختمان، فضاهای سبز و بالکن‌ها را در هر طبقه یکپارچه کرده و با استفاده از اصول پایداری، محیطی شفابخش ایجاد می‌کند که نور طبیعی را به حداکثر رسانده و بیماران را با طبیعت پیوند می‌دهد." },
                 tags: ["interior", "exec", "arch"], loc: "Tehran, Hakimieh", img: "./images/project2-img.jpg", hasAR: true,
-                modelGLB: "https://modelviewer.dev/shared-assets/models/Astronaut.glb", // PLACEHOLDER: Replace with ./models/project2.glb
-                modelUSDZ: "https://modelviewer.dev/shared-assets/models/Astronaut.usdz", // PLACEHOLDER: Replace with ./models/project2.usdz
+                modelGLB: "./models/project2.glb", 
+                modelUSDZ: "./models/project2.usdz", 
                 gallery: generateGallery(2, 4)
             },
             { 
@@ -487,6 +487,11 @@
             const [isImageLoading, setIsImageLoading] = useState(false);
             const [showAR, setShowAR] = useState(false); // Add state for AR view
             
+            // Swipe state
+            const [touchStart, setTouchStart] = useState(null);
+            const [touchEnd, setTouchEnd] = useState(null);
+            const minSwipeDistance = 50;
+
             const cursorDotRef = useRef(null);
             const cursorOutlineRef = useRef(null);
             const modelViewerRef = useRef(null); // Add ref for model viewer
@@ -564,7 +569,7 @@
             };
 
             const nextMedia = (e) => {
-                e.stopPropagation();
+                if (e) e.stopPropagation();
                 if (selectedProject) {
                     const totalMedia = selectedProject.gallery.length + (selectedProject.video ? 1 : 0);
                     setModalImageIndex((prev) => (prev + 1) % totalMedia);
@@ -573,11 +578,33 @@
             };
 
             const prevMedia = (e) => {
-                e.stopPropagation();
+                if (e) e.stopPropagation();
                 if (selectedProject) {
                     const totalMedia = selectedProject.gallery.length + (selectedProject.video ? 1 : 0);
                     setModalImageIndex((prev) => (prev - 1 + totalMedia) % totalMedia);
                     setIsImageLoading(true);
+                }
+            };
+
+            const onTouchStart = (e) => {
+                setTouchEnd(null);
+                setTouchStart(e.targetTouches[0].clientX);
+            };
+
+            const onTouchMove = (e) => {
+                setTouchEnd(e.targetTouches[0].clientX);
+            };
+
+            const onTouchEnd = () => {
+                if (!touchStart || !touchEnd) return;
+                const distance = touchStart - touchEnd;
+                const isLeftSwipe = distance > minSwipeDistance;
+                const isRightSwipe = distance < -minSwipeDistance;
+                if (isLeftSwipe) {
+                    nextMedia();
+                }
+                if (isRightSwipe) {
+                    prevMedia();
                 }
             };
 
@@ -846,7 +873,7 @@
                                 </button>
 
                                 {/* Media Section - Frameless, Free */}
-                                <div className="flex-1 w-full h-[50vh] md:h-full flex items-center justify-center relative pointer-events-auto" onClick={(e) => e.stopPropagation()}>
+                                <div className="flex-1 w-full h-[50vh] md:h-full flex items-center justify-center relative pointer-events-auto" onClick={(e) => e.stopPropagation()} onTouchStart={onTouchStart} onTouchMove={onTouchMove} onTouchEnd={onTouchEnd}>
                                     
                                     {isImageLoading && (
                                         <div className="absolute inset-0 flex items-center justify-center z-10">
@@ -891,10 +918,10 @@
                                             {/* Back button from AR view */}
                                             <button 
                                                 onClick={() => setShowAR(false)}
-                                                className="absolute top-4 left-4 z-50 p-2 bg-black/50 hover:bg-accent text-white rounded-full transition-colors backdrop-blur-md flex items-center gap-2"
+                                                className="absolute top-4 left-4 z-50 p-2 bg-black/20 hover:bg-black/40 backdrop-blur-md text-white rounded-full transition-all flex items-center justify-center w-10 h-10 md:w-auto md:h-auto md:px-4 md:py-2 md:rounded-full gap-2 border border-white/10"
                                             >
-                                                <Icons.Back />
-                                                <span className="text-xs font-bold uppercase tracking-wider pr-2">{lang === 'en' ? 'Back to Gallery' : 'بازگشت به گالری'}</span>
+                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                                <span className="hidden md:inline text-xs font-bold uppercase tracking-wider">{lang === 'en' ? 'Back to Gallery' : 'بازگشت به گالری'}</span>
                                             </button>
                                         </div>
                                     ) : (
@@ -921,13 +948,13 @@
                                                 <>
                                                     <button 
                                                         onClick={prevMedia}
-                                                        className="absolute left-4 top-1/2 -translate-y-1/2 p-3 bg-black/50 text-white/70 hover:text-white hover:bg-black/80 backdrop-blur-md rounded-full transition-all z-20 cursor-pointer"
+                                                        className="absolute left-4 top-1/2 -translate-y-1/2 p-2 md:p-3 bg-transparent md:bg-black/50 text-white/70 hover:text-white hover:bg-black/20 md:hover:bg-black/80 backdrop-blur-none md:backdrop-blur-md rounded-full transition-all z-20 cursor-pointer"
                                                     >
                                                         <Icons.ArrowLeft />
                                                     </button>
                                                     <button 
                                                         onClick={nextMedia}
-                                                        className="absolute right-4 top-1/2 -translate-y-1/2 p-3 bg-black/50 text-white/70 hover:text-white hover:bg-black/80 backdrop-blur-md rounded-full transition-all z-20 cursor-pointer"
+                                                        className="absolute right-4 top-1/2 -translate-y-1/2 p-2 md:p-3 bg-transparent md:bg-black/50 text-white/70 hover:text-white hover:bg-black/20 md:hover:bg-black/80 backdrop-blur-none md:backdrop-blur-md rounded-full transition-all z-20 cursor-pointer"
                                                     >
                                                         <Icons.ArrowRight />
                                                     </button>
