@@ -954,7 +954,7 @@
                                             {/* Back button from AR view - Fixed Z-Index */}
                                             <button 
                                                 onClick={() => setShowAR(false)}
-                                                className="absolute top-6 left-6 z-[60] px-6 py-3 bg-[#1a1a1a] hover:bg-[#333] text-white rounded-full transition-all flex items-center gap-3 shadow-lg pointer-events-auto font-bold uppercase tracking-widest text-xs"
+                                                className="absolute top-6 left-6 z-[60] px-4 py-2 md:px-6 md:py-3 bg-[#1a1a1a] hover:bg-[#333] text-white rounded-full transition-all flex items-center gap-2 md:gap-3 shadow-lg pointer-events-auto font-bold uppercase tracking-widest text-[10px] md:text-xs border border-white/10"
                                             >
                                                 <Icons.Back />
                                                 <span>{lang === 'en' ? 'Back to Gallery' : 'بازگشت به گالری'}</span>
@@ -1035,11 +1035,9 @@
                                             <div className="mt-auto pt-6 md:pt-12"></div> 
 
                                             {/* Metadata at bottom */}
-                                            {/* HIDE TAGS from user view based on request */}
                                             <div className="border-t border-white/10 pt-4 md:pt-6 grid grid-cols-1 gap-1.5 md:gap-3 text-xs text-white/40 font-mono tracking-wider">
                                                 <div className="flex justify-between"><span>ROLE:</span> <span className="text-white/70">Lead Architect</span></div>
                                                 <div className="flex justify-between"><span>STATUS:</span> <span className="text-white/70">Completed</span></div>
-                                                {/* <div className="flex justify-between"><span>TAGS:</span> <span className="text-white/70">{selectedProject.tags.join(', ').toUpperCase()}</span></div> */}
                                             </div>
                                         </div>
 
