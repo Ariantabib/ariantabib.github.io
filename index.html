@@ -52,6 +52,9 @@
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Model Viewer (For AR) -->
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
     
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@200;300;400;500;600;700&family=Vazirmatn:wght@100;300;400;500;700&display=swap" rel="stylesheet">
@@ -78,6 +81,13 @@
         .modal-scroll::-webkit-scrollbar-track { background: #111; }
         .modal-scroll::-webkit-scrollbar-thumb { background: #333; border-radius: 2px; }
         .modal-scroll::-webkit-scrollbar-thumb:hover { background: #C1A365; }
+
+        /* Model Viewer Customization */
+        model-viewer {
+            width: 100%;
+            height: 100%;
+            --poster-color: transparent;
+        }
 
         /* Header Fade */
         .header-fade { background: linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.6) 50%, transparent 100%); }
@@ -107,8 +117,8 @@
             Close: () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 6L6 18M6 6l12 12"/></svg>,
             Menu: () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>,
             ArrowDown: () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>,
-            ArrowRight: () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 18l6-6-6-6"/></svg>,
-            ArrowLeft: () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M15 18l-6-6 6-6"/></svg>,
+            ArrowRight: () => <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M9 18l6-6-6-6"/></svg>,
+            ArrowLeft: () => <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M15 18l-6-6 6-6"/></svg>,
             Download: () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>,
             Instagram: () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>,
             Linkedin: () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>,
@@ -116,7 +126,8 @@
             Send: () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>, // Telegram
             Mail: () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>,
             Phone: () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>,
-            AR: () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M2 8V5a3 3 0 0 1 3-3h3"/><path d="M2 16v3a3 3 0 0 0 3 3h3"/><path d="M22 8V5a3 3 0 0 0-3-3h-3"/><path d="M22 16v3a3 3 0 0 1-3 3h-3"/><path d="M12 8l-4 2 4 2 4-2-4-2z"/><path d="M8 10v4l4 2 4-2v-4"/></svg>
+            AR: () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M2 8V5a3 3 0 0 1 3-3h3"/><path d="M2 16v3a3 3 0 0 0 3 3h3"/><path d="M22 8V5a3 3 0 0 0-3-3h-3"/><path d="M22 16v3a3 3 0 0 1-3 3h-3"/><path d="M12 8l-4 2 4 2 4-2-4-2z"/><path d="M8 10v4l4 2 4-2v-4"/></svg>,
+            Back: () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
         };
 
         // --- CONTENT & DATA ---
@@ -191,6 +202,8 @@
                 title: { en: "Experience Narrative Center", fa: "مرکز خرید روایت تجربه" }, 
                 desc: { en: "This large-scale commercial complex transcends the traditional retail model by offering a narrative-driven journey. Defined by a fluid, Zaha Hadid-inspired parametric facade, the project features a 'Cultural Tower' where each floor immerses visitors in the atmosphere of a different world culture. The design prioritizes optimized circulation and a dynamic spatial experience.", fa: "این مجتمع تجاری بزرگ‌مقیاس با ارائه یک سفر روایت‌محور، فراتر از مدل‌های سنتی خرده‌فروشی عمل می‌کند. این پروژه که با یک نمای پارامتریک سیال و الهام‌گرفته از زاها حدید تعریف می‌شود، دارای یک 'برج فرهنگی' است که در آن هر طبقه بازدیدکنندگان را در اتمسفر فرهنگ متفاوتی از جهان غرق می‌کند. طراحی بر سیرکولاسیون بهینه و تجربه فضایی پویا اولویت دارد." },
                 tags: ["arch"], loc: "Tehran, Saadat Abad", img: "./images/project1-img.jpg", hasAR: true,
+                modelGLB: "https://modelviewer.dev/shared-assets/models/Astronaut.glb", // PLACEHOLDER: Replace with ./models/project1.glb
+                modelUSDZ: "https://modelviewer.dev/shared-assets/models/Astronaut.usdz", // PLACEHOLDER: Replace with ./models/project1.usdz
                 gallery: generateGallery(1, 6)
             },
             { 
@@ -198,6 +211,8 @@
                 title: { en: "Specialized Eye Hospital", fa: "بیمارستان تخصصی چشم‌" }, 
                 desc: { en: "Located in East Tehran, this specialized ophthalmology hospital merges advanced medical functionality with patient-centric design. The building’s tiered, terraced form integrates green spaces and balconies on every level, utilizing sustainable principles to create a healing environment that maximizes natural light and connects patients with nature.", fa: "این بیمارستان تخصصی چشم‌پزشکی در شرق تهران، عملکرد پیشرفته پزشکی را با طراحی بیمار-محور ادغام می‌کند. فرم پلکانی و لایه‌لایه ساختمان، فضاهای سبز و بالکن‌ها را در هر طبقه یکپارچه کرده و با استفاده از اصول پایداری، محیطی شفابخش ایجاد می‌کند که نور طبیعی را به حداکثر رسانده و بیماران را با طبیعت پیوند می‌دهد." },
                 tags: ["interior", "exec", "arch"], loc: "Tehran, Hakimieh", img: "./images/project2-img.jpg", hasAR: true,
+                modelGLB: "https://modelviewer.dev/shared-assets/models/Astronaut.glb", // PLACEHOLDER: Replace with ./models/project2.glb
+                modelUSDZ: "https://modelviewer.dev/shared-assets/models/Astronaut.usdz", // PLACEHOLDER: Replace with ./models/project2.usdz
                 gallery: generateGallery(2, 4)
             },
             { 
@@ -470,6 +485,7 @@
             const [menuOpen, setMenuOpen] = useState(false);
             const [modalImageIndex, setModalImageIndex] = useState(0);
             const [isImageLoading, setIsImageLoading] = useState(false);
+            const [showAR, setShowAR] = useState(false); // Add state for AR view
             
             const cursorDotRef = useRef(null);
             const cursorOutlineRef = useRef(null);
@@ -545,6 +561,7 @@
                 setSelectedProject(project);
                 setModalImageIndex(0);
                 setIsImageLoading(true);
+                setShowAR(false); // Reset AR view when opening a project
             };
 
             const handleImageLoad = () => {
@@ -554,6 +571,7 @@
             const handleBackdropClick = (e) => {
                 if (e.target === e.currentTarget) {
                     setSelectedProject(null);
+                    setShowAR(false);
                 }
             };
 
@@ -812,93 +830,140 @@
                                         </div>
                                     )}
 
-                                    {selectedProject.video && modalImageIndex === selectedProject.gallery.length ? (
-                                        <video 
-                                            src={selectedProject.video} 
-                                            controls 
-                                            autoPlay 
-                                            className="max-w-full max-h-full w-auto h-auto object-contain shadow-2xl transition-opacity duration-300"
-                                            onLoadedData={handleImageLoad}
-                                        ></video>
-                                    ) : (
-                                        <img 
-                                            src={selectedProject.gallery[modalImageIndex]} 
-                                            onLoad={handleImageLoad}
-                                            className={`max-w-full max-h-full w-auto h-auto object-contain shadow-2xl transition-opacity duration-300 ${isImageLoading ? 'opacity-0' : 'opacity-100'}`}
-                                            alt="Project Detail" 
-                                        />
-                                    )}
-                                    
-                                    {/* Unified Navigation Buttons (Inside Image Area) */}
-                                    {(selectedProject.gallery.length + (selectedProject.video ? 1 : 0)) > 1 && (
-                                        <>
-                                            <button 
-                                                onClick={prevMedia}
-                                                className="absolute left-4 top-1/2 -translate-y-1/2 p-3 bg-black/50 text-white/70 hover:text-white hover:bg-black/80 backdrop-blur-md rounded-full transition-all z-20 cursor-pointer"
+                                    {/* AR Viewer or Image/Video */}
+                                    {showAR && selectedProject.hasAR ? (
+                                        <div className="w-full h-full relative">
+                                            <model-viewer
+                                                src={selectedProject.modelGLB}
+                                                ios-src={selectedProject.modelUSDZ}
+                                                ar
+                                                ar-modes="webxr scene-viewer quick-look"
+                                                camera-controls
+                                                auto-rotate
+                                                shadow-intensity="1"
+                                                alt={`3D model of ${selectedProject.title[lang]}`}
+                                                style={{width: '100%', height: '100%'}}
                                             >
-                                                <Icons.ArrowLeft />
-                                            </button>
-                                            <button 
-                                                onClick={nextMedia}
-                                                className="absolute right-4 top-1/2 -translate-y-1/2 p-3 bg-black/50 text-white/70 hover:text-white hover:bg-black/80 backdrop-blur-md rounded-full transition-all z-20 cursor-pointer"
-                                            >
-                                                <Icons.ArrowRight />
-                                            </button>
+                                                <button slot="ar-button" style={{
+                                                    backgroundColor: 'white',
+                                                    borderRadius: '4px',
+                                                    border: 'none',
+                                                    position: 'absolute',
+                                                    top: '16px',
+                                                    right: '16px',
+                                                    padding: '8px 16px',
+                                                    fontWeight: 'bold',
+                                                    cursor: 'pointer'
+                                                }}>
+                                                    👋 {lang === 'en' ? 'Activate AR' : 'فعال‌سازی واقعیت افزوده'}
+                                                </button>
+                                            </model-viewer>
                                             
-                                            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-20">
-                                                {selectedProject.gallery.map((_, idx) => (
-                                                    <div 
-                                                        key={idx} 
-                                                        className={`w-1.5 h-1.5 rounded-full transition-all ${idx === modalImageIndex ? 'bg-accent w-4' : 'bg-white/50'}`}
-                                                    ></div>
-                                                ))}
-                                                {selectedProject.video && (
-                                                    <div 
-                                                        className={`w-1.5 h-1.5 rounded-full transition-all ${selectedProject.gallery.length === modalImageIndex ? 'bg-accent w-4' : 'bg-white/50'}`}
-                                                    ></div>
-                                                )}
-                                            </div>
+                                            {/* Back button from AR view */}
+                                            <button 
+                                                onClick={() => setShowAR(false)}
+                                                className="absolute top-4 left-4 z-50 p-2 bg-black/50 hover:bg-accent text-white rounded-full transition-colors backdrop-blur-md flex items-center gap-2"
+                                            >
+                                                <Icons.Back />
+                                                <span className="text-xs font-bold uppercase tracking-wider pr-2">{lang === 'en' ? 'Back to Gallery' : 'بازگشت به گالری'}</span>
+                                            </button>
+                                        </div>
+                                    ) : (
+                                        <>
+                                            {selectedProject.video && modalImageIndex === selectedProject.gallery.length ? (
+                                                <video 
+                                                    src={selectedProject.video} 
+                                                    controls 
+                                                    autoPlay 
+                                                    className="max-w-full max-h-full w-auto h-auto object-contain shadow-2xl transition-opacity duration-300"
+                                                    onLoadedData={handleImageLoad}
+                                                ></video>
+                                            ) : (
+                                                <img 
+                                                    src={selectedProject.gallery[modalImageIndex]} 
+                                                    onLoad={handleImageLoad}
+                                                    className={`max-w-full max-h-full w-auto h-auto object-contain shadow-2xl transition-opacity duration-300 ${isImageLoading ? 'opacity-0' : 'opacity-100'}`}
+                                                    alt="Project Detail" 
+                                                />
+                                            )}
+                                            
+                                            {/* Unified Navigation Buttons (Inside Image Area) */}
+                                            {(selectedProject.gallery.length + (selectedProject.video ? 1 : 0)) > 1 && (
+                                                <>
+                                                    <button 
+                                                        onClick={prevMedia}
+                                                        className="absolute left-4 top-1/2 -translate-y-1/2 p-3 bg-black/50 text-white/70 hover:text-white hover:bg-black/80 backdrop-blur-md rounded-full transition-all z-20 cursor-pointer"
+                                                    >
+                                                        <Icons.ArrowLeft />
+                                                    </button>
+                                                    <button 
+                                                        onClick={nextMedia}
+                                                        className="absolute right-4 top-1/2 -translate-y-1/2 p-3 bg-black/50 text-white/70 hover:text-white hover:bg-black/80 backdrop-blur-md rounded-full transition-all z-20 cursor-pointer"
+                                                    >
+                                                        <Icons.ArrowRight />
+                                                    </button>
+                                                    
+                                                    <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-20">
+                                                        {selectedProject.gallery.map((_, idx) => (
+                                                            <div 
+                                                                key={idx} 
+                                                                className={`w-1.5 h-1.5 rounded-full transition-all ${idx === modalImageIndex ? 'bg-accent w-4' : 'bg-white/50'}`}
+                                                            ></div>
+                                                        ))}
+                                                        {selectedProject.video && (
+                                                            <div 
+                                                                className={`w-1.5 h-1.5 rounded-full transition-all ${selectedProject.gallery.length === modalImageIndex ? 'bg-accent w-4' : 'bg-white/50'}`}
+                                                            ></div>
+                                                        )}
+                                                    </div>
+                                                </>
+                                            )}
                                         </>
                                     )}
                                 </div>
 
                                 {/* Info Section - Framed Card */}
-                                <div 
-                                    className={`w-full md:w-[400px] lg:w-[450px] max-h-[40vh] md:max-h-[80vh] flex flex-col bg-[#111] border border-white/10 shadow-2xl rounded-sm overflow-hidden pointer-events-auto ${isRTL ? 'text-right font-fa' : 'text-left'}`}
-                                    dir={isRTL ? 'rtl' : 'ltr'}
-                                    onClick={(e) => e.stopPropagation()} // Prevent close on click
-                                >
-                                    {/* Scrollable Content */}
-                                    <div className="p-5 md:p-10 overflow-y-auto flex-1 modal-scroll flex flex-col">
-                                        <span className="text-accent text-xs uppercase tracking-[0.2em] mb-2 md:mb-4 block opacity-80">{selectedProject.loc}</span>
-                                        <h2 className={`text-xl md:text-4xl font-bold mb-4 md:mb-8 text-white leading-tight ${isRTL ? 'font-fa' : ''}`}>{selectedProject.title[lang]}</h2>
-                                        
-                                        {/* Description with more line height */}
-                                        <div className={`text-secondary text-sm md:text-base leading-7 md:leading-[2.5] ${isRTL ? 'font-fa' : ''}`}>
-                                           {selectedProject.desc[lang]}
+                                {!showAR && (
+                                    <div 
+                                        className={`w-full md:w-[400px] lg:w-[450px] max-h-[40vh] md:max-h-[80vh] flex flex-col bg-[#111] border border-white/10 shadow-2xl rounded-sm overflow-hidden pointer-events-auto ${isRTL ? 'text-right font-fa' : 'text-left'}`}
+                                        dir={isRTL ? 'rtl' : 'ltr'}
+                                        onClick={(e) => e.stopPropagation()} // Prevent close on click
+                                    >
+                                        {/* Scrollable Content */}
+                                        <div className="p-5 md:p-10 overflow-y-auto flex-1 modal-scroll flex flex-col">
+                                            <span className="text-accent text-xs uppercase tracking-[0.2em] mb-2 md:mb-4 block opacity-80">{selectedProject.loc}</span>
+                                            <h2 className={`text-xl md:text-4xl font-bold mb-4 md:mb-8 text-white leading-tight ${isRTL ? 'font-fa' : ''}`}>{selectedProject.title[lang]}</h2>
+                                            
+                                            {/* Description with more line height */}
+                                            <div className={`text-secondary text-sm md:text-base leading-7 md:leading-[2.5] ${isRTL ? 'font-fa' : ''}`}>
+                                            {selectedProject.desc[lang]}
+                                            </div>
+
+                                            {/* Spacer to push metadata down */}
+                                            <div className="mt-auto pt-6 md:pt-12"></div> 
+
+                                            {/* Metadata at bottom */}
+                                            <div className="border-t border-white/10 pt-4 md:pt-6 grid grid-cols-1 gap-1.5 md:gap-3 text-xs text-white/40 font-mono tracking-wider">
+                                                <div className="flex justify-between"><span>ROLE:</span> <span className="text-white/70">Lead Architect</span></div>
+                                                <div className="flex justify-between"><span>STATUS:</span> <span className="text-white/70">Completed</span></div>
+                                                <div className="flex justify-between"><span>TAGS:</span> <span className="text-white/70">{selectedProject.tags.join(', ').toUpperCase()}</span></div>
+                                            </div>
                                         </div>
 
-                                        {/* Spacer to push metadata down */}
-                                        <div className="mt-auto pt-6 md:pt-12"></div> 
-
-                                        {/* Metadata at bottom */}
-                                        <div className="border-t border-white/10 pt-4 md:pt-6 grid grid-cols-1 gap-1.5 md:gap-3 text-xs text-white/40 font-mono tracking-wider">
-                                            <div className="flex justify-between"><span>ROLE:</span> <span className="text-white/70">Lead Architect</span></div>
-                                            <div className="flex justify-between"><span>STATUS:</span> <span className="text-white/70">Completed</span></div>
-                                            <div className="flex justify-between"><span>TAGS:</span> <span className="text-white/70">{selectedProject.tags.join(', ').toUpperCase()}</span></div>
-                                        </div>
+                                        {/* AR Button if needed */}
+                                        {selectedProject.hasAR && (
+                                            <div className="p-4 md:p-6 border-t border-white/10 bg-[#111]">
+                                                <button 
+                                                    onClick={() => setShowAR(true)}
+                                                    className="w-full py-3 bg-accent/10 border border-accent text-accent hover:bg-accent hover:text-black transition-all font-bold tracking-widest uppercase text-xs rounded flex items-center justify-center gap-2 group"
+                                                >
+                                                    <span>{lang === 'en' ? 'View in AR' : 'واقعیت مجازی سه بعدی'}</span>
+                                                    <Icons.AR />
+                                                </button>
+                                            </div>
+                                        )}
                                     </div>
-
-                                    {/* AR Button if needed */}
-                                    {selectedProject.hasAR && (
-                                        <div className="p-4 md:p-6 border-t border-white/10 bg-[#111]">
-                                            <button className="w-full py-3 bg-accent/10 border border-accent text-accent hover:bg-accent hover:text-black transition-all font-bold tracking-widest uppercase text-xs rounded flex items-center justify-center gap-2 group">
-                                                <span>{lang === 'en' ? 'View in AR' : 'واقعیت مجازی سه بعدی'}</span>
-                                                <Icons.AR />
-                                            </button>
-                                        </div>
-                                    )}
-                                </div>
+                                )}
                             </div>
                         </div>
                     )}
