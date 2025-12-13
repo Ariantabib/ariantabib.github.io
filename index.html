@@ -943,36 +943,16 @@
                                                 alt={`3D model of ${selectedProject.title[lang]}`}
                                                 style={{width: '100%', height: '100%'}}
                                             >
-                                                <button slot="ar-button" style={{
-                                                    backgroundColor: '#C1A365', // Accent color
-                                                    borderRadius: '9999px',
-                                                    border: '1px solid #C1A365',
-                                                    position: 'absolute',
-                                                    top: '24px',
-                                                    right: '24px',
-                                                    padding: '12px 24px',
-                                                    fontWeight: 'bold',
-                                                    color: 'black',
-                                                    cursor: 'pointer',
-                                                    zIndex: 50, 
-                                                    pointerEvents: 'auto',
-                                                    textTransform: 'uppercase',
-                                                    letterSpacing: '0.1em',
-                                                    fontSize: '0.75rem', // text-xs
-                                                    display: 'flex',
-                                                    alignItems: 'center',
-                                                    gap: '8px',
-                                                    boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)'
-                                                }}>
+                                                <button slot="ar-button" className="absolute top-6 right-6 z-50 px-4 py-2 md:px-6 md:py-3 bg-accent hover:bg-white text-black rounded-full transition-all flex items-center gap-2 md:gap-3 shadow-lg pointer-events-auto font-bold uppercase tracking-widest text-[10px] md:text-xs border border-accent cursor-pointer">
                                                     <span>{lang === 'en' ? 'Activate AR' : 'واقعیت افزوده'}</span>
-                                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M2 8V5a3 3 0 0 1 3-3h3"/><path d="M2 16v3a3 3 0 0 0 3 3h3"/><path d="M22 8V5a3 3 0 0 0-3-3h-3"/><path d="M22 16v3a3 3 0 0 1-3 3h-3"/><path d="M12 8l-4 2 4 2 4-2-4-2z"/><path d="M8 10v4l4 2 4-2v-4"/></svg>
+                                                    <Icons.AR />
                                                 </button>
                                             </model-viewer>
                                             
                                             {/* Back button from AR view - Matched Style */}
                                             <button 
                                                 onClick={() => setShowAR(false)}
-                                                className="absolute top-6 left-6 z-[60] px-4 py-2 md:px-6 md:py-3 bg-accent hover:bg-white text-black rounded-full transition-all flex items-center gap-2 md:gap-3 shadow-lg pointer-events-auto font-bold uppercase tracking-widest text-[10px] md:text-xs border border-accent"
+                                                className="absolute top-6 left-6 z-[60] px-4 py-2 md:px-6 md:py-3 bg-black hover:bg-[#333] text-white rounded-full transition-all flex items-center gap-2 md:gap-3 shadow-lg pointer-events-auto font-bold uppercase tracking-widest text-[10px] md:text-xs border border-white/10"
                                             >
                                                 <Icons.Back />
                                                 <span>{lang === 'en' ? 'Back to Gallery' : 'بازگشت به گالری'}</span>
