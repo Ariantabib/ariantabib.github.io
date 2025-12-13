@@ -539,8 +539,6 @@
                         const progress = event.detail.totalProgress;
                         if (typeof progress === 'number') {
                             setLoadProgress(Math.round(progress * 100));
-                            // REMOVED: setIsImageLoading(false) from here. 
-                            // We wait for the 'load' event to ensure the model is fully rendered before hiding the bar.
                         }
                     };
 
@@ -568,7 +566,7 @@
                         modelViewer.removeEventListener('load', handleLoad);
                     };
                 }
-            }, [showAR, selectedProject]);
+            }, [showAR, selectedProject, lang]); // Added lang to dependency array
 
             const scrollToTop = (e) => {
                 e.preventDefault();
@@ -902,7 +900,7 @@
                                 {/* Media Section - Frameless, Free */}
                                 <div className="flex-1 w-full h-[50vh] md:h-full flex items-center justify-center relative pointer-events-auto" onClick={(e) => e.stopPropagation()} onTouchStart={onTouchStart} onTouchMove={onTouchMove} onTouchEnd={onTouchEnd}>
                                     
-                                    {/* PROGRESS LOADING BAR FOR AR ONLY */}
+                                    {/* PROGRESS LOADING BAR FOR AR ONLY - IMPROVED Z-INDEX */}
                                     {isImageLoading && showAR && (
                                         <div className="absolute inset-0 flex flex-col items-center justify-center z-[110] bg-black/80 backdrop-blur-sm transition-opacity duration-300">
                                             <div className="w-64 h-1 bg-white/20 rounded-full overflow-hidden mb-4">
@@ -929,7 +927,7 @@
 
                                     {/* AR Viewer or Image/Video */}
                                     {showAR && selectedProject.hasAR ? (
-                                        <div className="w-full h-full relative">
+                                        <div className="w-full h-full relative" dir="ltr">
                                             <model-viewer
                                                 ref={modelViewerRef}
                                                 src={selectedProject.modelGLB}
