@@ -539,16 +539,14 @@
                         const progress = event.detail.totalProgress;
                         if (typeof progress === 'number') {
                             setLoadProgress(Math.round(progress * 100));
-                            if (progress >= 1) {
-                                setTimeout(() => {
-                                    setIsImageLoading(false);
-                                }, 500);
-                            }
+                            // REMOVED: setIsImageLoading(false) from here. 
+                            // We wait for the 'load' event to ensure the model is fully rendered before hiding the bar.
                         }
                     };
 
                     const handleLoad = () => {
                          setLoadProgress(100);
+                         // Keep the loading screen for a moment to ensure smooth transition
                          setTimeout(() => {
                             setIsImageLoading(false);
                          }, 500);
