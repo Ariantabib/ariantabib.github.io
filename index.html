@@ -11,6 +11,11 @@
     <meta name="author" content="Arian Tabib">
     <meta name="robots" content="index, follow">
 
+    <!-- Favicon & Site Icons (This fixes the globe icon in Google) -->
+    <link rel="icon" type="image/png" href="./images/logo.png">
+    <link rel="apple-touch-icon" href="./images/logo.png">
+    <meta name="theme-color" content="#050505">
+
     <!-- Open Graph / Facebook & LinkedIn -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://arian-tabib.github.io/portfolio/">
@@ -33,6 +38,7 @@
       "name": "Arian Tabib",
       "url": "https://arian-tabib.github.io/portfolio/",
       "jobTitle": "Architect",
+      "image": "https://arian-tabib.github.io/portfolio/images/logo.png",
       "alumniOf": "Azad University, North Tehran Branch",
       "sameAs": [
         "https://www.linkedin.com/in/arian-tabib",
@@ -348,6 +354,27 @@
                 tags: ["exec", "interior"], loc: "Tehran, Opal Mall", img: "./images/project21-img.jpg", 
                 gallery: generateGallery(21, 11)
             },
+            // { 
+            //     id: 22, order: 22, 
+            //     title: { en: "Project 22", fa: "پروژه ۲۲" }, 
+            //     desc: { en: "Placeholder description for Project 22.", fa: "توضیحات آزمایشی برای پروژه ۲۲." },
+            //     tags: ["cgi"], loc: "Tabriz", img: "./images/project22-img.jpg", 
+            //     gallery: generateGallery(22, 3)
+            // },
+            // { 
+            //     id: 23, order: 23, 
+            //     title: { en: "Project 23", fa: "پروژه ۲۳" }, 
+            //     desc: { en: "Placeholder description for Project 23.", fa: "توضیحات آزمایشی برای پروژه ۲۳." },
+            //     tags: ["ads", "sketch"], loc: "Studio", img: "./images/project23-img.jpg", 
+            //     gallery: generateGallery(23, 3)
+            // },
+            // { 
+            //     id: 24, order: 24, 
+            //     title: { en: "Project 24", fa: "پروژه ۲۴" }, 
+            //     desc: { en: "Placeholder description for Project 24.", fa: "توضیحات آزمایشی برای پروژه ۲۴." },
+            //     tags: ["arch"], loc: "Ramsar", img: "./images/project24-img.jpg", 
+            //     gallery: generateGallery(24, 3)
+            // },
             { 
                 id: 25, order: 25, 
                 title: { en: "Culinary Precision in Midnight Black", fa: "دقت آشپزی در قابی به رنگ شب" }, 
@@ -462,6 +489,7 @@
             },
         ];
 
+        // UPDATED SOCIAL LINKS with specific details
         const socialLinks = [
             { icon: <Icons.Mail />, label: "Email", href: "mailto:arian.tabib@gmail.com", text: "arian.tabib@gmail.com" },
             { icon: <Icons.Phone />, label: "Mobile", href: "tel:+989392263236", text: "+98 939 226 3236" },
@@ -477,6 +505,7 @@
             "./images/hero3.jpg"
         ];
 
+        // --- APP ---
         const App = () => {
             const [lang, setLang] = useState('en');
             const [currentSlide, setCurrentSlide] = useState(0);
@@ -484,7 +513,7 @@
             const [selectedProject, setSelectedProject] = useState(null);
             const [menuOpen, setMenuOpen] = useState(false);
             const [modalImageIndex, setModalImageIndex] = useState(0);
-            const [isImageLoading, setIsImageLoading] = useState(false);
+            const [isImageLoading, setIsImageLoading] = useState(false); // New state for loading
             const [showAR, setShowAR] = useState(false); 
             const [loadProgress, setLoadProgress] = useState(0);
             
@@ -679,6 +708,7 @@
                                     </a>
                                 ))}
                                 
+                                {/* Download Button (Desktop) */}
                                 <a 
                                     href="./docs/portfolio.pdf" 
                                     download 
@@ -713,6 +743,7 @@
                                 <a key={key} href={`#${key}`} onClick={(e) => handleNavClick(e, key)} className="text-2xl text-white font-light">{label}</a>
                             ))}
                             
+                            {/* Download Button (Mobile) */}
                             <a 
                                 href="./docs/portfolio.pdf" 
                                 download 
@@ -841,6 +872,7 @@
                                         {t.about.bio}
                                     </p>
 
+                                    {/* TIMELINE: WORK EXPERIENCE */}
                                     <div className="mt-16">
                                         <h3 className={`text-xl font-bold text-white mb-8 border-b border-white/10 pb-2 ${isRTL ? 'font-fa' : ''}`}>{t.about.expTitle}</h3>
                                         <div className={`space-y-8 relative ${isRTL ? 'border-r mr-2 pr-8' : 'border-l ml-2 pl-8'} border-white/10`}>
@@ -855,6 +887,7 @@
                                         </div>
                                     </div>
 
+                                    {/* TIMELINE: EDUCATION */}
                                     <div className="mt-16">
                                         <h3 className={`text-xl font-bold text-white mb-8 border-b border-white/10 pb-2 ${isRTL ? 'font-fa' : ''}`}>{t.about.eduTitle}</h3>
                                         <div className={`space-y-8 relative ${isRTL ? 'border-r mr-2 pr-8' : 'border-l ml-2 pl-8'} border-white/10`}>
@@ -881,7 +914,7 @@
                     {/* --- MODAL --- */}
                     {selectedProject && (
                         <div 
-                            className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-xl animate-fade-in" // Blurred & Darkened background
+                            className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-8 bg-black/90 backdrop-blur-xl animate-fade-in" // Blurred & Darkened background
                             onClick={handleBackdropClick}
                         >
                             <div className="w-full h-full max-w-[1920px] p-4 md:p-12 flex flex-col md:flex-row gap-8 items-center justify-center relative pointer-events-none">
@@ -1026,7 +1059,7 @@
                                             
                                             {/* Description with more line height */}
                                             <div className={`text-secondary text-sm md:text-base leading-7 md:leading-[2.5] ${isRTL ? 'font-fa' : ''}`}>
-                                            {selectedProject.desc[lang]}
+                                                {selectedProject.desc[lang]}
                                             </div>
 
                                             {/* Spacer to push metadata down */}
