@@ -11,7 +11,7 @@
     <meta name="author" content="Arian Tabib">
     <meta name="robots" content="index, follow">
 
-    <!-- Favicon & Site Icons (This fixes the globe icon in Google) -->
+    <!-- Favicon & Site Icons -->
     <link rel="icon" type="image/png" href="./images/logo.png">
     <link rel="apple-touch-icon" href="./images/logo.png">
     <meta name="theme-color" content="#050505">
@@ -94,6 +94,18 @@
             height: 100%;
             --poster-color: transparent;
         }
+        
+        /* Typing Effect Cursor */
+        .typing-cursor {
+            display: inline-block;
+            width: 2px;
+            height: 1em;
+            background-color: #C1A365;
+            margin-left: 4px;
+            animation: blink 1s step-end infinite;
+            vertical-align: middle;
+        }
+        @keyframes blink { 50% { opacity: 0; } }
 
         /* Header Fade */
         .header-fade { background: linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.6) 50%, transparent 100%); }
@@ -141,7 +153,13 @@
             en: {
                 nav: { work: "Projects", about: "About", contact: "Connect" },
                 download: "Download Portfolio",
-                hero: { name: "ARIAN TABIB", sub: "ARCHITECT & VISUALIZER" },
+                hero: { 
+                    name: "ARIAN TABIB", 
+                    roles: ["ARCHITECT", "3D VISUALIZER", "DESIGNER"],
+                    desc: "Bridging conceptual innovation with technical precision to create immersive spatial narratives.",
+                    ctaPrimary: "View Projects",
+                    ctaSecondary: "Download Resume"
+                },
                 filters: { all: "All", arch: "Architecture", interior: "Interior Design", ai: "AI Projects", exec: "Executive", cgi: "3D Modeling", sketch: "Sketches", ads: "Product Ads" },
                 contact: { title: "Let's Build Your Vision" },
                 about: {
@@ -155,7 +173,13 @@
             fa: {
                 nav: { work: "پروژه‌ها", about: "درباره من", contact: "ارتباط" },
                 download: "دانلود پورتفولیو",
-                hero: { name: "آرین طبیب", sub: "معمار و تصویرساز" },
+                hero: { 
+                    name: "آرین طبیب", 
+                    roles: ["معمار", "تصویرساز سه بعدی", "طراح"],
+                    desc: "تلاقی نوآوری مفهومی و دقت فنی برای خلق روایت‌های فضایی تاثیرگذار.",
+                    ctaPrimary: "مشاهده آثار",
+                    ctaSecondary: "دانلود رزومه"
+                },
                 filters: { all: "همه", arch: "پروژه های معماری", interior: "طراحی داخلی", ai: "پروژه های هوش مصنوعی", exec: "پروژه های اجرایی", cgi: "مدل سازی سه بعدی", sketch: "اسکیس", ads: "تبلیغات محصولات" },
                 contact: { title: "بیایید رویایی بسازیم" },
                 about: {
@@ -517,6 +541,12 @@
             const [showAR, setShowAR] = useState(false); 
             const [loadProgress, setLoadProgress] = useState(0);
             
+            // Typewriter State
+            const [text, setText] = useState('');
+            const [roleIndex, setRoleIndex] = useState(0);
+            const [isDeleting, setIsDeleting] = useState(false);
+            const [typingSpeed, setTypingSpeed] = useState(150);
+
             // Swipe state
             const [touchStart, setTouchStart] = useState(null);
             const [touchEnd, setTouchEnd] = useState(null);
@@ -530,6 +560,33 @@
             const timeline = timelineData[lang];
             const isRTL = lang === 'fa';
 
+            // --- Typewriter Effect ---
+            useEffect(() => {
+                const roles = t.hero.roles;
+                const currentRole = roles[roleIndex];
+                
+                const handleTyping = () => {
+                    if (isDeleting) {
+                        setText(currentRole.substring(0, text.length - 1));
+                        setTypingSpeed(50);
+                    } else {
+                        setText(currentRole.substring(0, text.length + 1));
+                        setTypingSpeed(150);
+                    }
+
+                    if (!isDeleting && text === currentRole) {
+                        setTimeout(() => setIsDeleting(true), 2000); // Wait before deleting
+                    } else if (isDeleting && text === '') {
+                        setIsDeleting(false);
+                        setRoleIndex((prev) => (prev + 1) % roles.length);
+                    }
+                };
+
+                const timer = setTimeout(handleTyping, typingSpeed);
+                return () => clearTimeout(timer);
+            }, [text, isDeleting, roleIndex, t.hero.roles]);
+
+            // --- Logic ---
             useEffect(() => {
                 const moveCursor = (e) => {
                     const { clientX: x, clientY: y } = e;
@@ -773,13 +830,40 @@
                             </div>
                         ))}
 
-                        <div className="relative z-20 max-w-4xl">
-                            <h2 className={`text-xs md:text-sm ${isRTL ? 'tracking-normal font-fa' : 'tracking-[0.4em]'} text-accent mb-6 uppercase animate-fade-in`}>
-                                {t.hero.sub}
-                            </h2>
-                            <h1 className={`text-5xl md:text-7xl lg:text-9xl font-bold text-white tracking-tight leading-none ${isRTL ? 'font-fa' : ''} mb-8`}>
+                        <div className="relative z-20 max-w-4xl flex flex-col items-center">
+                            
+                            {/* Name Title */}
+                            <h1 className={`text-5xl md:text-7xl lg:text-9xl font-bold text-white tracking-tight leading-none ${isRTL ? 'font-fa' : ''} mb-4`}>
                                 {t.hero.name}
                             </h1>
+
+                            {/* Typewriter Subtitle */}
+                            <div className={`text-lg md:text-2xl text-accent font-medium uppercase tracking-widest min-h-[1.5em] mb-6 ${isRTL ? 'font-fa tracking-normal' : ''}`}>
+                                {text}
+                                <span className="typing-cursor"></span>
+                            </div>
+
+                            {/* Description */}
+                            <p className={`text-white/80 text-sm md:text-lg max-w-2xl leading-relaxed mb-10 ${isRTL ? 'font-fa' : ''}`}>
+                                {t.hero.desc}
+                            </p>
+
+                            {/* CTA Buttons */}
+                            <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+                                <button 
+                                    onClick={scrollToProjects}
+                                    className={`px-8 py-3 bg-accent text-black font-bold uppercase rounded-full hover:bg-white transition-all shadow-lg hover:shadow-xl hover:scale-105 ${isRTL ? 'font-fa tracking-normal' : 'tracking-widest text-sm'}`}
+                                >
+                                    {t.hero.ctaPrimary}
+                                </button>
+                                <a 
+                                    href="./docs/portfolio.pdf" 
+                                    download
+                                    className={`px-8 py-3 border border-white text-white font-bold uppercase rounded-full hover:bg-white/10 transition-all ${isRTL ? 'font-fa tracking-normal' : 'tracking-widest text-sm'}`}
+                                >
+                                    {t.hero.ctaSecondary}
+                                </a>
+                            </div>
                         </div>
                         
                         <button 
