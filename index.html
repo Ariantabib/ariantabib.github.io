@@ -379,25 +379,25 @@
                 gallery: generateGallery(21, 11)
             },
             // { 
-            //     id: 22, order: 22, 
-            //     title: { en: "Project 22", fa: "پروژه ۲۲" }, 
-            //     desc: { en: "Placeholder description for Project 22.", fa: "توضیحات آزمایشی برای پروژه ۲۲." },
-            //     tags: ["cgi"], loc: "Tabriz", img: "./images/project22-img.jpg", 
-            //     gallery: generateGallery(22, 3)
+            //      id: 22, order: 22, 
+            //      title: { en: "Project 22", fa: "پروژه ۲۲" }, 
+            //      desc: { en: "Placeholder description for Project 22.", fa: "توضیحات آزمایشی برای پروژه ۲۲." },
+            //      tags: ["cgi"], loc: "Tabriz", img: "./images/project22-img.jpg", 
+            //      gallery: generateGallery(22, 3)
             // },
             // { 
-            //     id: 23, order: 23, 
-            //     title: { en: "Project 23", fa: "پروژه ۲۳" }, 
-            //     desc: { en: "Placeholder description for Project 23.", fa: "توضیحات آزمایشی برای پروژه ۲۳." },
-            //     tags: ["ads", "sketch"], loc: "Studio", img: "./images/project23-img.jpg", 
-            //     gallery: generateGallery(23, 3)
+            //      id: 23, order: 23, 
+            //      title: { en: "Project 23", fa: "پروژه ۲۳" }, 
+            //      desc: { en: "Placeholder description for Project 23.", fa: "توضیحات آزمایشی برای پروژه ۲۳." },
+            //      tags: ["ads", "sketch"], loc: "Studio", img: "./images/project23-img.jpg", 
+            //      gallery: generateGallery(23, 3)
             // },
             // { 
-            //     id: 24, order: 24, 
-            //     title: { en: "Project 24", fa: "پروژه ۲۴" }, 
-            //     desc: { en: "Placeholder description for Project 24.", fa: "توضیحات آزمایشی برای پروژه ۲۴." },
-            //     tags: ["arch"], loc: "Ramsar", img: "./images/project24-img.jpg", 
-            //     gallery: generateGallery(24, 3)
+            //      id: 24, order: 24, 
+            //      title: { en: "Project 24", fa: "پروژه ۲۴" }, 
+            //      desc: { en: "Placeholder description for Project 24.", fa: "توضیحات آزمایشی برای پروژه ۲۴." },
+            //      tags: ["arch"], loc: "Ramsar", img: "./images/project24-img.jpg", 
+            //      gallery: generateGallery(24, 3)
             // },
             { 
                 id: 25, order: 25, 
@@ -1078,16 +1078,27 @@
                                                 alt={`3D model of ${selectedProject.title[lang]}`}
                                                 style={{width: '100%', height: '100%'}}
                                             >
-                                                <button slot="ar-button" className={`absolute top-6 right-6 z-50 px-4 py-2 md:px-6 md:py-3 bg-accent hover:bg-white text-black rounded-full transition-all flex items-center gap-2 md:gap-3 shadow-lg pointer-events-auto font-bold uppercase ${isRTL ? 'tracking-normal font-fa' : 'tracking-widest'} text-[10px] md:text-xs border border-accent cursor-pointer`}>
+                                                {/* UPDATED AR BUTTON FOR MOBILE:
+                                                    1. Uses clamp() for font-size: text-[clamp(10px,2.5vw,14px)] to be smart.
+                                                    2. Uses clamp() for padding.
+                                                    3. Uses whitespace-nowrap to never break lines.
+                                                    4. md:hidden -> Hides completely on desktop.
+                                                */}
+                                                <button slot="ar-button" className={`absolute top-4 right-4 z-50 px-[3vw] py-2 md:px-6 md:py-3 bg-accent hover:bg-white text-black rounded-full transition-all flex items-center gap-2 shadow-lg pointer-events-auto font-bold uppercase ${isRTL ? 'tracking-normal font-fa' : 'tracking-widest'} text-[clamp(10px,2.5vw,14px)] border border-accent cursor-pointer whitespace-nowrap md:hidden`}>
                                                     <span>{lang === 'en' ? 'Activate AR' : 'واقعیت افزوده'}</span>
                                                     <Icons.AR />
                                                 </button>
                                             </model-viewer>
                                             
-                                            {/* Back button from AR view - Matched Style */}
+                                            {/* UPDATED BACK BUTTON FOR AR VIEW:
+                                                1. Uses clamp() for font-size: text-[clamp(10px,2.5vw,14px)].
+                                                2. Uses clamp() for padding.
+                                                3. Uses whitespace-nowrap to never break lines.
+                                                4. Positioned top-4 left-4 to ensure no overlap with right button on mobile.
+                                            */}
                                             <button 
                                                 onClick={() => setShowAR(false)}
-                                                className={`absolute top-6 left-6 z-[60] px-4 py-2 md:px-6 md:py-3 bg-black hover:bg-[#333] text-white rounded-full transition-all flex items-center gap-2 md:gap-3 shadow-lg pointer-events-auto font-bold uppercase ${isRTL ? 'tracking-normal font-fa' : 'tracking-widest'} text-[10px] md:text-xs border border-white/10`}
+                                                className={`absolute top-4 left-4 z-[60] px-[3vw] py-2 md:px-6 md:py-3 bg-black hover:bg-[#333] text-white rounded-full transition-all flex items-center gap-2 shadow-lg pointer-events-auto font-bold uppercase ${isRTL ? 'tracking-normal font-fa' : 'tracking-widest'} text-[clamp(10px,2.5vw,14px)] border border-white/10 whitespace-nowrap`}
                                             >
                                                 <Icons.Back />
                                                 <span>{lang === 'en' ? 'Back to Gallery' : 'بازگشت به گالری'}</span>
