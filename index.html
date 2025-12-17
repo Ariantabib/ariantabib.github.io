@@ -378,27 +378,6 @@
                 tags: ["exec", "interior"], loc: "Tehran, Opal Mall", img: "./images/project21-img.jpg", 
                 gallery: generateGallery(21, 11)
             },
-            // { 
-            //     id: 22, order: 22, 
-            //     title: { en: "Project 22", fa: "پروژه ۲۲" }, 
-            //     desc: { en: "Placeholder description for Project 22.", fa: "توضیحات آزمایشی برای پروژه ۲۲." },
-            //     tags: ["cgi"], loc: "Tabriz", img: "./images/project22-img.jpg", 
-            //     gallery: generateGallery(22, 3)
-            // },
-            // { 
-            //     id: 23, order: 23, 
-            //     title: { en: "Project 23", fa: "پروژه ۲۳" }, 
-            //     desc: { en: "Placeholder description for Project 23.", fa: "توضیحات آزمایشی برای پروژه ۲۳." },
-            //     tags: ["ads", "sketch"], loc: "Studio", img: "./images/project23-img.jpg", 
-            //     gallery: generateGallery(23, 3)
-            // },
-            // { 
-            //     id: 24, order: 24, 
-            //     title: { en: "Project 24", fa: "پروژه ۲۴" }, 
-            //     desc: { en: "Placeholder description for Project 24.", fa: "توضیحات آزمایشی برای پروژه ۲۴." },
-            //     tags: ["arch"], loc: "Ramsar", img: "./images/project24-img.jpg", 
-            //     gallery: generateGallery(24, 3)
-            // },
             { 
                 id: 25, order: 25, 
                 title: { en: "Culinary Precision in Midnight Black", fa: "دقت آشپزی در قابی به رنگ شب" }, 
@@ -513,7 +492,6 @@
             },
         ];
 
-        // UPDATED SOCIAL LINKS with specific details
         const socialLinks = [
             { icon: <Icons.Mail />, label: "Email", href: "mailto:arian.tabib@gmail.com", text: "arian.tabib@gmail.com" },
             { icon: <Icons.Phone />, label: "Mobile", href: "tel:+989392263236", text: "+98 939 226 3236" },
@@ -769,16 +747,15 @@
 
                             <nav className="hidden md:flex items-center gap-8">
                                 {Object.entries(t.nav).map(([key, label]) => (
-                                    <a key={key} href={`#${key}`} onClick={(e) => handleNavClick(e, key)} className={`text-xs font-bold uppercase ${isRTL ? 'tracking-normal font-fa' : 'tracking-widest'} text-white/70 hover:text-white transition-colors`} onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)}>
+                                    <a key={key} href={`#${key}`} onClick={(e) => handleNavClick(e, key)} className="text-xs font-bold uppercase tracking-widest text-white/70 hover:text-white transition-colors" onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)}>
                                         {label}
                                     </a>
                                 ))}
                                 
-                                {/* Download Button (Desktop) */}
                                 <a 
                                     href="./docs/portfolio.pdf" 
                                     download 
-                                    className={`flex items-center gap-2 text-xs font-bold uppercase ${isRTL ? 'tracking-normal font-fa' : 'tracking-widest'} text-accent hover:text-white transition-colors border border-accent px-4 py-2 rounded-full`}
+                                    className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-accent hover:text-white transition-colors border border-accent px-4 py-2 rounded-full"
                                     onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)}
                                 >
                                     <span className="hidden lg:inline">{t.download}</span>
@@ -806,14 +783,13 @@
                     {menuOpen && (
                         <div className="fixed inset-0 bg-black z-30 flex flex-col items-center justify-center gap-8">
                             {Object.entries(t.nav).map(([key, label]) => (
-                                <a key={key} href={`#${key}`} onClick={(e) => handleNavClick(e, key)} className={`text-2xl text-white font-light ${isRTL ? 'font-fa' : ''}`}>{label}</a>
+                                <a key={key} href={`#${key}`} onClick={(e) => handleNavClick(e, key)} className="text-2xl text-white font-light">{label}</a>
                             ))}
                             
-                            {/* Download Button (Mobile) */}
                             <a 
                                 href="./docs/portfolio.pdf" 
                                 download 
-                                className={`flex items-center gap-2 text-lg font-light text-accent ${isRTL ? 'font-fa' : ''}`}
+                                className="flex items-center gap-2 text-lg font-light text-accent"
                                 onClick={() => setMenuOpen(false)}
                             >
                                 {t.download} <Icons.Download />
@@ -1016,7 +992,7 @@
                     {/* --- MODAL --- */}
                     {selectedProject && (
                         <div 
-                            className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-8 bg-black/90 backdrop-blur-xl animate-fade-in" // Blurred & Darkened background
+                            className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-xl animate-fade-in" // Blurred & Darkened background
                             onClick={handleBackdropClick}
                         >
                             <div className="w-full h-full max-w-[1920px] p-4 md:p-12 flex flex-col md:flex-row gap-8 items-center justify-center relative pointer-events-none">
@@ -1078,7 +1054,8 @@
                                                 alt={`3D model of ${selectedProject.title[lang]}`}
                                                 style={{width: '100%', height: '100%'}}
                                             >
-                                                <button slot="ar-button" className={`absolute top-6 right-6 z-50 px-4 py-2 md:px-6 md:py-3 bg-accent hover:bg-white text-black rounded-full transition-all flex items-center gap-2 md:gap-3 shadow-lg pointer-events-auto font-bold uppercase ${isRTL ? 'tracking-normal font-fa' : 'tracking-widest'} text-[10px] md:text-xs border border-accent cursor-pointer`}>
+                                                {/* Activate AR Button */}
+                                                <button slot="ar-button" className={`absolute top-6 right-6 z-50 px-4 py-2 md:px-6 md:py-3 bg-accent hover:bg-white text-black rounded-full transition-all flex items-center gap-2 md:gap-3 shadow-lg pointer-events-auto font-bold uppercase ${isRTL ? 'tracking-normal font-fa' : 'tracking-widest'} text-[10px] md:text-xs border border-accent cursor-pointer whitespace-nowrap`}>
                                                     <span>{lang === 'en' ? 'Activate AR' : 'واقعیت افزوده'}</span>
                                                     <Icons.AR />
                                                 </button>
@@ -1087,7 +1064,7 @@
                                             {/* Back button from AR view - Matched Style */}
                                             <button 
                                                 onClick={() => setShowAR(false)}
-                                                className={`absolute top-6 left-6 z-[60] px-4 py-2 md:px-6 md:py-3 bg-black hover:bg-[#333] text-white rounded-full transition-all flex items-center gap-2 md:gap-3 shadow-lg pointer-events-auto font-bold uppercase ${isRTL ? 'tracking-normal font-fa' : 'tracking-widest'} text-[10px] md:text-xs border border-white/10`}
+                                                className={`absolute top-6 left-6 z-[60] px-4 py-2 md:px-6 md:py-3 bg-black hover:bg-[#333] text-white rounded-full transition-all flex items-center gap-2 md:gap-3 shadow-lg pointer-events-auto font-bold uppercase ${isRTL ? 'tracking-normal font-fa' : 'tracking-widest'} text-[10px] md:text-xs border border-white/10 whitespace-nowrap`}
                                             >
                                                 <Icons.Back />
                                                 <span>{lang === 'en' ? 'Back to Gallery' : 'بازگشت به گالری'}</span>
@@ -1156,19 +1133,19 @@
                                     >
                                         {/* Scrollable Content */}
                                         <div className="p-5 md:p-10 overflow-y-auto flex-1 modal-scroll flex flex-col">
-                                            <span className={`text-accent text-xs uppercase ${isRTL ? 'tracking-normal font-fa' : 'tracking-[0.2em]'} mb-2 md:mb-4 block opacity-80`}>{selectedProject.loc}</span>
+                                            <span className="text-accent text-xs uppercase tracking-[0.2em] mb-2 md:mb-4 block opacity-80">{selectedProject.loc}</span>
                                             <h2 className={`text-xl md:text-4xl font-bold mb-4 md:mb-8 text-white leading-tight ${isRTL ? 'font-fa' : ''}`}>{selectedProject.title[lang]}</h2>
                                             
                                             {/* Description with more line height */}
                                             <div className={`text-secondary text-sm md:text-base leading-7 md:leading-[2.5] ${isRTL ? 'font-fa' : ''}`}>
-                                                {selectedProject.desc[lang]}
+                                            {selectedProject.desc[lang]}
                                             </div>
 
                                             {/* Spacer to push metadata down */}
                                             <div className="mt-auto pt-6 md:pt-12"></div> 
 
                                             {/* Metadata at bottom */}
-                                            <div className={`border-t border-white/10 pt-4 md:pt-6 grid grid-cols-1 gap-1.5 md:gap-3 text-xs text-white/40 font-mono ${isRTL ? 'tracking-normal' : 'tracking-wider'}`}>
+                                            <div className="border-t border-white/10 pt-4 md:pt-6 grid grid-cols-1 gap-1.5 md:gap-3 text-xs text-white/40 font-mono tracking-wider">
                                                 <div className="flex justify-between"><span>ROLE:</span> <span className="text-white/70">Lead Architect</span></div>
                                                 <div className="flex justify-between"><span>STATUS:</span> <span className="text-white/70">Completed</span></div>
                                             </div>
@@ -1179,9 +1156,9 @@
                                             <div className="p-4 md:p-6 border-t border-white/10 bg-[#111] flex justify-end">
                                                 <button 
                                                     onClick={() => setShowAR(true)}
-                                                    className={`px-4 py-2 md:px-6 md:py-3 bg-accent hover:bg-white text-black rounded-full transition-all flex items-center gap-2 md:gap-3 shadow-lg pointer-events-auto font-bold uppercase ${isRTL ? 'tracking-normal font-fa' : 'tracking-widest'} text-[10px] md:text-xs border border-accent`}
+                                                    className={`px-4 py-2 md:px-6 md:py-3 bg-accent hover:bg-white text-black rounded-full transition-all flex items-center gap-2 md:gap-3 shadow-lg pointer-events-auto font-bold uppercase ${isRTL ? 'tracking-normal font-fa' : 'tracking-widest'} text-[10px] md:text-xs border border-accent whitespace-nowrap`}
                                                 >
-                                                    <span>{lang === 'en' ? 'View in AR' : 'واقعیت افزوده'}</span>
+                                                    <span>{lang === 'en' ? 'Activate AR' : 'واقعیت افزوده'}</span>
                                                     <Icons.AR />
                                                 </button>
                                             </div>
