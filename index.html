@@ -101,11 +101,14 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            transition: opacity 0.8s ease, visibility 0.8s ease;
+            opacity: 1;
+            visibility: visible;
+            transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1), visibility 1.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .loading-screen.hidden {
             opacity: 0;
             visibility: hidden;
+            pointer-events: none;
         }
         .loading-name {
             font-size: clamp(2rem, 8vw, 5rem);
@@ -162,23 +165,19 @@
         /* Scroll Reveal Animations */
         .reveal {
             opacity: 0;
-            transform: translateY(60px);
-            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateY(30px);
+            transition: opacity 0.4s ease-out, transform 0.4s ease-out;
         }
         .reveal.revealed {
             opacity: 1;
             transform: translateY(0);
         }
-        .reveal-delay-1 { transition-delay: 0.1s; }
-        .reveal-delay-2 { transition-delay: 0.2s; }
-        .reveal-delay-3 { transition-delay: 0.3s; }
-        .reveal-delay-4 { transition-delay: 0.4s; }
 
         /* Staggered card animations */
         .project-card {
             opacity: 0;
-            transform: translateY(40px) scale(0.95);
-            transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateY(25px) scale(0.98);
+            transition: opacity 0.35s ease-out, transform 0.35s ease-out;
         }
         .project-card.revealed {
             opacity: 1;
@@ -316,15 +315,15 @@
         /* Timeline reveal */
         .timeline-item {
             opacity: 0;
-            transform: translateX(-30px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
+            transform: translateX(-20px);
+            transition: opacity 0.35s ease-out, transform 0.35s ease-out;
         }
         .timeline-item.revealed {
             opacity: 1;
             transform: translateX(0);
         }
         [dir="rtl"] .timeline-item {
-            transform: translateX(30px);
+            transform: translateX(20px);
         }
         [dir="rtl"] .timeline-item.revealed {
             transform: translateX(0);
@@ -333,8 +332,8 @@
         /* Contact card animations */
         .contact-card {
             opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.5s ease, transform 0.5s ease;
+            transform: translateY(20px);
+            transition: opacity 0.35s ease-out, transform 0.35s ease-out;
         }
         .contact-card.revealed {
             opacity: 1;
@@ -344,8 +343,8 @@
         /* Section title animations */
         .section-title {
             opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.7s ease, transform 0.7s ease;
+            transform: translateY(20px);
+            transition: opacity 0.4s ease-out, transform 0.4s ease-out;
         }
         .section-title.revealed {
             opacity: 1;
@@ -355,8 +354,8 @@
         /* Filter bar animation */
         .filter-bar {
             opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
+            transform: translateY(15px);
+            transition: opacity 0.35s ease-out, transform 0.35s ease-out;
         }
         .filter-bar.revealed {
             opacity: 1;
@@ -851,39 +850,42 @@
                 return () => window.removeEventListener('scroll', handleScroll);
             }, []);
 
-            // Intersection Observer for scroll reveal animations
+            // Intersection Observer for scroll reveal animations - repeatable
             useEffect(() => {
                 const observerOptions = {
-                    threshold: 0.1,
-                    rootMargin: '0px 0px -50px 0px'
+                    threshold: 0.05,
+                    rootMargin: '0px 0px -20px 0px'
                 };
 
                 const observer = new IntersectionObserver((entries) => {
                     entries.forEach((entry) => {
                         if (entry.isIntersecting) {
                             entry.target.classList.add('revealed');
+                        } else {
+                            // Remove the class when out of view for repeatable animation
+                            entry.target.classList.remove('revealed');
                         }
                     });
                 }, observerOptions);
 
-                // Observe elements after a short delay to ensure DOM is ready
-                const timer = setTimeout(() => {
-                    document.querySelectorAll('.reveal, .project-card, .timeline-item, .contact-card, .section-title, .filter-bar').forEach((el) => {
-                        observer.observe(el);
-                    });
-                }, 100);
+                // Observe elements immediately
+                const elements = document.querySelectorAll('.reveal, .project-card, .timeline-item, .contact-card, .section-title, .filter-bar');
+                elements.forEach((el) => {
+                    observer.observe(el);
+                });
 
                 return () => {
-                    clearTimeout(timer);
                     observer.disconnect();
                 };
             }, [filter, isLoaded]);
 
-            // Staggered animation for project cards
+            // Staggered animation for project cards - minimal delay
             useEffect(() => {
                 const cards = document.querySelectorAll('.project-card');
                 cards.forEach((card, index) => {
-                    card.style.transitionDelay = `${index * 0.05}s`;
+                    // Faster stagger with max cap
+                    const delay = Math.min(index * 0.03, 0.3);
+                    card.style.transitionDelay = `${delay}s`;
                 });
             }, [filter]);
 
@@ -1265,8 +1267,8 @@
                                         key={index} 
                                         href={item.href} 
                                         target="_blank"
-                                        className="contact-card flex items-center gap-4 p-6 rounded-lg border border-white/5 hover:border-accent/50 hover:bg-white/5 transition-all group cursor-none text-left"
-                                        style={{ transitionDelay: `${index * 0.1}s` }}
+                                        className="contact-card flex items-center gap-4 p-6 rounded-xl border border-white/10 hover:border-accent/70 hover:bg-white/5 transition-all duration-300 group cursor-none text-left backdrop-blur-sm bg-white/[0.02] shadow-[0_0_1px_rgba(255,255,255,0.1)]"
+                                        style={{ transitionDelay: `${index * 0.05}s` }}
                                         onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)}
                                     >
                                         <span className="text-secondary group-hover:text-accent transition-colors scale-110">{item.icon}</span>
