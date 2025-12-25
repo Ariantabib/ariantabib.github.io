@@ -361,6 +361,233 @@
             opacity: 1;
             transform: translateY(0);
         }
+
+        /* Active filter button - filled style */
+        .filter-btn-active {
+            background: linear-gradient(135deg, #C1A365 0%, #D4B978 100%);
+            color: #000 !important;
+            border-color: #C1A365 !important;
+            box-shadow: 0 2px 10px rgba(193, 163, 101, 0.3);
+        }
+
+        /* Ken Burns effect for hero images */
+        @keyframes kenBurns1 {
+            0% { transform: scale(1) translate(0, 0); }
+            100% { transform: scale(1.1) translate(-1%, -1%); }
+        }
+        @keyframes kenBurns2 {
+            0% { transform: scale(1.05) translate(1%, 0); }
+            100% { transform: scale(1.15) translate(-1%, 1%); }
+        }
+        @keyframes kenBurns3 {
+            0% { transform: scale(1) translate(-1%, 1%); }
+            100% { transform: scale(1.12) translate(1%, -1%); }
+        }
+        .hero-img-0 { animation: kenBurns1 8s ease-out forwards; }
+        .hero-img-1 { animation: kenBurns2 8s ease-out forwards; }
+        .hero-img-2 { animation: kenBurns3 8s ease-out forwards; }
+
+        /* Section Divider Decorations */
+        .section-divider {
+            position: relative;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .section-divider::before {
+            content: '';
+            position: absolute;
+            width: 200px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #C1A365, transparent);
+        }
+        .section-divider-dot {
+            width: 8px;
+            height: 8px;
+            background: #C1A365;
+            transform: rotate(45deg);
+            position: relative;
+            z-index: 1;
+        }
+        .section-divider-lines {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .section-divider-line {
+            width: 60px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(193, 163, 101, 0.5));
+        }
+        .section-divider-line:last-child {
+            background: linear-gradient(90deg, rgba(193, 163, 101, 0.5), transparent);
+        }
+
+        /* Mobile Bottom Navigation */
+        .mobile-bottom-nav {
+            position: fixed;
+            bottom: 16px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background: rgba(20, 20, 20, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+        }
+        .mobile-nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 8px 16px;
+            border-radius: 24px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.5);
+        }
+        .mobile-nav-item:active {
+            transform: scale(0.95);
+        }
+        .mobile-nav-item.active {
+            color: #C1A365;
+            background: rgba(193, 163, 101, 0.15);
+        }
+        .mobile-nav-item svg {
+            width: 22px;
+            height: 22px;
+            margin-bottom: 4px;
+        }
+        .mobile-nav-item span {
+            font-size: 9px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .mobile-nav-item.lang-toggle {
+            padding: 8px 12px;
+        }
+        .mobile-nav-item.lang-toggle img {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* LQIP - Low Quality Image Placeholder */
+        .img-blur-wrapper {
+            position: relative;
+            overflow: hidden;
+            background-color: #1a1a1a;
+        }
+        .img-blur-placeholder {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: blur(20px);
+            transform: scale(1.1);
+            transition: opacity 0.4s ease-out;
+            z-index: 1;
+        }
+        .img-blur-placeholder.loaded {
+            opacity: 0;
+            pointer-events: none;
+        }
+        .img-blur-main {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 0.4s ease-out;
+        }
+        .img-blur-main.loaded {
+            opacity: 1;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+        }
+        @media (min-width: 640px) {
+            .skills-grid {
+                grid-template-columns: repeat(6, 1fr);
+                gap: 1.25rem;
+            }
+        }
+        @media (min-width: 1024px) {
+            .skills-grid {
+                grid-template-columns: repeat(8, 1fr);
+                gap: 1.5rem;
+            }
+        }
+        .skill-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 0.5rem;
+            border-radius: 0.75rem;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(15px);
+        }
+        .skill-item.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .skill-item:hover {
+            background: rgba(193, 163, 101, 0.1);
+            border-color: rgba(193, 163, 101, 0.3);
+            transform: translateY(-4px);
+        }
+        .skill-icon {
+            width: 36px;
+            height: 36px;
+            object-fit: contain;
+            filter: grayscale(100%) brightness(0.8);
+            transition: all 0.3s ease;
+        }
+        @media (min-width: 640px) {
+            .skill-icon {
+                width: 44px;
+                height: 44px;
+            }
+        }
+        .skill-item:hover .skill-icon {
+            filter: grayscale(0%) brightness(1);
+            transform: scale(1.1);
+        }
+        .skill-name {
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: rgba(255, 255, 255, 0.5);
+            text-align: center;
+            transition: color 0.3s ease;
+        }
+        @media (min-width: 640px) {
+            .skill-name {
+                font-size: 0.65rem;
+            }
+        }
+        .skill-item:hover .skill-name {
+            color: #C1A365;
+        }
     </style>
     
     <script>
@@ -408,7 +635,12 @@
             Mail: () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>,
             Phone: () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>,
             AR: () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M2 8V5a3 3 0 0 1 3-3h3"/><path d="M2 16v3a3 3 0 0 0 3 3h3"/><path d="M22 8V5a3 3 0 0 0-3-3h-3"/><path d="M22 16v3a3 3 0 0 1-3 3h-3"/><path d="M12 8l-4 2 4 2 4-2-4-2z"/><path d="M8 10v4l4 2 4-2v-4"/></svg>,
-            Back: () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
+            Back: () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>,
+            // Mobile Nav Icons
+            Grid: () => <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>,
+            User: () => <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>,
+            MessageCircle: () => <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>,
+            Globe: () => <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
         };
 
         // --- CONTENT & DATA ---
@@ -429,7 +661,8 @@
                     title: "The Architect",
                     bio: "I am an architectural designer operating at the intersection of built environments and digital artistry. With a high-honors academic background and a diverse portfolio of executive projects, my work bridges the gap between conceptual innovation and technical precision. From designing large-scale healthcare facilities to crafting bespoke luxury interiors and leading global 3D visualization campaigns, I am dedicated to creating spaces and images that tell a compelling story.",
                     expTitle: "Work Experience",
-                    eduTitle: "Education"
+                    eduTitle: "Education",
+                    skillsTitle: "Tools & Technologies"
                 },
                 footer: "© 2025 Arian Tabib. All Rights Reserved."
             },
@@ -449,7 +682,8 @@
                     title: "درباره من",
                     bio: "من طراح معماری هستم که در نقطه تلاقی محیط‌های ساخته‌شده و هنر دیجیتال فعالیت می‌کنم. با پیش‌زمینه‌ای آکادمیک و ممتاز و پورتفولیویی متنوع از پروژه‌های اجرایی، کار من پلی است میان نوآوری مفهومی و دقت فنی. از طراحی مراکز درمانی بزرگ‌مقیاس تا خلق فضاهای داخلی لوکس و سفارشی، و رهبری کمپین‌های جهانی تجسم سه‌بعدی، هدف من خلق فضاها و تصاویری است که داستانی گیرا را روایت می‌کنند.",
                     expTitle: "سوابق کاری",
-                    eduTitle: "تحصیلات"
+                    eduTitle: "تحصیلات",
+                    skillsTitle: "ابزارها و تکنولوژی‌ها"
                 },
                 footer: "© ۱۴۰۳ آرین طبیب. تمامی حقوق محفوظ است."
             }
@@ -581,7 +815,7 @@
             { 
                 id: 13, order: 13, 
                 title: { en: "Classic BedRoom 3", fa: "طراحی اتاق خواب کلاسیک 3" }, 
-                desc: { en: "This executive project showcases the enduring appeal of classical design. Every detail, from intricate wall moldings to gilded accents and crystal chandeliers, is meticulously crafted to create a sense of grandeur. The design balances ornate aesthetics with modern comfort, resulting in a luxurious family residence defined by its timeless beauty.", fa: "این پروژه اجرایی، جذابیت ماندگار طراحی کلاسیک را به نمایش می‌گذارد. هر جزئیات، از گچ‌بری‌های ظریف دیوار تا المان‌های طلایی و لوسترهای کریستالی، با دقت فراوان برای ایجاد حس شکوه ساخته شده‌اند. طراحی تعادلی میان زیبایی‌شناسی پرآذین و راحتی مدرن ایجاد می‌کند که نتیجه آن یک اقامتگاه خانوادگی لوکس با زیبایی جاودانه است." },
+                desc: { en: "This executive project showcases the enduring appeal of classical design. Every detail, from intricate wall moldings to gilded accents and crystal chandeliers, is meticulously crafted to create a sense of grandeur. The design balances ornate aesthetics with modern comfort, resulting in a luxurious family residence defined by its timeless beauty.", fa: "این پروژه اجرایی، جذابیت ماندگار طراحی کلاسیک را به نمایش می‌گذارد. هر جزئیات، از گچ‌بری‌های ظریف دیوار تا المان‌های طلایی و لوسترهای کریستالی، with دقت فراوان برای ایجاد حس شکوه ساخته شده‌اند. طراحی تعادلی میان زیبایی‌شناسی پرآذین و راحتی مدرن ایجاد می‌کند که نتیجه آن یک اقامتگاه خانوادگی لوکس با زیبایی جاودانه است." },
                 tags: ["ads", "exec", "interior"], loc: "Mazandaran, MahmoudAbad", img: "./images/project13-img.jpg", 
                 gallery: generateGallery(13, 4)
             },
@@ -777,13 +1011,143 @@
             ]
         };
 
+        // Skills/Software Data
+        const skillsData = [
+            { id: "autocad", name: "AutoCAD", icon: "./images/skills/autocad.png" },
+            { id: "revit", name: "Revit", icon: "./images/skills/revit.png" },
+            { id: "3dsmax", name: "3Ds Max", icon: "./images/skills/3dsmax.png" },
+            { id: "vray", name: "V-Ray", icon: "./images/skills/vray.png" },
+            { id: "unreal", name: "Unreal Engine", icon: "./images/skills/unreal.png" },
+            { id: "lumion", name: "Lumion", icon: "./images/skills/lumion.png" },
+            { id: "photoshop", name: "Photoshop", icon: "./images/skills/photoshop.png" },
+            { id: "premiere", name: "Premiere Pro", icon: "./images/skills/premiere.png" },
+            { id: "illustrator", name: "Illustrator", icon: "./images/skills/illustrator.png" },
+            { id: "aftereffects", name: "After Effects", icon: "./images/skills/aftereffects.png" },
+            { id: "substance", name: "Substance", icon: "./images/skills/substance.png" },
+            { id: "coreldraw", name: "CorelDRAW", icon: "./images/skills/coreldraw.png" },
+            { id: "aiimage", name: "AI Image", icon: "./images/skills/aiimage.png" },
+            { id: "aivideo", name: "AI Video", icon: "./images/skills/aivideo.png" },
+            { id: "coding", name: "Coding", icon: "./images/skills/coding.png" },
+            { id: "ar", name: "AR", icon: "./images/skills/ar.png" },
+            { id: "vr", name: "VR", icon: "./images/skills/vr.png" }
+        ];
+
+        // Section Divider Component
+        const SectionDivider = () => (
+            <div className="section-divider">
+                <div className="section-divider-lines">
+                    <div className="section-divider-line"></div>
+                    <div className="section-divider-dot"></div>
+                    <div className="section-divider-line"></div>
+                </div>
+            </div>
+        );
+
+        // LQIP BlurImage Component - Automatic blur placeholder system
+        const BlurImage = ({ src, alt, className, onLoad: externalOnLoad, ...props }) => {
+            const [isLoaded, setIsLoaded] = useState(false);
+            const [placeholder, setPlaceholder] = useState('');
+            const imgRef = useRef(null);
+
+            // Generate tiny placeholder from original image
+            useEffect(() => {
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                const img = new Image();
+                img.crossOrigin = 'anonymous';
+                
+                img.onload = () => {
+                    // Create a tiny 20px wide version for blur placeholder
+                    const aspectRatio = img.height / img.width;
+                    canvas.width = 20;
+                    canvas.height = Math.round(20 * aspectRatio);
+                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                    
+                    try {
+                        const dataUrl = canvas.toDataURL('image/jpeg', 0.5);
+                        setPlaceholder(dataUrl);
+                    } catch (e) {
+                        // Fallback for CORS issues - use solid color
+                        setPlaceholder('');
+                    }
+                };
+                
+                img.onerror = () => {
+                    setPlaceholder('');
+                };
+                
+                img.src = src;
+            }, [src]);
+
+            const handleLoad = () => {
+                setIsLoaded(true);
+                if (externalOnLoad) externalOnLoad();
+            };
+
+            return (
+                <div className="img-blur-wrapper" style={{ width: '100%', height: '100%' }}>
+                    {placeholder && (
+                        <img 
+                            src={placeholder}
+                            alt=""
+                            className={`img-blur-placeholder ${isLoaded ? 'loaded' : ''}`}
+                            aria-hidden="true"
+                        />
+                    )}
+                    <img 
+                        ref={imgRef}
+                        src={src}
+                        alt={alt}
+                        className={`img-blur-main ${isLoaded ? 'loaded' : ''} ${className || ''}`}
+                        onLoad={handleLoad}
+                        {...props}
+                    />
+                </div>
+            );
+        };
+
+        // Mobile Bottom Navigation Component
+        const MobileBottomNav = ({ activeSection, onNavigate, lang, onLangToggle, isRTL }) => {
+            const navItems = [
+                { id: 'work', icon: <Icons.Grid />, label: { en: 'Projects', fa: 'پروژه‌ها' } },
+                { id: 'about', icon: <Icons.User />, label: { en: 'About', fa: 'درباره' } },
+                { id: 'contact', icon: <Icons.MessageCircle />, label: { en: 'Contact', fa: 'ارتباط' } },
+            ];
+
+            return (
+                <nav className="mobile-bottom-nav md:hidden">
+                    {navItems.map((item) => (
+                        <a
+                            key={item.id}
+                            href={`#${item.id}`}
+                            onClick={(e) => onNavigate(e, item.id)}
+                            className={`mobile-nav-item ${activeSection === item.id ? 'active' : ''}`}
+                        >
+                            {item.icon}
+                            <span className={isRTL ? 'font-fa' : ''}>{item.label[lang]}</span>
+                        </a>
+                    ))}
+                    <button 
+                        onClick={onLangToggle}
+                        className="mobile-nav-item lang-toggle"
+                    >
+                        <img 
+                            src="./images/flag.jpg" 
+                            onError={(e) => { e.target.onerror = null; e.target.src = "https://placehold.co/50x50/white/black?text=" + (lang === 'en' ? 'FA' : 'EN'); }}
+                            alt="Switch Language" 
+                        />
+                        <span>{lang === 'en' ? 'فا' : 'EN'}</span>
+                    </button>
+                </nav>
+            );
+        };
+
         // --- APP ---
         const App = () => {
             const [lang, setLang] = useState('en');
             const [currentSlide, setCurrentSlide] = useState(0);
             const [filter, setFilter] = useState('all');
             const [selectedProject, setSelectedProject] = useState(null);
-            const [menuOpen, setMenuOpen] = useState(false);
             const [modalImageIndex, setModalImageIndex] = useState(0);
             const [isImageLoading, setIsImageLoading] = useState(false);
             const [showAR, setShowAR] = useState(false); 
@@ -809,6 +1173,9 @@
             const modelViewerRef = useRef(null);
             const heroContentRef = useRef(null);
 
+            // Active section tracking for mobile nav
+            const [activeSection, setActiveSection] = useState('work');
+
             const t = content[lang];
             const timeline = timelineData[lang];
             const isRTL = lang === 'fa';
@@ -832,7 +1199,7 @@
                 return () => clearTimeout(timer);
             }, []);
 
-            // Hero parallax/collapse effect on scroll
+            // Hero parallax/collapse effect on scroll + active section tracking
             useEffect(() => {
                 const handleScroll = () => {
                     const scrollY = window.scrollY;
@@ -844,6 +1211,19 @@
                     
                     setHeroScale(scale);
                     setHeroOpacity(opacity);
+
+                    // Track active section for mobile nav
+                    const sections = ['work', 'contact', 'about'];
+                    for (const sectionId of sections) {
+                        const section = document.getElementById(sectionId);
+                        if (section) {
+                            const rect = section.getBoundingClientRect();
+                            if (rect.top <= windowHeight / 2 && rect.bottom >= windowHeight / 2) {
+                                setActiveSection(sectionId);
+                                break;
+                            }
+                        }
+                    }
                 };
 
                 window.addEventListener('scroll', handleScroll, { passive: true });
@@ -869,7 +1249,7 @@
                 }, observerOptions);
 
                 // Observe elements immediately
-                const elements = document.querySelectorAll('.reveal, .project-card, .timeline-item, .contact-card, .section-title, .filter-bar');
+                const elements = document.querySelectorAll('.reveal, .project-card, .timeline-item, .contact-card, .section-title, .filter-bar, .skill-item');
                 elements.forEach((el) => {
                     observer.observe(el);
                 });
@@ -942,6 +1322,36 @@
                 }, 4500);
                 return () => clearInterval(interval);
             }, []);
+
+            // Keyboard navigation for modal
+            useEffect(() => {
+                if (!selectedProject) return;
+                
+                const handleKeyDown = (e) => {
+                    // Don't trigger if user is in AR mode
+                    if (showAR) return;
+                    
+                    switch(e.key) {
+                        case 'Escape':
+                            setSelectedProject(null);
+                            setShowAR(false);
+                            break;
+                        case 'ArrowRight':
+                            e.preventDefault();
+                            nextMedia();
+                            break;
+                        case 'ArrowLeft':
+                            e.preventDefault();
+                            prevMedia();
+                            break;
+                        default:
+                            break;
+                    }
+                };
+                
+                window.addEventListener('keydown', handleKeyDown);
+                return () => window.removeEventListener('keydown', handleKeyDown);
+            }, [selectedProject, showAR, modalImageIndex]);
 
             // Model loading state and progress
             useEffect(() => {
@@ -1111,54 +1521,34 @@
                                 </button>
                             </nav>
 
-                            <button className="md:hidden text-white z-50" onClick={() => setMenuOpen(!menuOpen)}>
-                                {menuOpen ? <Icons.Close /> : <Icons.Menu />}
-                            </button>
                         </div>
                     </header>
 
-                    {/* Mobile Menu */}
-                    {menuOpen && (
-                        <div className="fixed inset-0 bg-black z-30 flex flex-col items-center justify-center gap-8">
-                            {Object.entries(t.nav).map(([key, label]) => (
-                                <a key={key} href={`#${key}`} onClick={(e) => handleNavClick(e, key)} className={`text-2xl text-white font-light ${isRTL ? 'font-fa' : ''}`}>{label}</a>
-                            ))}
-                            
-                            <a 
-                                href="./docs/portfolio.pdf" 
-                                download 
-                                className={`flex items-center gap-2 text-lg font-light text-accent ${isRTL ? 'font-fa' : ''}`}
-                                onClick={() => setMenuOpen(false)}
-                            >
-                                {t.download} <Icons.Download />
-                            </a>
-
-                            <button onClick={() => { setLang(lang === 'en' ? 'fa' : 'en'); setMenuOpen(false); }} className="mt-8 w-10 h-10 rounded-full overflow-hidden border border-accent">
-                                <img 
-                                    src="./images/flag.jpg" 
-                                    onError={(e) => { e.target.onerror = null; e.target.src = "https://placehold.co/50x50/white/black?text=" + (lang === 'en' ? 'FA' : 'EN'); }}
-                                    alt="Switch Language" 
-                                    className="w-full h-full object-cover" 
-                                />
-                            </button>
-                        </div>
-                    )}
-
                     {/* --- HERO --- */}
                     <section className="relative h-screen w-full overflow-hidden flex flex-col justify-center items-center text-center px-6">
-                        {/* Desktop Hero Images */}
+                        {/* Desktop Hero Images with Ken Burns effect */}
                         {heroImages.desktop.map((img, index) => (
-                            <div key={`desktop-${index}`} className={`absolute inset-0 transition-opacity duration-[2000ms] ease-in-out ${currentSlide === index ? 'opacity-100' : 'opacity-0'} hidden md:block`}>
+                            <div key={`desktop-${index}`} className={`absolute inset-0 transition-opacity duration-[2000ms] ease-in-out ${currentSlide === index ? 'opacity-100' : 'opacity-0'} hidden md:block overflow-hidden`}>
                                 <div className="absolute inset-0 bg-black/60 z-10"></div>
-                                <img src={img} className="w-full h-full object-cover scale-105 animate-pulse-slow" alt="Hero" />
+                                <div className={`w-full h-full ${currentSlide === index ? `hero-img-${index}` : ''}`}>
+                                    <BlurImage 
+                                        src={img} 
+                                        alt="Hero"
+                                    />
+                                </div>
                             </div>
                         ))}
 
-                        {/* Mobile Hero Images */}
+                        {/* Mobile Hero Images with Ken Burns effect */}
                         {heroImages.mobile.map((img, index) => (
-                            <div key={`mobile-${index}`} className={`absolute inset-0 transition-opacity duration-[2000ms] ease-in-out ${currentSlide === index ? 'opacity-100' : 'opacity-0'} md:hidden`}>
+                            <div key={`mobile-${index}`} className={`absolute inset-0 transition-opacity duration-[2000ms] ease-in-out ${currentSlide === index ? 'opacity-100' : 'opacity-0'} md:hidden overflow-hidden`}>
                                 <div className="absolute inset-0 bg-black/60 z-10"></div>
-                                <img src={img} className="w-full h-full object-cover scale-105 animate-pulse-slow" alt="Hero" />
+                                <div className={`w-full h-full ${currentSlide === index ? `hero-img-${index}` : ''}`}>
+                                    <BlurImage 
+                                        src={img} 
+                                        alt="Hero"
+                                    />
+                                </div>
                             </div>
                         ))}
 
@@ -1207,13 +1597,16 @@
                         
                         <button 
                             onClick={scrollToProjects}
-                            className="absolute bottom-12 left-1/2 transform -translate-x-1/2 z-20 text-white/50 hover:text-white transition-colors animate-bounce cursor-none"
+                            className="absolute bottom-12 left-0 right-0 mx-auto w-fit z-20 text-white/50 hover:text-white transition-colors animate-bounce cursor-none"
                             style={{ opacity: heroOpacity }}
                             onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)}
                         >
                             <Icons.ArrowDown />
                         </button>
                     </section>
+
+                    {/* Section Divider */}
+                    <SectionDivider />
 
                     {/* --- PROJECTS --- */}
                     <section id="work" className="py-24 px-4 md:px-12 container mx-auto">
@@ -1222,7 +1615,7 @@
                                 <button 
                                     key={key}
                                     onClick={() => setFilter(key)}
-                                    className={`text-xs font-bold uppercase ${isRTL ? 'tracking-normal font-fa' : 'tracking-widest'} transition-all px-3 py-1 rounded-full border ${filter === key ? 'border-accent text-accent' : 'border-transparent text-secondary hover:text-white'}`}
+                                    className={`text-xs font-bold uppercase ${isRTL ? 'tracking-normal font-fa' : 'tracking-widest'} transition-all duration-300 px-4 py-1.5 rounded-full border ${filter === key ? 'filter-btn-active' : 'border-white/20 text-secondary hover:text-white hover:border-white/40'}`}
                                     onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)}
                                 >
                                     {t.filters[key]}
@@ -1238,11 +1631,14 @@
                                     onClick={() => openProject(project)}
                                     onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)}
                                 >
-                                    <img 
-                                        src={project.img} 
-                                        alt={project.title[lang]} 
-                                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-90 group-hover:opacity-100"
-                                    />
+                                    <div className="w-full h-full transition-transform duration-700 group-hover:scale-110">
+                                        <BlurImage 
+                                            src={project.img} 
+                                            alt={project.title[lang]} 
+                                            loading="lazy"
+                                            className="opacity-90 group-hover:opacity-100"
+                                        />
+                                    </div>
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
                                         <span className={`text-accent text-[10px] uppercase ${isRTL ? 'tracking-normal font-fa' : 'tracking-widest'} mb-1`}>{project.loc}</span>
                                         <h3 className={`text-sm md:text-lg font-bold text-white ${isRTL ? 'font-fa' : ''}`}>
@@ -1253,6 +1649,9 @@
                             ))}
                         </div>
                     </section>
+
+                    {/* Section Divider */}
+                    <SectionDivider />
 
                     {/* --- CONTACT --- */}
                     <section id="contact" className="py-24 px-6 bg-surface border-t border-white/5">
@@ -1281,6 +1680,11 @@
                             </div>
                         </div>
                     </section>
+
+                    {/* Section Divider */}
+                    <div className="bg-surface">
+                        <SectionDivider />
+                    </div>
 
                     {/* --- ABOUT ME --- */}
                     <section id="about" className="py-24 px-6 bg-[#080808] border-t border-white/5">
@@ -1328,13 +1732,51 @@
                                     </div>
                                 </div>
                             </div>
+
+                            {/* SKILLS SECTION */}
+                            <div className="mt-24">
+                                <h3 className={`reveal text-xl font-bold text-white mb-10 text-center ${isRTL ? 'font-fa' : ''}`}>
+                                    {t.about.skillsTitle}
+                                </h3>
+                                <div className="skills-grid" dir="ltr">
+                                    {skillsData.map((skill, index) => (
+                                        <div 
+                                            key={skill.id} 
+                                            className="skill-item"
+                                            style={{ transitionDelay: `${index * 0.03}s` }}
+                                            onMouseEnter={() => handleHover(true)} 
+                                            onMouseLeave={() => handleHover(false)}
+                                        >
+                                            <img 
+                                                src={skill.icon} 
+                                                alt={skill.name}
+                                                className="skill-icon"
+                                                onError={(e) => { 
+                                                    e.target.onerror = null; 
+                                                    e.target.src = `https://placehold.co/44x44/1a1a1a/C1A365?text=${skill.name.charAt(0)}`; 
+                                                }}
+                                            />
+                                            <span className="skill-name">{skill.name}</span>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
                         </div>
                     </section>
 
                     {/* --- FOOTER --- */}
-                    <footer className="py-8 text-center bg-bg border-t border-white/5">
+                    <footer className="py-8 pb-24 md:pb-8 text-center bg-bg border-t border-white/5">
                         <p className={`reveal text-xs text-white/20 uppercase ${isRTL ? 'tracking-normal font-fa' : 'tracking-widest'}`}>{t.footer}</p>
                     </footer>
+
+                    {/* --- MOBILE BOTTOM NAVIGATION --- */}
+                    <MobileBottomNav 
+                        activeSection={activeSection}
+                        onNavigate={handleNavClick}
+                        lang={lang}
+                        onLangToggle={() => setLang(lang === 'en' ? 'fa' : 'en')}
+                        isRTL={isRTL}
+                    />
 
                     {/* --- MODAL --- */}
                     {selectedProject && (
