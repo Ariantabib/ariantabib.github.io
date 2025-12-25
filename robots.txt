@@ -1,3 +1,4 @@
 User-agent: *
 Allow: /
-Sitemap: [https://ariantabib.github.io/website/sitemap.xml](https://ariantabib.github.io/website/sitemap.xml)
+
+Sitemap: https://ariantabib.github.io/website/sitemap.xml
