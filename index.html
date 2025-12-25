@@ -1,51 +1,66 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en-US" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- SEO & Meta Tags -->
-    <title>Arian Tabib | Architect & 3D Visualizer Portfolio</title>
-    <meta name="description" content="Portfolio of Arian Tabib (آرین طبیب), an experienced Architect and 3D Visualizer specializing in architectural design and CGI visualizations. متخصص معماری و طراحی داخلی در تهران.">
-    <meta name="keywords" content="Arian Tabib, آرین طبیب, Architect, 3D Visualizer, Interior Design, CGI Artist, Architecture Portfolio, Tehran Architect, 3ds Max, V-Ray, Unreal Engine, طراحی داخلی, معمار تهران">
+    <!-- SEO & Meta Tags (Updated for better ranking) -->
+    <title>Arian Tabib | Architect & 3D Visualizer | آرین طبیب</title>
+    
+    <!-- Primary Meta Tags -->
+    <meta name="title" content="Arian Tabib | Architect & 3D Visualizer | آرین طبیب">
+    <meta name="description" content="Portfolio of Arian Tabib (آرین طبیب), an experienced Architect and 3D Visualizer based in Tehran. Specializing in architectural design, interior design, and high-end CGI visualizations.">
+    
+    <!-- Keywords (English & Persian) -->
+    <meta name="keywords" content="Arian Tabib, آرین طبیب, Architect, معمار, 3D Visualizer, تصویرساز سه بعدی, Interior Design, طراحی داخلی, CGI Artist, Architecture Portfolio, Tehran Architect, معمار تهران, 3ds Max, V-Ray, Unreal Engine, Visualization, معماری">
+    
     <meta name="author" content="Arian Tabib">
-    <meta name="robots" content="index, follow">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="language" content="English">
+    <meta name="revisit-after" content="7 days">
+
+    <!-- Canonical Tag (Critical for preventing duplicate content issues) -->
+    <link rel="canonical" href="https://ariantabib.github.io/website/">
 
     <!-- Favicon & Site Icons -->
     <link rel="icon" type="image/png" href="./images/logo.png">
     <link rel="apple-touch-icon" href="./images/logo.png">
     <meta name="theme-color" content="#050505">
 
-    <!-- Open Graph / Facebook & LinkedIn -->
+    <!-- Open Graph / Facebook & LinkedIn (Updated URLs) -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://arian-tabib.github.io/portfolio/">
-    <meta property="og:title" content="Arian Tabib | Architect & 3D Visualizer">
-    <meta property="og:description" content="Explore the architectural and visualization works of Arian Tabib. Bridging conceptual innovation with technical precision.">
-    <meta property="og:image" content="https://arian-tabib.github.io/portfolio/images/cover-preview.jpg">
+    <meta property="og:url" content="https://ariantabib.github.io/website/">
+    <meta property="og:title" content="Arian Tabib | Architect & 3D Visualizer | آرین طبیب">
+    <meta property="og:description" content="Explore the architectural and visualization works of Arian Tabib (آرین طبیب). Bridging conceptual innovation with technical precision.">
+    <meta property="og:image" content="https://ariantabib.github.io/website/images/cover-preview.jpg">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:site_name" content="Arian Tabib Portfolio">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://arian-tabib.github.io/portfolio/">
-    <meta property="twitter:title" content="Arian Tabib | Architect & 3D Visualizer">
+    <meta property="twitter:url" content="https://ariantabib.github.io/website/">
+    <meta property="twitter:title" content="Arian Tabib | Architect & 3D Visualizer | آرین طبیب">
     <meta property="twitter:description" content="Explore the architectural and visualization works of Arian Tabib.">
-    <meta property="twitter:image" content="https://arian-tabib.github.io/portfolio/images/cover-preview.jpg">
+    <meta property="twitter:image" content="https://ariantabib.github.io/website/images/cover-preview.jpg">
 
-    <!-- Structured Data -->
+    <!-- Structured Data (JSON-LD) - Updated -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "Person",
       "name": "Arian Tabib",
-      "url": "https://arian-tabib.github.io/portfolio/",
+      "alternateName": "آرین طبیب",
+      "url": "https://ariantabib.github.io/website/",
       "jobTitle": "Architect",
-      "image": "https://arian-tabib.github.io/portfolio/images/logo.png",
+      "image": "https://ariantabib.github.io/website/images/logo.png",
       "alumniOf": "Azad University, North Tehran Branch",
       "sameAs": [
         "https://www.linkedin.com/in/arian-tabib",
         "https://www.instagram.com/Arian_tabib",
-        "https://youtube.com/@Ariantabib"
+        "https://youtube.com/@Ariantabib",
+        "https://t.me/ariantabib"
       ],
-      "knowsAbout": ["Architecture", "3D Visualization", "Interior Design", "CGI", "3ds Max", "V-Ray"]
+      "knowsAbout": ["Architecture", "3D Visualization", "Interior Design", "CGI", "3ds Max", "V-Ray", "Unreal Engine"]
     }
     </script>
     
@@ -641,7 +656,7 @@
                          setLoadProgress(100);
                          // Keep the loading screen for a moment to ensure smooth transition
                          setTimeout(() => {
-                            setIsImageLoading(false);
+                           setIsImageLoading(false);
                          }, 500);
                     };
 
@@ -652,7 +667,7 @@
                     if (modelViewer.loaded) {
                          setLoadProgress(100);
                          setTimeout(() => {
-                            setIsImageLoading(false);
+                           setIsImageLoading(false);
                          }, 500);
                     }
 
@@ -1078,27 +1093,16 @@
                                                 alt={`3D model of ${selectedProject.title[lang]}`}
                                                 style={{width: '100%', height: '100%'}}
                                             >
-                                                {/* UPDATED AR BUTTON FOR MOBILE:
-                                                    1. Uses clamp() for font-size: text-[clamp(10px,2.5vw,14px)] to be smart.
-                                                    2. Uses clamp() for padding.
-                                                    3. Uses whitespace-nowrap to never break lines.
-                                                    4. md:hidden -> Hides completely on desktop.
-                                                */}
-                                                <button slot="ar-button" className={`absolute top-4 right-4 z-50 px-[3vw] py-2 md:px-6 md:py-3 bg-accent hover:bg-white text-black rounded-full transition-all flex items-center gap-2 shadow-lg pointer-events-auto font-bold uppercase ${isRTL ? 'tracking-normal font-fa' : 'tracking-widest'} text-[clamp(10px,2.5vw,14px)] border border-accent cursor-pointer whitespace-nowrap md:hidden`}>
+                                                <button slot="ar-button" className={`absolute top-6 right-6 z-50 px-4 py-2 md:px-6 md:py-3 bg-accent hover:bg-white text-black rounded-full transition-all flex items-center gap-2 md:gap-3 shadow-lg pointer-events-auto font-bold uppercase ${isRTL ? 'tracking-normal font-fa' : 'tracking-widest'} text-[10px] md:text-xs border border-accent cursor-pointer`}>
                                                     <span>{lang === 'en' ? 'Activate AR' : 'واقعیت افزوده'}</span>
                                                     <Icons.AR />
                                                 </button>
                                             </model-viewer>
                                             
-                                            {/* UPDATED BACK BUTTON FOR AR VIEW:
-                                                1. Uses clamp() for font-size: text-[clamp(10px,2.5vw,14px)].
-                                                2. Uses clamp() for padding.
-                                                3. Uses whitespace-nowrap to never break lines.
-                                                4. Positioned top-4 left-4 to ensure no overlap with right button on mobile.
-                                            */}
+                                            {/* Back button from AR view - Matched Style */}
                                             <button 
                                                 onClick={() => setShowAR(false)}
-                                                className={`absolute top-4 left-4 z-[60] px-[3vw] py-2 md:px-6 md:py-3 bg-black hover:bg-[#333] text-white rounded-full transition-all flex items-center gap-2 shadow-lg pointer-events-auto font-bold uppercase ${isRTL ? 'tracking-normal font-fa' : 'tracking-widest'} text-[clamp(10px,2.5vw,14px)] border border-white/10 whitespace-nowrap`}
+                                                className={`absolute top-6 left-6 z-[60] px-4 py-2 md:px-6 md:py-3 bg-black hover:bg-[#333] text-white rounded-full transition-all flex items-center gap-2 md:gap-3 shadow-lg pointer-events-auto font-bold uppercase ${isRTL ? 'tracking-normal font-fa' : 'tracking-widest'} text-[10px] md:text-xs border border-white/10`}
                                             >
                                                 <Icons.Back />
                                                 <span>{lang === 'en' ? 'Back to Gallery' : 'بازگشت به گالری'}</span>
