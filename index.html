@@ -370,18 +370,10 @@
             box-shadow: 0 2px 10px rgba(193, 163, 101, 0.3);
         }
 
-        /* Ken Burns effect for hero images - seamless transitions */
-        @keyframes kenBurns1 {
-            0% { transform: scale(1.05); }
-            100% { transform: scale(1.15); }
-        }
-        @keyframes kenBurns2 {
-            0% { transform: scale(1.05); }
-            100% { transform: scale(1.15); }
-        }
-        @keyframes kenBurns3 {
-            0% { transform: scale(1.05); }
-            100% { transform: scale(1.15); }
+        /* Ken Burns effect for hero images - seamless crossfade transitions */
+        @keyframes kenBurnsZoom {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.12); }
         }
         .hero-slide-container {
             position: absolute;
@@ -394,13 +386,16 @@
             height: 100%;
             object-fit: cover;
         }
-        .hero-slide-active .hero-img-animator {
-            animation: kenBurns1 5s ease-out forwards;
-        }
         .hero-img-animator {
             width: 100%;
             height: 100%;
-            transform: scale(1.05);
+            transform: scale(1);
+            animation: kenBurnsZoom 6s ease-out forwards;
+        }
+        /* Reset animation when slide becomes active */
+        .hero-slide-active .hero-img-animator {
+            animation: none;
+            animation: kenBurnsZoom 6s ease-out forwards;
         }
 
         /* Section Divider Decorations */
@@ -515,23 +510,28 @@
             letter-spacing: 0.3px;
         }
         .mobile-nav-item.lang-toggle {
-            padding: 6px 10px;
-            margin-left: 4px;
+            padding: 8px 12px;
+            margin-left: 6px;
             border-left: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 0 20px 20px 0;
+            border-radius: 20px;
+            flex-shrink: 0;
         }
         .mobile-nav-item.lang-toggle img {
-            width: 20px;
-            height: 20px;
+            width: 24px;
+            height: 24px;
+            min-width: 24px;
+            min-height: 24px;
             border-radius: 50%;
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            border: 1.5px solid rgba(255, 255, 255, 0.2);
             transition: transform 0.25s ease, border-color 0.25s ease;
+            object-fit: cover;
         }
         .mobile-nav-item.lang-toggle:active img {
             transform: scale(0.9);
         }
         .mobile-nav-item.lang-toggle span {
-            margin-top: 2px;
+            margin-top: 3px;
+            font-size: 9px;
         }
 
         /* LQIP - Low Quality Image Placeholder */
@@ -1585,15 +1585,25 @@
                         {heroImages.desktop.map((img, index) => (
                             <div 
                                 key={`desktop-${index}`} 
-                                className={`hero-slide-container transition-opacity duration-[1500ms] ease-in-out ${currentSlide === index ? 'opacity-100 hero-slide-active' : 'opacity-0'} hidden md:block`}
+                                className={`hero-slide-container transition-opacity duration-[1500ms] ease-in-out ${currentSlide === index ? 'opacity-100' : 'opacity-0 pointer-events-none'} hidden md:block`}
                             >
                                 <div className="absolute inset-0 bg-black/60 z-10"></div>
-                                <div className="hero-img-animator">
-                                    <BlurImage 
-                                        src={img} 
-                                        alt="Hero"
-                                    />
-                                </div>
+                                {currentSlide === index && (
+                                    <div key={`anim-desktop-${index}-${currentSlide}`} className="hero-img-animator">
+                                        <BlurImage 
+                                            src={img} 
+                                            alt="Hero"
+                                        />
+                                    </div>
+                                )}
+                                {currentSlide !== index && (
+                                    <div className="w-full h-full" style={{ transform: 'scale(1.12)' }}>
+                                        <BlurImage 
+                                            src={img} 
+                                            alt="Hero"
+                                        />
+                                    </div>
+                                )}
                             </div>
                         ))}
 
@@ -1601,15 +1611,25 @@
                         {heroImages.mobile.map((img, index) => (
                             <div 
                                 key={`mobile-${index}`} 
-                                className={`hero-slide-container transition-opacity duration-[1500ms] ease-in-out ${currentSlide === index ? 'opacity-100 hero-slide-active' : 'opacity-0'} md:hidden`}
+                                className={`hero-slide-container transition-opacity duration-[1500ms] ease-in-out ${currentSlide === index ? 'opacity-100' : 'opacity-0 pointer-events-none'} md:hidden`}
                             >
                                 <div className="absolute inset-0 bg-black/60 z-10"></div>
-                                <div className="hero-img-animator">
-                                    <BlurImage 
-                                        src={img} 
-                                        alt="Hero"
-                                    />
-                                </div>
+                                {currentSlide === index && (
+                                    <div key={`anim-mobile-${index}-${currentSlide}`} className="hero-img-animator">
+                                        <BlurImage 
+                                            src={img} 
+                                            alt="Hero"
+                                        />
+                                    </div>
+                                )}
+                                {currentSlide !== index && (
+                                    <div className="w-full h-full" style={{ transform: 'scale(1.12)' }}>
+                                        <BlurImage 
+                                            src={img} 
+                                            alt="Hero"
+                                        />
+                                    </div>
+                                )}
                             </div>
                         ))}
 
