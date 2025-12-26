@@ -370,27 +370,43 @@
             box-shadow: 0 2px 10px rgba(193, 163, 101, 0.3);
         }
 
-        /* Ken Burns effect for hero images */
+        /* Ken Burns effect for hero images - seamless transitions */
         @keyframes kenBurns1 {
-            0% { transform: scale(1) translate(0, 0); }
-            100% { transform: scale(1.1) translate(-1%, -1%); }
+            0% { transform: scale(1.05); }
+            100% { transform: scale(1.15); }
         }
         @keyframes kenBurns2 {
-            0% { transform: scale(1.05) translate(1%, 0); }
-            100% { transform: scale(1.15) translate(-1%, 1%); }
+            0% { transform: scale(1.05); }
+            100% { transform: scale(1.15); }
         }
         @keyframes kenBurns3 {
-            0% { transform: scale(1) translate(-1%, 1%); }
-            100% { transform: scale(1.12) translate(1%, -1%); }
+            0% { transform: scale(1.05); }
+            100% { transform: scale(1.15); }
         }
-        .hero-img-0 { animation: kenBurns1 8s ease-out forwards; }
-        .hero-img-1 { animation: kenBurns2 8s ease-out forwards; }
-        .hero-img-2 { animation: kenBurns3 8s ease-out forwards; }
+        .hero-slide-container {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+        }
+        .hero-slide-container img,
+        .hero-slide-container .img-blur-wrapper {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .hero-slide-active .hero-img-animator {
+            animation: kenBurns1 5s ease-out forwards;
+        }
+        .hero-img-animator {
+            width: 100%;
+            height: 100%;
+            transform: scale(1.05);
+        }
 
         /* Section Divider Decorations */
         .section-divider {
             position: relative;
-            height: 40px;
+            height: 24px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -428,59 +444,94 @@
         /* Mobile Bottom Navigation */
         .mobile-bottom-nav {
             position: fixed;
-            bottom: 16px;
+            bottom: 20px;
             left: 50%;
-            transform: translateX(-50%);
+            transform: translateX(-50%) translateY(100px);
             z-index: 100;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
-            padding: 12px 24px;
-            background: rgba(20, 20, 20, 0.85);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 50px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+            gap: 4px;
+            padding: 8px 12px;
+            background: rgba(10, 10, 10, 0.7);
+            backdrop-filter: blur(24px) saturate(180%);
+            -webkit-backdrop-filter: blur(24px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 40px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5), 0 0 0 0.5px rgba(255, 255, 255, 0.1) inset;
+            opacity: 0;
+            visibility: hidden;
+            transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .mobile-bottom-nav.visible {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+            visibility: visible;
         }
         .mobile-nav-item {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 8px 16px;
-            border-radius: 24px;
-            transition: all 0.3s ease;
+            padding: 6px 14px;
+            border-radius: 20px;
+            transition: all 0.25s ease;
             text-decoration: none;
-            color: rgba(255, 255, 255, 0.5);
+            color: rgba(255, 255, 255, 0.4);
+            position: relative;
         }
         .mobile-nav-item:active {
-            transform: scale(0.95);
+            transform: scale(0.92);
         }
         .mobile-nav-item.active {
             color: #C1A365;
-            background: rgba(193, 163, 101, 0.15);
+            background: rgba(193, 163, 101, 0.12);
+            box-shadow: 0 0 12px rgba(193, 163, 101, 0.2);
+        }
+        .mobile-nav-item.active::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 16px;
+            height: 2px;
+            background: #C1A365;
+            border-radius: 2px;
         }
         .mobile-nav-item svg {
-            width: 22px;
-            height: 22px;
-            margin-bottom: 4px;
+            width: 20px;
+            height: 20px;
+            margin-bottom: 2px;
+            transition: transform 0.25s ease;
+        }
+        .mobile-nav-item.active svg {
+            transform: scale(1.1);
         }
         .mobile-nav-item span {
-            font-size: 9px;
+            font-size: 8px;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.3px;
         }
         .mobile-nav-item.lang-toggle {
-            padding: 8px 12px;
+            padding: 6px 10px;
+            margin-left: 4px;
+            border-left: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 0 20px 20px 0;
         }
         .mobile-nav-item.lang-toggle img {
-            width: 24px;
-            height: 24px;
+            width: 20px;
+            height: 20px;
             border-radius: 50%;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transition: transform 0.25s ease, border-color 0.25s ease;
+        }
+        .mobile-nav-item.lang-toggle:active img {
+            transform: scale(0.9);
+        }
+        .mobile-nav-item.lang-toggle span {
+            margin-top: 2px;
         }
 
         /* LQIP - Low Quality Image Placeholder */
@@ -1107,15 +1158,15 @@
         };
 
         // Mobile Bottom Navigation Component
-        const MobileBottomNav = ({ activeSection, onNavigate, lang, onLangToggle, isRTL }) => {
+        const MobileBottomNav = ({ activeSection, onNavigate, lang, onLangToggle, isRTL, isVisible }) => {
             const navItems = [
-                { id: 'work', icon: <Icons.Grid />, label: { en: 'Projects', fa: 'پروژه‌ها' } },
+                { id: 'work', icon: <Icons.Grid />, label: { en: 'Work', fa: 'آثار' } },
                 { id: 'about', icon: <Icons.User />, label: { en: 'About', fa: 'درباره' } },
-                { id: 'contact', icon: <Icons.MessageCircle />, label: { en: 'Contact', fa: 'ارتباط' } },
+                { id: 'contact', icon: <Icons.MessageCircle />, label: { en: 'Contact', fa: 'تماس' } },
             ];
 
             return (
-                <nav className="mobile-bottom-nav md:hidden">
+                <nav className={`mobile-bottom-nav md:hidden ${isVisible ? 'visible' : ''}`}>
                     {navItems.map((item) => (
                         <a
                             key={item.id}
@@ -1175,6 +1226,7 @@
 
             // Active section tracking for mobile nav
             const [activeSection, setActiveSection] = useState('work');
+            const [mobileNavVisible, setMobileNavVisible] = useState(false);
 
             const t = content[lang];
             const timeline = timelineData[lang];
@@ -1199,7 +1251,7 @@
                 return () => clearTimeout(timer);
             }, []);
 
-            // Hero parallax/collapse effect on scroll + active section tracking
+            // Hero parallax/collapse effect on scroll + active section tracking + mobile nav visibility
             useEffect(() => {
                 const handleScroll = () => {
                     const scrollY = window.scrollY;
@@ -1212,8 +1264,11 @@
                     setHeroScale(scale);
                     setHeroOpacity(opacity);
 
+                    // Show mobile nav after scrolling past hero (80% of viewport height)
+                    setMobileNavVisible(scrollY > windowHeight * 0.8);
+
                     // Track active section for mobile nav
-                    const sections = ['work', 'contact', 'about'];
+                    const sections = ['work', 'about', 'contact'];
                     for (const sectionId of sections) {
                         const section = document.getElementById(sectionId);
                         if (section) {
@@ -1528,9 +1583,12 @@
                     <section className="relative h-screen w-full overflow-hidden flex flex-col justify-center items-center text-center px-6">
                         {/* Desktop Hero Images with Ken Burns effect */}
                         {heroImages.desktop.map((img, index) => (
-                            <div key={`desktop-${index}`} className={`absolute inset-0 transition-opacity duration-[2000ms] ease-in-out ${currentSlide === index ? 'opacity-100' : 'opacity-0'} hidden md:block overflow-hidden`}>
+                            <div 
+                                key={`desktop-${index}`} 
+                                className={`hero-slide-container transition-opacity duration-[1500ms] ease-in-out ${currentSlide === index ? 'opacity-100 hero-slide-active' : 'opacity-0'} hidden md:block`}
+                            >
                                 <div className="absolute inset-0 bg-black/60 z-10"></div>
-                                <div className={`w-full h-full ${currentSlide === index ? `hero-img-${index}` : ''}`}>
+                                <div className="hero-img-animator">
                                     <BlurImage 
                                         src={img} 
                                         alt="Hero"
@@ -1541,9 +1599,12 @@
 
                         {/* Mobile Hero Images with Ken Burns effect */}
                         {heroImages.mobile.map((img, index) => (
-                            <div key={`mobile-${index}`} className={`absolute inset-0 transition-opacity duration-[2000ms] ease-in-out ${currentSlide === index ? 'opacity-100' : 'opacity-0'} md:hidden overflow-hidden`}>
+                            <div 
+                                key={`mobile-${index}`} 
+                                className={`hero-slide-container transition-opacity duration-[1500ms] ease-in-out ${currentSlide === index ? 'opacity-100 hero-slide-active' : 'opacity-0'} md:hidden`}
+                            >
                                 <div className="absolute inset-0 bg-black/60 z-10"></div>
-                                <div className={`w-full h-full ${currentSlide === index ? `hero-img-${index}` : ''}`}>
+                                <div className="hero-img-animator">
                                     <BlurImage 
                                         src={img} 
                                         alt="Hero"
@@ -1597,7 +1658,7 @@
                         
                         <button 
                             onClick={scrollToProjects}
-                            className="absolute bottom-12 left-0 right-0 mx-auto w-fit z-20 text-white/50 hover:text-white transition-colors animate-bounce cursor-none"
+                            className="absolute bottom-12 left-1/2 -translate-x-1/2 z-20 text-white/50 hover:text-white transition-colors animate-bounce cursor-none"
                             style={{ opacity: heroOpacity }}
                             onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)}
                         >
@@ -1776,6 +1837,7 @@
                         lang={lang}
                         onLangToggle={() => setLang(lang === 'en' ? 'fa' : 'en')}
                         isRTL={isRTL}
+                        isVisible={mobileNavVisible}
                     />
 
                     {/* --- MODAL --- */}
