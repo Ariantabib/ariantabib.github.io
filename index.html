@@ -373,7 +373,7 @@
         /* Ken Burns effect for hero images - smooth continuous zoom */
         @keyframes kenBurnsZoom {
             0% { transform: scale(1.0); }
-            100% { transform: scale(1.12); }
+            100% { transform: scale(1.15); }
         }
         .hero-slide-container {
             position: absolute;
@@ -390,19 +390,23 @@
             width: 100%;
             height: 100%;
             will-change: transform;
-            animation: kenBurnsZoom 6s linear forwards;
             transform-origin: center center;
         }
+        .hero-img-animator.active {
+            animation: kenBurnsZoom 5s ease-out forwards;
+        }
+        .hero-img-animator.inactive {
+            transform: scale(1.15);
+        }
 
-        /* Section Divider Decorations - Centered between sections */
+        /* Section Divider Decorations - Perfectly centered between sections */
         .section-divider {
             position: relative;
-            height: 1px;
+            height: 0;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0;
-            padding: 0;
+            z-index: 10;
         }
         .section-divider::before {
             content: '';
@@ -1084,9 +1088,9 @@
             { id: "vr", name: "VR", icon: "./images/skills/vr.png" }
         ];
 
-        // Section Divider Component - Positioned to overlap sections equally
+        // Section Divider Component - Perfectly centered on section borders
         const SectionDivider = ({ className = "" }) => (
-            <div className={`section-divider ${className}`} style={{ marginTop: '-12px', marginBottom: '-12px', zIndex: 10, position: 'relative' }}>
+            <div className={`section-divider ${className}`}>
                 <div className="section-divider-lines">
                     <div className="section-divider-line"></div>
                     <div className="section-divider-dot"></div>
@@ -1375,7 +1379,7 @@
             useEffect(() => {
                 const interval = setInterval(() => {
                     setCurrentSlide((prev) => (prev + 1) % heroImages.desktop.length);
-                }, 5000);
+                }, 6000);
                 return () => clearInterval(interval);
             }, []);
 
@@ -1589,14 +1593,11 @@
                             return (
                                 <div 
                                     key={`desktop-${index}`} 
-                                    className={`hero-slide-container transition-opacity duration-[1500ms] ease-in-out hidden md:block ${isActive ? 'opacity-100' : 'opacity-0'}`}
+                                    className={`hero-slide-container transition-opacity duration-[1200ms] ease-in-out hidden md:block ${isActive ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
                                     style={{ zIndex: isActive ? 2 : 1 }}
                                 >
                                     <div className="absolute inset-0 bg-black/60 z-10"></div>
-                                    <div 
-                                        key={`anim-desktop-${index}-${currentSlide}`}
-                                        className="hero-img-animator"
-                                    >
+                                    <div className={`hero-img-animator ${isActive ? 'active' : 'inactive'}`}>
                                         <BlurImage 
                                             src={img} 
                                             alt="Hero"
@@ -1613,14 +1614,11 @@
                             return (
                                 <div 
                                     key={`mobile-${index}`} 
-                                    className={`hero-slide-container transition-opacity duration-[1500ms] ease-in-out md:hidden ${isActive ? 'opacity-100' : 'opacity-0'}`}
+                                    className={`hero-slide-container transition-opacity duration-[1200ms] ease-in-out md:hidden ${isActive ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
                                     style={{ zIndex: isActive ? 2 : 1 }}
                                 >
                                     <div className="absolute inset-0 bg-black/60 z-10"></div>
-                                    <div 
-                                        key={`anim-mobile-${index}-${currentSlide}`}
-                                        className="hero-img-animator"
-                                    >
+                                    <div className={`hero-img-animator ${isActive ? 'active' : 'inactive'}`}>
                                         <BlurImage 
                                             src={img} 
                                             alt="Hero"
