@@ -74,6 +74,9 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
+    <!-- PapaParse for CSV parsing -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+
     <!-- Google Model Viewer (For AR) -->
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
     
@@ -774,286 +777,6 @@
             }
         };
 
-        const generateGallery = (id, count, hasIndex = true) => {
-            if (!hasIndex) return [`./images/project${id}-gallery.jpg`];
-            return Array.from({ length: count }, (_, i) => `./images/project${id}-gallery${i + 1}.jpg`);
-        };
-
-        const projects = [
-            { 
-                id: 1, order: 1, 
-                title: { en: "Experience Narrative Center", fa: "مرکز خرید روایت تجربه" }, 
-                desc: { en: "This large-scale commercial complex transcends the traditional retail model by offering a narrative-driven journey. Defined by a fluid, Zaha Hadid-inspired parametric facade, the project features a 'Cultural Tower' where each floor immerses visitors in the atmosphere of a different world culture. The design prioritizes optimized circulation and a dynamic spatial experience.", fa: "این مجتمع تجاری بزرگ‌مقیاس با ارائه یک سفر روایت‌محور، فراتر از مدل‌های سنتی خرده‌فروشی عمل می‌کند. این پروژه که با یک نمای پارامتریک سیال و الهام‌گرفته از زاها حدید تعریف می‌شود، دارای یک 'برج فرهنگی' است که در آن هر طبقه بازدیدکنندگان را در اتمسفر فرهنگ متفاوتی از جهان غرق می‌کند. طراحی بر سیرکولاسیون بهینه و تجربه فضایی پویا اولویت دارد." },
-                tags: ["arch"], loc: "Tehran, Saadat Abad", img: "./images/project1-img.jpg", hasAR: true,
-                modelGLB: "./models/project1.glb", 
-                modelUSDZ: "./models/project1.usdz", 
-                gallery: generateGallery(1, 6)
-            },
-            { 
-                id: 2, order: 2, 
-                title: { en: "Specialized Eye Hospital", fa: "بیمارستان تخصصی چشم‌" }, 
-                desc: { en: "Located in East Tehran, this specialized ophthalmology hospital merges advanced medical functionality with patient-centric design. The building's tiered, terraced form integrates green spaces and balconies on every level, utilizing sustainable principles to create a healing environment that maximizes natural light and connects patients with nature.", fa: "این بیمارستان تخصصی چشم‌پزشکی در شرق تهران، عملکرد پیشرفته پزشکی را با طراحی بیمار-محور ادغام می‌کند. فرم پلکانی و لایه‌لایه ساختمان، فضاهای سبز و بالکن‌ها را در هر طبقه یکپارچه کرده و با استفاده از اصول پایداری، محیطی شفابخش ایجاد می‌کند که نور طبیعی را به حداکثر رسانده و بیماران را با طبیعت پیوند می‌دهد." },
-                tags: ["interior", "exec", "arch"], loc: "Tehran, Hakimieh", img: "./images/project2-img.jpg", hasAR: true,
-                modelGLB: "./models/project2.glb", 
-                modelUSDZ: "./models/project2.usdz", 
-                gallery: generateGallery(2, 4)
-            },
-            { 
-                id: 3, order: 3, 
-                title: { en: "Iran Air Tours Corporate Office", fa: "طراحی داخلی دفتر ایران ایر تور" }, 
-                desc: { en: "An executed interior design project for the headquarters of Iran Air Tours. The space redefines the corporate aviation environment by blending raw industrial textures like concrete with warm wood and sleek metal accents. The layout is strategically planned to foster collaboration while reflecting the brand's prestigious legacy and commitment to precision.", fa: "یک پروژه طراحی داخلی اجرا شده برای دفتر مرکزی ایران ایر تور. این فضا با ترکیب بافت‌های خام صنعتی مانند بتن با چوب گرم و المان‌های فلزی براق، محیط اداری هوانوردی را بازتعریف می‌کند. چیدمان به صورت استراتژیک برای تقویت همکاری برنامه‌ریزی شده است، در حالی که میراث معتبر برند و تعهد آن به دقت را بازتاب می‌دهد." },
-                tags: ["cgi", "ads", "interior", "exec"], loc: "Studio", img: "./images/project3-img.jpg", 
-                gallery: generateGallery(3, 5)
-            },
-            { 
-                id: 4, order: 4, 
-                title: { en: "Compact Live/Work Unit", fa: "واحد مسکونی-تجاری فشرده" }, 
-                desc: { en: "A competition entry addressing the challenge of urban density on a small plot. The design creatively stacks a public book-cafe on the ground floor with a private duplex residence above. The architecture serves as a dialogue between modern minimalism and traditional Iranian motifs, offering a smart solution for contemporary urban living.", fa: "طرحی برای مسابقه معماری که به چالش تراکم شهری در یک زمین کوچک می‌پردازد. طراحی به شکلی خلاقانه یک کافه کتاب عمومی در طبقه همکف را با یک اقامتگاه دوبلکس خصوصی در بالا ترکیب می‌کند. این معماری به عنوان دیالوگی میان مینیمالیسم مدرن و موتیف‌های سنتی ایرانی عمل کرده و راهکاری هوشمندانه برای زندگی شهری معاصر ارائه می‌دهد." },
-                tags: ["arch", "cgi", "interior"], loc: "Tehran, Forsat Shirazi", img: "./images/project4-img.jpg", 
-                gallery: generateGallery(4, 11)
-            },
-            { 
-                id: 5, order: 5, 
-                title: { en: "Hillside Residential Complex", fa: " مجتمع مسکونی در جنگل های جوارم" }, 
-                desc: { en: "Nestled in the Javarom Forest, this residential community turns a steep slope into its defining feature. The complex is organized into terraced levels connected by bridge-like platforms that serve as vibrant communal courtyards. The design emphasizes sustainability and the preservation of existing trees, weaving architecture seamlessly into the natural landscape.", fa: "این مجتمع مسکونی که در دل جنگل جوارم جای گرفته، شیب تند سایت را به ویژگی اصلی خود تبدیل کرده است. مجموعه در ترازهای پلکانی سازماندهی شده که توسط پلتفرم‌های پل‌مانند به هم متصل می‌شوند؛ پلتفرم‌هایی که به عنوان حیاط‌های عمومی و پویا عمل می‌کنند. طراحی بر پایداری و حفظ درختان موجود تأکید دارد و معماری را به شکلی یکپارچه در چشم‌انداز طبیعی می‌بافد." },
-                tags: ["interior", "arch"], loc: "Mazandaran Javarem Forest", img: "./images/project5-img.jpg", 
-                gallery: generateGallery(5, 10)
-            },
-            { 
-                id: 6, order: 6, 
-                title: { en: "The Signature Suite", fa: "واحد مسکونی مدرن" }, 
-                desc: { en: "An executive residential project in Mahmudabad that masters the challenge of a non-orthogonal, curved floor plan. The interior design embraces the architecture's fluidity, using custom furniture and organic lines to create a sophisticated, modern coastal retreat. A neutral palette combined with rich textures creates an atmosphere of understated luxury.", fa: "یک پروژه مسکونی اجرایی در محمودآباد که بر چالش یک پلان منحنی و غیرگونیا غلبه می‌کند. طراحی داخلی با استفاده از مبلمان سفارشی و خطوط ارگانیک، سیالیت معماری را در آغوش می‌گیرد تا یک پناهگاه ساحلی مدرن و شیک خلق کند. پالت رنگی خنثی در ترکیب با بافت‌های غنی، فضایی از لوکس بودن بی‌پیرایه را ایجاد می‌کند." },
-                tags: ["interior", "exec"], loc: "Office", img: "./images/project6-img.jpg", 
-                gallery: generateGallery(6, 12)
-            },
-            { 
-                id: 7, order: 7, 
-                title: { en: "Modern BedRoom 1", fa: "طراحی اتاق خواب مدرن 1" }, 
-                desc: { en: "Exploration of modern bedroom aesthetics using AI and digital tools.", fa: "کاوش در زیبایی‌شناسی اتاق خواب مدرن با استفاده از هوش مصنوعی و ابزارهای دیجیتال." },
-                tags: ["ai", "interior", "exec"], loc: "Virtual", img: "./images/project7-img.jpg", 
-                gallery: generateGallery(7, 5)
-            },
-            { 
-                id: 8, order: 8, 
-                title: { en: "Modern BedRoom 2", fa: "طراحی اتاق خواب مدرن 2" }, 
-                desc: { en: "A conceptual approach to bedroom design focusing on warmth and minimalism.", fa: "رویکردی مفهومی به طراحی اتاق خواب با تمرکز بر گرما و مینیمالیسم." },
-                tags: ["sketch", "interior", "exec"], loc: "Sketchbook", img: "./images/project8-img.jpg", 
-                gallery: generateGallery(8, 5)
-            },
-            { 
-                id: 9, order: 9, 
-                title: { en: "Modern BathRoom", fa: "سرویس بهداشتی مدرن" }, 
-                desc: { en: "High-end bathroom design featuring luxury materials and fixtures.", fa: "طراحی سرویس بهداشتی سطح بالا با استفاده از متریال و شیرآلات لوکس." },
-                tags: ["arch", "exec", "interior"], loc: "Shiraz", img: "./images/project9-img.jpg", 
-                gallery: generateGallery(9, 5)
-            },
-            { 
-                id: 10, order: 10, 
-                title: { en: "Timeless Residence", fa: "طراحی داخلی کلاسیک" }, 
-                desc: { en: "This executive project showcases the enduring appeal of classical design. Every detail, from intricate wall moldings to gilded accents and crystal chandeliers, is meticulously crafted to create a sense of grandeur. The design balances ornate aesthetics with modern comfort, resulting in a luxurious family residence defined by its timeless beauty.", fa: "این پروژه اجرایی، جذابیت ماندگار طراحی کلاسیک را به نمایش می‌گذارد. هر جزئیات، از گچ‌بری‌های ظریف دیوار تا المان‌های طلایی و لوسترهای کریستالی، با دقت فراوان برای ایجاد حس شکوه ساخته شده‌اند. طراحی تعادلی میان زیبایی‌شناسی پرآذین و راحتی مدرن ایجاد می‌کند که نتیجه آن یک اقامتگاه خانوادگی لوکس با زیبایی جاودانه است." },
-                tags: ["interior"], loc: "Mazandaran, MahmoudAbad", img: "./images/project10-img.jpg", 
-                gallery: generateGallery(10, 8)
-            },
-            { 
-                id: 11, order: 11, 
-                title: { en: "Classic BedRoom 1", fa: "طراحی اتاق خواب کلاسیک 1" }, 
-                desc: { en: "This executive project showcases the enduring appeal of classical design. Every detail, from intricate wall moldings to gilded accents and crystal chandeliers, is meticulously crafted to create a sense of grandeur. The design balances ornate aesthetics with modern comfort, resulting in a luxurious family residence defined by its timeless beauty.", fa: "این پروژه اجرایی، جذابیت ماندگار طراحی کلاسیک را به نمایش می‌گذارد. هر جزئیات، از گچ‌بری‌های ظریف دیوار تا المان‌های طلایی و لوسترهای کریستالی، با دقت فراوان برای ایجاد حس شکوه ساخته شده‌اند. طراحی تعادلی میان زیبایی‌شناسی پرآذین و راحتی مدرن ایجاد می‌کند که نتیجه آن یک اقامتگاه خانوادگی لوکس با زیبایی جاودانه است." },
-                tags: ["cgi", "exec", "interior"], loc: "Mazandaran, MahmoudAbad", img: "./images/project11-img.jpg", 
-                gallery: generateGallery(11, 3)
-            },
-            { 
-                id: 12, order: 12, 
-                title: { en: "Classic BedRoom 2", fa: "طراحی اتاق خواب کلاسیک 2" }, 
-                desc: { en: "This executive project showcases the enduring appeal of classical design. Every detail, from intricate wall moldings to gilded accents and crystal chandeliers, is meticulously crafted to create a sense of grandeur. The design balances ornate aesthetics with modern comfort, resulting in a luxurious family residence defined by its timeless beauty.", fa: "این پروژه اجرایی، جذابیت ماندگار طراحی کلاسیک را به نمایش می‌گذارد. هر جزئیات، از گچ‌بری‌های ظریف دیوار تا المان‌های طلایی و لوسترهای کریستالی، با دقت فراوان برای ایجاد حس شکوه ساخته شده‌اند. طراحی تعادلی میان زیبایی‌شناسی پرآذین و راحتی مدرن ایجاد می‌کند که نتیجه آن یک اقامتگاه خانوادگی لوکس با زیبایی جاودانه است." },
-                tags: ["ai", "sketch", "exec", "interior"], loc: "Mazandaran, MahmoudAbad", img: "./images/project12-img.jpg", 
-                gallery: generateGallery(12, 5)
-            },
-            { 
-                id: 13, order: 13, 
-                title: { en: "Classic BedRoom 3", fa: "طراحی اتاق خواب کلاسیک 3" }, 
-                desc: { en: "This executive project showcases the enduring appeal of classical design. Every detail, from intricate wall moldings to gilded accents and crystal chandeliers, is meticulously crafted to create a sense of grandeur. The design balances ornate aesthetics with modern comfort, resulting in a luxurious family residence defined by its timeless beauty.", fa: "این پروژه اجرایی، جذابیت ماندگار طراحی کلاسیک را به نمایش می‌گذارد. هر جزئیات، از گچ‌بری‌های ظریف دیوار تا المان‌های طلایی و لوسترهای کریستالی، with دقت فراوان برای ایجاد حس شکوه ساخته شده‌اند. طراحی تعادلی میان زیبایی‌شناسی پرآذین و راحتی مدرن ایجاد می‌کند که نتیجه آن یک اقامتگاه خانوادگی لوکس با زیبایی جاودانه است." },
-                tags: ["ads", "exec", "interior"], loc: "Mazandaran, MahmoudAbad", img: "./images/project13-img.jpg", 
-                gallery: generateGallery(13, 4)
-            },
-            { 
-                id: 14, order: 14, 
-                title: { en: "Chromatic Symphony", fa: "سمفونی رنگارنگ" }, 
-                desc: { en: "An exploration of bold color and sophisticated mood, augmented by AI design tools. This interior concept treats the home as a curated gallery, using deep jewel tones—emerald, sapphire, and mustard—to create dramatic yet comforting spaces. It is a testament to the power of color in shaping emotional experiences within a modern residence.", fa: "کاوشی در رنگ‌های جسورانه و حال و هوای شیک، که با ابزارهای طراحی هوش مصنوعی تقویت شده است. این کانسپت داخلی، خانه را مانند یک گالری چیدمان‌شده می‌بیند و از رنگ‌های جواهری عمیق—زمردی، یاقوتی و خردلی—برای خلق فضایی دراماتیک و در عین حال آرامش‌بخش استفاده می‌کند. این گواهی است بر قدرت رنگ در شکل‌دهی به تجربیات احساسی در یک خانه مدرن." },
-                tags: ["arch", "ai", "interior"], loc: "Virtual", img: "./images/project14-img.jpg", 
-                gallery: generateGallery(14, 7)
-            },
-            { 
-                id: 15, order: 15, 
-                title: { en: "Elysian Retreat", fa: "خلوتگاه بهشتی" }, 
-                desc: { en: "This villa design captures the warmth and rustic elegance of the Mediterranean. With sun-drenched terraces, natural stone textures, and vibrant bougainvillea, the project blurs the lines between indoor and outdoor living. It is designed as a sanctuary of peace, where light and materiality create a timeless connection to nature.", fa: "طراحی این ویلا گرما و ظرافت روستایی مدیترانه را به تصویر می‌کشد. با تراس‌های غرق در نور، بافت‌های سنگ طبیعی و گل‌های کاغذی پرطراوت، این پروژه مرزهای بین زندگی در فضای داخلی و خارجی را محو می‌کند. این فضا به عنوان پناهگاهی برای آرامش طراحی شده است، جایی که نور و مادیت پیوندی جاودانه با طبیعت ایجاد می‌کنند." },
-                tags: ["interior", "ai"], loc: "Virtual", img: "./images/project15-img.jpg", 
-                gallery: generateGallery(15, 7)
-            },
-            { 
-                id: 16, order: 16, 
-                title: { en: "The Forest Sanctuary", fa: "پناهگاه جنگلی" }, 
-                desc: { en: "A minimalist residence designed to exist in quiet dialogue with a lush forest setting. Large expanses of glass and a palette of raw concrete and warm wood ensure the architecture respects its surroundings. The design focuses on framing views and capturing natural light, creating a serene retreat that feels completely immersed in the ecosystem.", fa: "یک اقامتگاه مینیمال که برای همزیستی آرام در گفتمان با محیط جنگلی طراحی شده است. سطوح وسیع شیشه‌ای و پالت متریالی شامل بتن خام و چوب گرم، احترام معماری به محیط پیرامونش را تضمین می‌کند. تمرکز طراحی بر قاب‌بندی مناظر و دریافت نور طبیعی است تا پناهگاهی آرام خلق کند که کاملاً در اکوسیستم غرق شده است." },
-                tags: ["exec", "ai", "interior"], loc: "Virtual", img: "./images/project16-img.jpg", 
-                gallery: generateGallery(16, 7)
-            },
-            { 
-                id: 17, order: 17, 
-                title: { en: "The Industrial Atelier", fa: "آتلیه معماری با سبک صنعتی" }, 
-                desc: { en: "A corporate office design that merges raw industrial character with executive luxury. Exposed brick and steel structures are softened by leather furnishings and warm lighting, creating a powerful environment that fosters both productivity and creativity. This project establishes a new visual identity for the modern workplace.", fa: "طراحی یک دفتر کار سازمانی که شخصیت خام صنعتی را با تجمل مدیریتی ادغام می‌کند. ساختارهای آجر و فولاد نمایان با مبلمان چرمی و نورپردازی گرم تلطیف شده‌اند تا محیطی قدرتمند ایجاد کنند که هم بهره‌وری و هم خلاقیت را پرورش می‌دهد. این پروژه هویت بصری جدیدی برای محیط کار مدرن تعریف می‌کند." },
-                tags: ["cgi", "arch", "ai", "interior"], loc: "Virtual", img: "./images/project17-img.jpg", 
-                gallery: generateGallery(17, 7)
-            },
-            { 
-                id: 18, order: 18, 
-                title: { en: "A Graceful Landing", fa: "ورودی باوقار" }, 
-                desc: { en: "An executed project that transforms the often-overlooked spaces of a parking garage and courtyard into a luxurious arrival experience. By treating the parking area as a gallery and the courtyard as a landscaped lounge, the design elevates the transition from the city to the private home, proving that every space deserves thoughtful design.", fa: "یک پروژه اجرایی که فضاهای نادیده گرفته شده پارکینگ و حیاط را به یک تجربه ورود لوکس تبدیل می‌کند. با نگاه به پارکینگ به عنوان یک گالری و حیاط به عنوان یک فضای استراحت محوطه‌سازی شده، این طراحی انتقال از شهر به حریم خانه را ارتقا می‌دهد و ثابت می‌کند که هر فضایی شایسته طراحی متفکرانه است" },
-                tags: ["arch", "exec", "interior"], loc: "Tehran, JanatAbad", img: "./images/project18-img.jpg", 
-                gallery: generateGallery(18, 14)
-            },
-            { 
-                id: 19, order: 19, 
-                title: { en: "Retail Design at Niayesh Mall", fa: "طراحی تجاری در نیایش مال" }, 
-                desc: { en: "Located in Niayesh Mall, this boutique design utilizes a palette of natural wood and black metal to create a warm, inviting, and modern atmosphere. The focus is on texture and light, with vertical slats creating a sense of rhythm that guides customers through the collection.", fa: "این طراحی بوتیک که در نیایش مال واقع شده، از پالت چوب طبیعی و فلز سیاه برای ایجاد فضایی گرم، دعوت‌کننده و مدرن استفاده می‌کند. تمرکز بر بافت و نور است، جایی که اسلَت‌های عمودی حس ریتمی را ایجاد می‌کنند که مشتریان را در میان مجموعه هدایت می‌کند." },
-                tags: ["interior", "exec"], loc: "Tehran, Niayesh Mall", img: "./images/project19-img.jpg", 
-                gallery: generateGallery(19, 6)
-            },
-            { 
-                id: 20, order: 20, 
-                title: { en: "Black Rose Boutique", fa: "بوتیک بلک رز" }, 
-                desc: { en: "A distinctive retail concept in Niayesh Mall that treats the store as a sculptural landscape. Soft, organic forms and fluid shelving units create a gallery-like feel, contrasting with the minimalist display racks. The design creates a memorable and artistic backdrop for the fashion brand.", fa: "یک کانسپت تجاری متمایز در نیایش مال که فروشگاه را مانند یک چشم‌انداز مجسمه‌وار می‌بیند. فرم‌های نرم و ارگانیک و قفسه‌بندی‌های سیال، حسی شبیه به گالری ایجاد می‌کنند که با رگال‌های مینیمال در تضاد است. این طراحی یک پس‌زمینه به یاد ماندنی و هنری برای برند مد خلق می‌کند." },
-                tags: ["exec", "interior"], loc: "Tehran, Niayesh Mall", img: "./images/project20-img.jpg", 
-                gallery: generateGallery(20, 9)
-            },
-            { 
-                id: 21, order: 21, 
-                title: { en: "Retail Shop at Opal Mall", fa: "فروشگاه تجاری در مرکز خرید اوپال" }, 
-                desc: { en: "Situated in the prestigious Opal Shopping Center, this boutique features a dynamic suspended grid system that adds architectural depth to the space. The design plays with levels and structure to create a sophisticated stage for the products, blending industrial chic with modern elegance.", fa: "این بوتیک که در مرکز خرید معتبر اوپال واقع شده، دارای یک سیستم شبکه معلق پویا است که عمق معماری به فضا می‌بخشد. طراحی با ترازها و ساختار بازی می‌کند تا صحنه‌ای شیک برای محصولات ایجاد کند و شیک‌بودن صنعتی را با ظرافت مدرن در می‌آمیزد." },
-                tags: ["exec", "interior"], loc: "Tehran, Opal Mall", img: "./images/project21-img.jpg", 
-                gallery: generateGallery(21, 11)
-            },
-            { 
-                id: 25, order: 25, 
-                title: { en: "Culinary Precision in Midnight Black", fa: "دقت آشپزی در قابی به رنگ شب" }, 
-                desc: { en: "Experience the art of baking with the Mix Plus built-in oven. Designed for the modern gourmand, its sleek matte black finish seamlessly integrates into your cabinetry, while advanced convection technology ensures every pastry is a masterpiece. A perfect blend of Italian design and culinary engineering.", fa: "هنر پخت‌وپز را با فر توکار میکس پلاس تجربه کنید. طراحی شده برای ذائقه‌های مدرن، با پوشش مشکی مات که به زیبایی با کابینت‌های شما یکپارچه می‌شود. تکنولوژی پیشرفته کانوکشن تضمین می‌کند که هر شیرینی، یک شاهکار باشد. ترکیبی بی‌نقص از طراحی ایتالیایی و مهندسی آشپزی." },
-                tags: ["ads", "cgi"], loc: "MixPlus", img: "./images/project25-img.jpg", 
-                gallery: generateGallery(25, 1, false) 
-            },
-            { 
-                id: 26, order: 26, 
-                title: { en: "The Chef's Canvas: Premium Steel Hob", fa: "اجاق گاز استیل پریمیوم" }, 
-                desc: { en: "Unleash your inner chef with power and stability. This 5-burner gas hob features a robust stainless steel surface and heavy-duty cast iron trivets, providing ample space for complex meals. Durable, timeless, and built for those who take cooking seriously.", fa: "سرآشپز درون خود را با قدرت و ثبات آزاد کنید. این اجاق گاز ۵ شعله با صفحه استیل مقاوم و شبکه‌های چدنی سنگین، فضای کافی برای پخت غذاهای حرفه‌ای را فراهم می‌کند. بادوام، ماندگار و ساخته شده برای کسانی که آشپزی را جدی می‌گیرند." },
-                tags: ["ads", "cgi"], loc: "MixPlus", img: "./images/project26-img.jpg", 
-                gallery: generateGallery(26, 1)
-            },
-            { 
-                id: 27, order: 27, 
-                title: { en: "Modern Sophistication: Black Glass Series", fa: "اوج ظرافت مدرن: سری شیشه‌ای مشکی" }, 
-                desc: { en: "Where lifestyle meets utility. This 4-burner hob creates a stunning focal point with its reflective tempered glass surface and unique geometric burner layout. Perfect for the contemporary home, offering high-efficiency heat in a package of pure elegance.", fa: "جایی که سبک زندگی با کارایی تلاقی می‌کند. این اجاق گاز ۴ شعله با سطح شیشه سکوریت بازتابنده و چیدمان هندسی خاص شعله‌ها، نقطه کانونی خیره‌کننده‌ای می‌سازد. انتخابی ایده‌آل برای خانه‌های امروزی که حرارت با راندمان بالا را در قالب زیبایی خالص ارائه می‌دهد." },
-                tags: ["ads", "cgi"], loc: "MixPlus", img: "./images/project27-img.jpg", 
-                gallery: generateGallery(27, 1)
-            },
-            { 
-                id: 28, order: 28, 
-                title: { en: "The Art of Utility: Geometric Steel Sink", fa: "هنر کارایی: سینک استیل هندسی" }, 
-                desc: { en: "Redefining the wet zone with sharp lines and uncompromising quality. This double-bowl stainless steel sink offers a spacious drainer and deep basins, marrying ergonomic functionality with a minimalist aesthetic that complements any countertop.", fa: "بازتعریف فضای شستشو با خطوط تیز و کیفیتی بی‌‌نظیر. این سینک استیل دو لگنه با سینی آبچکان وسیع و لگن‌های عمیق، ارگونومی کاربردی را با زیبایی‌شناسی مینیمال پیوند می‌زند و مکمل هر نوع کانترتاپی خواهد بود." },
-                tags: ["ads", "cgi"], loc: "MixPlus", img: "./images/project28-img.jpg", 
-                gallery: generateGallery(28, 1)
-            },
-            { 
-                id: 29, order: 29, 
-                title: { en: "Sleek Symmetry: The 5-Burner Glass Hob", fa: "تقارن شیک: اجاق گاز ۵ شعله شیشه‌ای" }, 
-                desc: { en: "Elevate your kitchen with this stunning 5-burner glass hob. The reflective black surface and precise burner arrangement combine modern aesthetics with culinary power. Designed for efficiency and style, it's the perfect centerpiece for any contemporary cooking space.", fa: "آشپزخانه خود را با این اجاق گاز ۵ شعله شیشه‌ای خیره‌کننده ارتقا دهید. سطح مشکی براق و چیدمان دقیق شعله‌ها، زیبایی‌شناسی مدرن را با قدرت آشپزی ترکیب می‌کند. طراحی شده برای کارایی و زیبایی، این اجاق گاز نقطه کانونی مناسبی برای هر فضای آشپزی امروزی است." },
-                tags: ["ads", "cgi"], loc: "MixPlus", img: "./images/project29-img.jpg", 
-                gallery: generateGallery(29, 1)
-            },
-            { 
-                id: 30, order: 30, 
-                title: { en: "Culinary Command: Precision Glass Hob", fa: "فرماندهی آشپزی: اجاق گاز شیشه‌ای دقیق" }, 
-                desc: { en: "Take control of your cooking with this sophisticated 5-burner glass hob. Featuring ergonomic front controls and robust cast iron pan supports, it offers both style and functionality. The spacious layout ensures you have room for all your culinary creations.", fa: "با این اجاق گاز ۵ شعله شیشه‌ای پیشرفته، کنترل آشپزی خود را در دست بگیرید. با ویژگی‌هایی همچون ولوم‌های ارگونومیک در جلو و شبکه‌های چدنی مقاوم، این اجاق گاز ترکیبی از سبک و کارایی است. چیدمان جادار آن فضای کافی برای تمام خلاقیت‌های آشپزی شما را فراهم می‌کند." },
-                tags: ["ads", "cgi"], loc: "MixPlus", img: "./images/project30-img.jpg", 
-                gallery: generateGallery(30, 1)
-            },
-            { 
-                id: 31, order: 31, 
-                title: { en: "The Integrated Chef: Oven & Hob Suite", fa: "سرآشپز یکپارچه: ست فر و گاز" }, 
-                desc: { en: "Experience seamless kitchen integration with this matching built-in oven and hob set. The sleek black glass finish creates a unified, modern look, while advanced cooking technologies in both appliances empower you to explore new culinary horizons with confidence.", fa: "یکپارچگی بی‌نقص آشپزخانه را با این ست فر و گاز توکار هماهنگ تجربه کنید. پوشش شیشه‌ای مشکی براق ظاهری یکدست و مدرن ایجاد می‌کند، در حالی که تکنولوژی‌های پخت پیشرفته در هر دو دستگاه به شما قدرت می‌دهد تا با اطمینان افق‌های جدید آشپزی را کشف کنید." },
-                tags: ["ads", "cgi"], loc: "MixPlus", img: "./images/project31-img.jpg", 
-                gallery: generateGallery(31, 1)
-            },
-            { 
-                id: 32, order: 32, 
-                title: { en: "Architectural Elegance: The Modern Kitchen", fa: "ظرافت معماری: آشپزخانه مدرن" }, 
-                desc: { en: "Where design meets daily life. This visualization showcases a Mix Plus hob in a beautifully curated modern kitchen setting. From the marble countertop to the sleek lighting, every element is chosen to highlight the appliance's sophisticated design and premium quality.", fa: "جایی که طراحی با زندگی روزمره تلاقی می‌کند. این تصویرسازی یک اجاق گاز میکس پلاس را در چیدمان زیبای یک آشپزخانه مدرن به نمایش می‌گذارد. از کانترتاپ مرمری تا نورپردازی شیک، هر المان برای برجسته کردن طراحی پیچیده و کیفیت برتر این محصول انتخاب شده است." },
-                tags: ["ads", "cgi"], loc: "MixPlus", img: "./images/project32-img.jpg", 
-                gallery: generateGallery(32, 1)
-            },
-            { 
-                id: 33, order: 33, 
-                title: { en: "The Centerpiece of Taste: Island Edition", fa: "نقطه کانونی طعم: نسخه جزیره" }, 
-                desc: { en: "Make cooking the heart of your home. This sleek 5-burner glass hob is showcased on a minimalist kitchen island, highlighting its reflective black surface against textured stone. Designed for social cooking, it offers precision control and effortless style for the modern host.", fa: "آشپزی را به قلب خانه خود تبدیل کنید. این اجاق گاز ۵ شعله شیشه‌ای بر روی جزیره آشپزخانه مینیمال به نمایش درآمده و سطح مشکی براق آن در برابر سنگ بافت‌دار خودنمایی می‌کند. طراحی شده برای آشپزی اجتماعی، این محصول کنترل دقیق و استایلی بی‌زحمت را برای میزبان مدرن فراهم می‌کند." },
-                tags: ["ads", "cgi"], loc: "MixPlus", img: "./images/project33-img.jpg", 
-                gallery: generateGallery(33, 1)
-            },
-            { 
-                id: 34, order: 34, 
-                title: { en: "Shadow & Light: The Complete Workspace", fa: "سایه و نور: فضای کار کامل" }, 
-                desc: { en: "A masterclass in kitchen ergonomics and aesthetics. This visualization captures the interplay of light and shadow on a fully equipped workspace, featuring a Mix Plus gas hob paired with a functional sink unit. The rich textures and moody lighting emphasize the premium build quality of every component.", fa: "کلاس درسی در ارگونومی و زیبایی‌شناسی آشپزخانه. این تصویرسازی، بازی نور و سایه را بر روی یک فضای کار کاملاً مجهز به نمایش می‌گذارد که در آن اجاق گاز میکس پلاس با یک سینک کاربردی جفت شده است. بافت‌های غنی و نورپردازی خاص، کیفیت ساخت ممتاز هر قطعه را برجسته می‌کند." },
-                tags: ["ads", "cgi"], loc: "MixPlus", img: "./images/project34-img.jpg", 
-                gallery: generateGallery(34, 1)
-            },
-            { 
-                id: 35, order: 35, 
-                title: { en: "Organic Modernism: Steel Meets Wood", fa: "مدرنیسم ارگانیک: ملاقات استیل و چوب" }, 
-                desc: { en: "Harmony in materials. This setting highlights a premium double-bowl stainless steel sink integrated into a stone countertop, complemented by a warm wooden breakfast bar. The design celebrates the contrast between cool, hygienic steel and natural textures, creating a balanced and inviting kitchen environment.", fa: "هارمونی در متریال. این چیدمان، یک سینک استیل دو لگنه ممتاز را که در کانترتاپ سنگی یکپارچه شده، در کنار یک بار صبحانه چوبی گرم برجسته می‌کند. این طراحی تضاد میان استیل سرد و بهداشتی با بافت‌های طبیعی را جشن می‌گیرد و محیطی متعادل و دعوت‌کننده در آشپزخانه خلق می‌کند." },
-                tags: ["ads", "cgi"], loc: "MixPlus", img: "./images/project35-img.jpg", 
-                gallery: generateGallery(35, 1)
-            },
-            { 
-                id: 36, order: 36, 
-                title: { en: "Performance in Focus: The 5-Burner Layout", fa: "تمرکز بر عملکرد: چیدمان ۵ شعله" }, 
-                desc: { en: "A clear perspective on power. This overhead view showcases the intelligent layout of the 5-burner glass hob, designed to accommodate multiple pans simultaneously without crowding. The durable cast iron supports and intuitive front controls ensure a professional cooking experience at home.", fa: "چشم‌اندازی روشن از قدرت. این نمای بالا، چیدمان هوشمندانه اجاق گاز ۵ شعله شیشه‌ای را نشان می‌دهد که برای جای دادن همزمان چندین ظرف بدون شلوغی طراحی شده است. محافظ‌های چدنی بادوام و کنترل‌های جلویی بصری، تجربه آشپزی حرفه‌ای را در خانه تضمین می‌کنند." },
-                tags: ["ads", "cgi"], loc: "MixPlus", img: "./images/project36-img.jpg", 
-                gallery: generateGallery(36, 1)
-            },
-            { 
-                id: 37, order: 37, 
-                title: { en: "The Culinary Workstation: More Than a Sink", fa: "ایستگاه کاری آشپزی: فراتر از یک سینک" }, 
-                desc: { en: "Redefine your prep zone with this multifunctional workstation sink. Featuring integrated accessories like a cutting board and drying rack, it transforms a simple wet area into a highly efficient culinary hub. The sleek stainless steel design complements modern countertops perfectly.", fa: "منطقه آماده‌سازی خود را با این سینک چندکاره بازتعریف کنید. با داشتن اکسسوری‌های یکپارچه مانند تخته برش و آبچکان، این محصول یک فضای شستشوی ساده را به یک مرکز کارآمد آشپزی تبدیل می‌کند. طراحی استیل براق آن به خوبی مکمل کانترتاپ‌های مدرن است." },
-                tags: ["ads", "cgi"], loc: "MixPlus", img: "./images/project37-img.jpg", 
-                gallery: generateGallery(37, 1)
-            },
-            { 
-                id: 38, order: 38, 
-                title: { en: "Bold Contrast: Stainless Steel on Dark Stone", fa: "تضاد جسورانه: استیل روی سنگ تیره" }, 
-                desc: { en: "Make a statement with contrasting textures. This robust 5-burner stainless steel hob stands out beautifully against a dark, matte kitchen island. With its heavy-duty cast iron grates and central wok burner, it promises professional performance in a striking package.", fa: "با تضاد بافت‌ها، بیانیه‌ای جسورانه صادر کنید. این اجاق گاز ۵ شعله استیل مستحکم، به زیبایی بر روی جزیره آشپزخانه تیره و مات خودنمایی می‌کند. با شبکه‌های چدنی سنگین و شعله پلوپز مرکزی، این محصول وعده عملکردی حرفه‌ای را در بسته‌بندی خیره‌کننده می‌دهد." },
-                tags: ["ads", "cgi"], loc: "MixPlus", img: "./images/project38-img.jpg", 
-                gallery: generateGallery(38, 1)
-            },
-            { 
-                id: 39, order: 39, 
-                title: { en: "Pure Minimalism: The 4-Burner Glass Hob", fa: "مینیمالیسم خالص: اجاق گاز ۴ شعله شیشه‌ای" }, 
-                desc: { en: "Embrace simplicity without sacrificing power. This 4-burner glass hob offers a clean, uncluttered look perfect for compact modern kitchens. The white glass surface reflects light beautifully, adding a touch of brightness and sophistication to your cooking space.", fa: "سادگی را بدون فدا کردن قدرت در آغوش بگیرید. این اجاق گاز ۴ شعله شیشه‌ای ظاهری تمیز و خلوت ارائه می‌دهد که برای آشپزخانه‌های مدرن و جمع‌وجور عالی است. سطح شیشه‌ای سفید نور را به زیبایی بازتاب می‌دهد و لمسی از روشنایی و ظرافت به فضای آشپزی شما می‌افزاید." },
-                tags: ["ads", "cgi"], loc: "MixPlus", img: "./images/project39-img.jpg", 
-                gallery: generateGallery(39, 1)
-            },
-            { 
-                id: 40, order: 40, 
-                title: { en: "Seamless Ventilation: The Integrated Hood", fa: "تهویه یکپارچه: هود مدرن" }, 
-                desc: { en: "Experience the future of kitchen ventilation. This innovative setup features a sleek, angled hood perfectly positioned above a premium gas hob. The design ensures efficient fume extraction while maintaining a clean, unobstructed visual line in your kitchen cabinetry.", fa: "آینده تهویه آشپزخانه را تجربه کنید. این چیدمان نوآورانه دارای یک هود زاویه‌دار شیک است که دقیقاً بالای یک اجاق گاز ممتاز قرار گرفته است. این طراحی ضمن تضمین مکش موثر دود و بو، خط بصری تمیز و بدون مانعی را در کابینت‌های آشپزخانه شما حفظ می‌کند." },
-                tags: ["ads", "cgi"], loc: "MixPlus", img: "./images/project40-img.jpg", 
-                gallery: generateGallery(40, 1)
-            },
-        ];
-
-        const socialLinks = [
-            { icon: <Icons.Mail />, label: "Email", href: "mailto:arian.tabib@gmail.com", text: "arian.tabib@gmail.com" },
-            { icon: <Icons.Phone />, label: "Mobile", href: "tel:+989392263236", text: "+98 939 226 3236" },
-            { icon: <Icons.Send />, label: "Telegram", href: "https://t.me/ariantabib", text: "@ariantabib" },
-            { icon: <Icons.Instagram />, label: "Instagram", href: "https://instagram.com/Arian_tabib", text: "@Arian_tabib" },
-            { icon: <Icons.Youtube />, label: "YouTube", href: "https://youtube.com/@Ariantabib", text: "@Ariantabib" },
-            { icon: <Icons.Linkedin />, label: "LinkedIn", href: "https://linkedin.com/in/arian-tabib", text: "Arian Tabib" },
-        ];
-
         const heroImages = {
             desktop: [
                 "./images/hero-desktop-1.jpg",
@@ -1198,6 +921,15 @@
             );
         };
 
+        const socialLinks = [
+            { icon: <Icons.Mail />, label: "Email", href: "mailto:arian.tabib@gmail.com", text: "arian.tabib@gmail.com" },
+            { icon: <Icons.Phone />, label: "Mobile", href: "tel:+989392263236", text: "+98 939 226 3236" },
+            { icon: <Icons.Send />, label: "Telegram", href: "https://t.me/ariantabib", text: "@ariantabib" },
+            { icon: <Icons.Instagram />, label: "Instagram", href: "https://instagram.com/Arian_tabib", text: "@Arian_tabib" },
+            { icon: <Icons.Youtube />, label: "YouTube", href: "https://youtube.com/@Ariantabib", text: "@Ariantabib" },
+            { icon: <Icons.Linkedin />, label: "LinkedIn", href: "https://linkedin.com/in/arian-tabib", text: "Arian Tabib" },
+        ];
+
         // --- APP ---
         const App = () => {
             const [lang, setLang] = useState('en');
@@ -1208,7 +940,10 @@
             const [isImageLoading, setIsImageLoading] = useState(false);
             const [showAR, setShowAR] = useState(false); 
             const [loadProgress, setLoadProgress] = useState(0);
-            const [isLoaded, setIsLoaded] = useState(false);
+            const [isLoaded, setIsLoaded] = useState(false); // Initial loading screen
+            const [projectsData, setProjectsData] = useState([]); // Dynamic Projects State
+            const [dataFetched, setDataFetched] = useState(false); // Track if data is fetched
+            
             const [heroScale, setHeroScale] = useState(1);
             const [heroOpacity, setHeroOpacity] = useState(1);
             const [isMobile, setIsMobile] = useState(false);
@@ -1239,6 +974,80 @@
             const t = content[lang];
             const timeline = timelineData[lang];
             const isRTL = lang === 'fa';
+
+            // Google Sheet CSV URL
+            const GOOGLE_SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRG5pVpEgdXTzjQlWZBBU5aSNuCQNDGxbZ1DtICEH1htnaPoTFMHUT-0VWIaguFvb2VAEb8rm_3iVCd/pub?gid=0&single=true&output=csv";
+
+            // Fetch Projects from Google Sheet
+            useEffect(() => {
+                const fetchProjects = async () => {
+                    try {
+                        const response = await fetch(GOOGLE_SHEET_CSV_URL);
+                        const csvText = await response.text();
+                        
+                        // Parse CSV using PapaParse
+                        const parsedData = Papa.parse(csvText, {
+                            header: true,
+                            skipEmptyLines: true
+                        });
+
+                        // Transform data to match the structure of the app
+                        const transformedProjects = parsedData.data.map((row, index) => {
+                            const id = row.ID ? row.ID.trim() : index + 1;
+                            const galleryCount = parseInt(row.Gallery_Count || 0);
+                            
+                            // Generate gallery paths dynamically
+                            const galleryPaths = [];
+                            if (galleryCount > 0) {
+                                for (let i = 1; i <= galleryCount; i++) {
+                                    galleryPaths.push(`./images/project${id}-gallery${i}.jpg`);
+                                }
+                            } else {
+                                // Fallback for projects with 0 gallery count specified but maybe have 1 default image
+                                galleryPaths.push(`./images/project${id}-gallery.jpg`);
+                            }
+
+                            // Parse tags
+                            const tagsArray = row.Tags 
+                                ? row.Tags.split(',').map(tag => tag.trim().toLowerCase()) 
+                                : [];
+
+                            const hasAR = row.HasAR && row.HasAR.toLowerCase() === 'true';
+
+                            return {
+                                id: id,
+                                order: parseInt(row.Order || 999),
+                                title: {
+                                    en: row.Title_EN || "Untitled Project",
+                                    fa: row.Title_Fa || "پروژه بدون عنوان"
+                                },
+                                desc: {
+                                    en: row.Desc_EN || "",
+                                    fa: row.Desc_Fa || ""
+                                },
+                                tags: tagsArray,
+                                loc: row.Loc || "",
+                                img: `./images/project${id}-img.jpg`, // Cover image
+                                hasAR: hasAR,
+                                modelGLB: hasAR ? `./models/project${id}.glb` : null,
+                                modelUSDZ: hasAR ? `./models/project${id}.usdz` : null,
+                                gallery: galleryPaths
+                            };
+                        }).filter(p => p.title.en !== "Untitled Project" || p.title.fa !== "پروژه بدون عنوان"); // Filter out empty rows
+
+                        // Sort by Order
+                        transformedProjects.sort((a, b) => a.order - b.order);
+
+                        setProjectsData(transformedProjects);
+                        setDataFetched(true);
+                    } catch (error) {
+                        console.error("Error fetching projects:", error);
+                        setDataFetched(true); // Continue anyway to show UI
+                    }
+                };
+
+                fetchProjects();
+            }, []);
 
             // Check if mobile
             useEffect(() => {
@@ -1327,7 +1136,7 @@
                 return () => {
                     observer.disconnect();
                 };
-            }, [filter, isLoaded]);
+            }, [filter, dataFetched, projectsData]); // Re-run when data changes
 
             // Staggered animation for project cards - minimal delay
             useEffect(() => {
@@ -1337,7 +1146,7 @@
                     const delay = Math.min(index * 0.03, 0.3);
                     card.style.transitionDelay = `${delay}s`;
                 });
-            }, [filter]);
+            }, [filter, projectsData]);
 
             // --- Typewriter Effect ---
             useEffect(() => {
@@ -1618,7 +1427,7 @@
                 }
             };
 
-            const filteredProjects = projects
+            const filteredProjects = projectsData
                 .filter(p => filter === 'all' || p.tags.includes(filter))
                 .sort((a, b) => a.order - b.order);
 
@@ -1788,31 +1597,36 @@
                             ))}
                         </div>
 
-                        <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-                            {filteredProjects.map((project, index) => (
-                                <div 
-                                    key={project.id} 
-                                    className="project-card group relative cursor-none aspect-[3/4] overflow-hidden bg-surface"
-                                    onClick={() => openProject(project)}
-                                    onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)}
-                                >
-                                    <div className="w-full h-full transition-transform duration-700 group-hover:scale-110">
-                                        <BlurImage 
-                                            src={project.img} 
-                                            alt={project.title[lang]} 
-                                            loading="lazy"
-                                            className="opacity-90 group-hover:opacity-100"
-                                        />
+                        {/* Show loading state if data not fetched yet */}
+                        {!dataFetched ? (
+                            <div className="text-center py-20 text-white/50">Loading Projects...</div>
+                        ) : (
+                            <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                                {filteredProjects.map((project, index) => (
+                                    <div 
+                                        key={project.id} 
+                                        className="project-card group relative cursor-none aspect-[3/4] overflow-hidden bg-surface"
+                                        onClick={() => openProject(project)}
+                                        onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)}
+                                    >
+                                        <div className="w-full h-full transition-transform duration-700 group-hover:scale-110">
+                                            <BlurImage 
+                                                src={project.img} 
+                                                alt={project.title[lang]} 
+                                                loading="lazy"
+                                                className="opacity-90 group-hover:opacity-100"
+                                            />
+                                        </div>
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                                            <span className={`text-accent text-[10px] uppercase ${isRTL ? 'tracking-normal font-fa' : 'tracking-widest'} mb-1`}>{project.loc}</span>
+                                            <h3 className={`text-sm md:text-lg font-bold text-white ${isRTL ? 'font-fa' : ''}`}>
+                                                {project.title[lang]}
+                                            </h3>
+                                        </div>
                                     </div>
-                                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                                        <span className={`text-accent text-[10px] uppercase ${isRTL ? 'tracking-normal font-fa' : 'tracking-widest'} mb-1`}>{project.loc}</span>
-                                        <h3 className={`text-sm md:text-lg font-bold text-white ${isRTL ? 'font-fa' : ''}`}>
-                                            {project.title[lang]}
-                                        </h3>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
+                                ))}
+                            </div>
+                        )}
                     </section>
 
                     {/* Section Divider */}
