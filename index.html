@@ -4,66 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- SEO & Meta Tags (Updated for better ranking) -->
+    <!-- SEO & Meta Tags -->
     <title>Arian Tabib | Architect & 3D Visualizer | آرین طبیب</title>
-    
-    <!-- Primary Meta Tags -->
     <meta name="title" content="Arian Tabib | Architect & 3D Visualizer | آرین طبیب">
-    <meta name="description" content="Portfolio of Arian Tabib (آرین طبیب), an experienced Architect and 3D Visualizer based in Tehran. Specializing in architectural design, interior design, and high-end CGI visualizations.">
-    
-    <!-- Keywords (English & Persian) -->
-    <meta name="keywords" content="Arian Tabib, آرین طبیب, Architect, معمار, 3D Visualizer, تصویرساز سه بعدی, Interior Design, طراحی داخلی, CGI Artist, Architecture Portfolio, Tehran Architect, معمار تهران, 3ds Max, V-Ray, Unreal Engine, Visualization, معماری">
-    
+    <meta name="description" content="Portfolio of Arian Tabib (آرین طبیب). Architectural design, interior design, and high-end CGI visualizations.">
+    <meta name="keywords" content="Arian Tabib, آرین طبیب, Architect, 3D Visualizer, Interior Design, CGI, Tehran, Architecture Portfolio">
     <meta name="author" content="Arian Tabib">
     <meta name="robots" content="index, follow, max-image-preview:large">
     <meta name="language" content="English">
-    <meta name="revisit-after" content="7 days">
-
-    <!-- Canonical Tag (Critical for preventing duplicate content issues) -->
+    
+    <!-- Canonical & Favicon -->
     <link rel="canonical" href="https://ariantabib.github.io/website/">
-
-    <!-- Favicon & Site Icons -->
     <link rel="icon" type="image/png" href="./images/logo.png">
     <link rel="apple-touch-icon" href="./images/logo.png">
     <meta name="theme-color" content="#050505">
 
-    <!-- Open Graph / Facebook & LinkedIn (Updated URLs) -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://ariantabib.github.io/website/">
-    <meta property="og:title" content="Arian Tabib | Architect & 3D Visualizer | آرین طبیب">
-    <meta property="og:description" content="Explore the architectural and visualization works of Arian Tabib (آرین طبیب). Bridging conceptual innovation with technical precision.">
-    <meta property="og:image" content="https://ariantabib.github.io/website/images/cover-preview.jpg">
-    <meta property="og:locale" content="en_US">
-    <meta property="og:site_name" content="Arian Tabib Portfolio">
-
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://ariantabib.github.io/website/">
-    <meta property="twitter:title" content="Arian Tabib | Architect & 3D Visualizer | آرین طبیب">
-    <meta property="twitter:description" content="Explore the architectural and visualization works of Arian Tabib.">
-    <meta property="twitter:image" content="https://ariantabib.github.io/website/images/cover-preview.jpg">
-
-    <!-- Structured Data (JSON-LD) - Updated -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "Arian Tabib",
-      "alternateName": "آرین طبیب",
-      "url": "https://ariantabib.github.io/website/",
-      "jobTitle": "Architect",
-      "image": "https://ariantabib.github.io/website/images/logo.png",
-      "alumniOf": "Azad University, North Tehran Branch",
-      "sameAs": [
-        "https://www.linkedin.com/in/arian-tabib",
-        "https://www.instagram.com/Arian_tabib",
-        "https://youtube.com/@Ariantabib",
-        "https://t.me/ariantabib"
-      ],
-      "knowsAbout": ["Architecture", "3D Visualization", "Interior Design", "CGI", "3ds Max", "V-Ray", "Unreal Engine"]
-    }
-    </script>
-    
     <!-- React & ReactDOM -->
     <script crossorigin src="https://unpkg.com/react@18.2.0/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
@@ -74,17 +29,14 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- PapaParse for CSV parsing -->
+    <!-- PapaParse & Model Viewer -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
-
-    <!-- Google Model Viewer (For AR) -->
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
     
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@200;300;400;500;600;700&family=Vazirmatn:wght@100;300;400;500;700&display=swap" rel="stylesheet">
 
     <style>
-        /* Fonts Setup */
         @font-face { font-family: 'Kalameh'; src: url('./fonts/KALAMEH-THIN.woff2') format('woff2'); font-weight: 100; font-display: swap; }
         @font-face { font-family: 'Kalameh'; src: url('./fonts/KALAMEH-REGULAR.woff2') format('woff2'); font-weight: 400; font-display: swap; }
         @font-face { font-family: 'Kalameh'; src: url('./fonts/KALAMEH-BOLD.woff2') format('woff2'); font-weight: 700; font-display: swap; }
@@ -94,559 +46,149 @@
         body { font-family: 'Oxanium', sans-serif; background-color: #050505; color: #ffffff; overflow-x: hidden; cursor: none; }
         .font-fa { font-family: 'Kalameh', 'Vazirmatn', Tahoma, sans-serif; }
 
-        /* Loading Screen Styles */
+        /* Loading Screen */
         .loading-screen {
-            position: fixed;
-            inset: 0;
-            z-index: 9999;
-            background-color: #050505;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            opacity: 1;
-            visibility: visible;
+            position: fixed; inset: 0; z-index: 9999; background-color: #050505;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            opacity: 1; visibility: visible;
             transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1), visibility 1.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .loading-screen.hidden {
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
-        }
-        .loading-name {
-            font-size: clamp(2rem, 8vw, 5rem);
-            font-weight: 700;
-            letter-spacing: 0.3em;
-            color: #fff;
-            opacity: 0;
-            animation: fadeInName 1s ease forwards 0.3s;
-        }
-        .loading-line {
-            width: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, #C1A365, transparent);
-            margin-top: 2rem;
-            animation: expandLine 1.5s ease forwards 0.8s;
-        }
-        .loading-subtitle {
-            font-size: 0.75rem;
-            letter-spacing: 0.4em;
-            color: #C1A365;
-            text-transform: uppercase;
-            margin-top: 1.5rem;
-            opacity: 0;
-            animation: fadeInName 0.8s ease forwards 1.5s;
-        }
-        .loading-dots {
-            display: flex;
-            gap: 8px;
-            margin-top: 3rem;
-        }
-        .loading-dot {
-            width: 6px;
-            height: 6px;
-            background-color: #C1A365;
-            border-radius: 50%;
-            animation: pulse 1.4s ease-in-out infinite;
-        }
+        .loading-screen.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+        .loading-name { font-size: clamp(2rem, 8vw, 5rem); font-weight: 200; letter-spacing: 0.3em; color: #fff; opacity: 0; animation: fadeInName 1s ease forwards 0.3s; }
+        .loading-line { width: 0; height: 1px; background: linear-gradient(90deg, transparent, #C1A365, transparent); margin-top: 2rem; animation: expandLine 1.5s ease forwards 0.8s; }
+        .loading-subtitle { font-size: 0.75rem; letter-spacing: 0.4em; color: #C1A365; text-transform: uppercase; margin-top: 1.5rem; opacity: 0; animation: fadeInName 0.8s ease forwards 1.5s; }
+        .loading-dots { display: flex; gap: 8px; margin-top: 3rem; }
+        .loading-dot { width: 6px; height: 6px; background-color: #C1A365; border-radius: 50%; animation: pulse 1.4s ease-in-out infinite; }
         .loading-dot:nth-child(2) { animation-delay: 0.2s; }
         .loading-dot:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes fadeInName { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes expandLine { from { width: 0; } to { width: min(300px, 60vw); } }
+        @keyframes pulse { 0%, 100% { opacity: 0.3; transform: scale(1); } 50% { opacity: 1; transform: scale(1.2); } }
 
-        @keyframes fadeInName {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes expandLine {
-            from { width: 0; }
-            to { width: min(300px, 60vw); }
-        }
-        @keyframes pulse {
-            0%, 100% { opacity: 0.3; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.2); }
-        }
+        /* Scroll Reveal */
+        .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+        .reveal.revealed { opacity: 1; transform: translateY(0); }
 
-        /* Scroll Reveal Animations */
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.4s ease-out, transform 0.4s ease-out;
-        }
-        .reveal.revealed {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Staggered card animations */
+        /* Project Card */
         .project-card {
-            opacity: 0;
-            transform: translateY(25px) scale(0.98);
-            transition: opacity 0.35s ease-out, transform 0.35s ease-out;
+            opacity: 0; transform: translateY(25px) scale(0.98);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+            /* Grid layout handled by parent, but card needs to fill the spanned grid area */
+            height: 100%; 
         }
-        .project-card.revealed {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-        }
+        .project-card.revealed { opacity: 1; transform: translateY(0) scale(1); }
 
-        /* Hero parallax/collapse effect */
-        .hero-content {
-            transition: transform 0.1s linear, opacity 0.1s linear;
-            will-change: transform, opacity;
-        }
+        /* Hero Parallax */
+        .hero-content { transition: transform 0.1s linear, opacity 0.1s linear; will-change: transform, opacity; }
 
-        /* Cursor */
+        /* Custom Cursor */
         .cursor-dot, .cursor-outline { position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; z-index: 9998; pointer-events: none; }
         .cursor-dot { width: 6px; height: 6px; background-color: #fff; }
         .cursor-outline { width: 40px; height: 40px; border: 1px solid rgba(255, 255, 255, 0.3); transition: width 0.2s, height 0.2s, background-color 0.2s; }
         body.hovering .cursor-outline { width: 60px; height: 60px; background-color: rgba(255, 255, 255, 0.1); border-color: transparent; backdrop-filter: blur(2px); }
 
-        /* Scrollbar for Modal Sidebar */
+        /* Utilities */
+        .header-fade { background: linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.6) 50%, transparent 100%); }
+        .noise { position: fixed; inset: 0; z-index: 50; opacity: 0.03; pointer-events: none; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"); }
+        
+        /* Typing Effect */
+        .typing-cursor { display: inline-block; width: 2px; height: 1em; background-color: #C1A365; margin-left: 4px; animation: blink 1s step-end infinite; vertical-align: middle; }
+        @keyframes blink { 50% { opacity: 0; } }
+
+        /* Scrollbars */
         .modal-scroll::-webkit-scrollbar { width: 4px; }
         .modal-scroll::-webkit-scrollbar-track { background: #111; }
         .modal-scroll::-webkit-scrollbar-thumb { background: #333; border-radius: 2px; }
         .modal-scroll::-webkit-scrollbar-thumb:hover { background: #C1A365; }
 
-        /* Model Viewer Customization */
-        model-viewer {
-            width: 100%;
-            height: 100%;
-            --poster-color: transparent;
-        }
+        /* AR Buttons */
+        .ar-buttons-container { position: absolute; top: 1rem; left: 1rem; right: 1rem; z-index: 60; display: flex; justify-content: space-between; align-items: center; gap: 0.5rem; }
+        @media (min-width: 768px) { .ar-buttons-container { top: 1.5rem; left: 1.5rem; right: 1.5rem; } }
+        .ar-btn { display: flex; align-items: center; justify-content: center; gap: 0.375rem; padding: 0.5rem 0.75rem; font-size: 0.625rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; border-radius: 9999px; transition: all 0.3s ease; white-space: nowrap; flex-shrink: 0; }
+        @media (min-width: 400px) { .ar-btn { padding: 0.625rem 1rem; gap: 0.5rem; font-size: 0.6875rem; } }
+        @media (min-width: 768px) { .ar-btn { padding: 0.75rem 1.5rem; gap: 0.75rem; font-size: 0.75rem; } }
+        .ar-btn-back { background-color: rgba(0, 0, 0, 0.8); color: #fff; border: 1px solid rgba(255, 255, 255, 0.2); backdrop-filter: blur(8px); }
+        .ar-btn-back:hover { background-color: rgba(51, 51, 51, 1); }
+        .ar-btn-activate { background-color: #C1A365; color: #000; border: 1px solid #C1A365; }
+        .ar-btn-activate:hover { background-color: #fff; }
+        .ar-btn svg { width: 14px; height: 14px; flex-shrink: 0; }
+        @media (min-width: 768px) { .ar-btn svg { width: 18px; height: 18px; } }
+
+        /* Sections */
+        .timeline-item { opacity: 0; transform: translateX(-20px); transition: opacity 0.35s ease-out, transform 0.35s ease-out; }
+        .timeline-item.revealed { opacity: 1; transform: translateX(0); }
+        [dir="rtl"] .timeline-item { transform: translateX(20px); }
+        [dir="rtl"] .timeline-item.revealed { transform: translateX(0); }
         
-        /* Typing Effect Cursor */
-        .typing-cursor {
-            display: inline-block;
-            width: 2px;
-            height: 1em;
-            background-color: #C1A365;
-            margin-left: 4px;
-            animation: blink 1s step-end infinite;
-            vertical-align: middle;
-        }
-        @keyframes blink { 50% { opacity: 0; } }
-
-        /* Header Fade */
-        .header-fade { background: linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.6) 50%, transparent 100%); }
-        .noise { position: fixed; inset: 0; z-index: 50; opacity: 0.03; pointer-events: none; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"); }
-
-        /* AR Buttons Container - Mobile Responsive */
-        .ar-buttons-container {
-            position: absolute;
-            top: 1rem;
-            left: 1rem;
-            right: 1rem;
-            z-index: 60;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 0.5rem;
-        }
+        .contact-card { opacity: 0; transform: translateY(20px); transition: opacity 0.35s ease-out, transform 0.35s ease-out; }
+        .contact-card.revealed { opacity: 1; transform: translateY(0); }
         
-        @media (min-width: 768px) {
-            .ar-buttons-container {
-                top: 1.5rem;
-                left: 1.5rem;
-                right: 1.5rem;
-            }
-        }
+        .section-title { opacity: 0; transform: translateY(20px); transition: opacity 0.4s ease-out, transform 0.4s ease-out; }
+        .section-title.revealed { opacity: 1; transform: translateY(0); }
+        
+        .filter-bar { opacity: 0; transform: translateY(15px); transition: opacity 0.5s ease-out, transform 0.5s ease-out; }
+        .filter-bar.revealed { opacity: 1; transform: translateY(0); }
 
-        .ar-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.375rem;
-            padding: 0.5rem 0.75rem;
-            font-size: 0.625rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            border-radius: 9999px;
-            transition: all 0.3s ease;
-            white-space: nowrap;
-            flex-shrink: 0;
-        }
+        .filter-btn-active { background: linear-gradient(135deg, #C1A365 0%, #D4B978 100%); color: #000 !important; border-color: #C1A365 !important; box-shadow: 0 2px 10px rgba(193, 163, 101, 0.3); }
 
-        @media (min-width: 400px) {
-            .ar-btn {
-                padding: 0.625rem 1rem;
-                gap: 0.5rem;
-                font-size: 0.6875rem;
-            }
-        }
+        /* Ken Burns */
+        @keyframes kenBurnsZoom { 0% { transform: scale(1.0); } 100% { transform: scale(1.15); } }
+        .hero-slide-container { position: absolute; inset: 0; overflow: hidden; }
+        .hero-slide-container img, .hero-slide-container .img-blur-wrapper { width: 100%; height: 100%; object-fit: cover; }
+        .hero-img-animator { width: 100%; height: 100%; will-change: transform; transform-origin: center center; }
+        .hero-img-animator.active { animation: kenBurnsZoom 5s ease-out forwards; }
+        .hero-img-animator.inactive { transform: scale(1.15); }
 
-        @media (min-width: 768px) {
-            .ar-btn {
-                padding: 0.75rem 1.5rem;
-                gap: 0.75rem;
-                font-size: 0.75rem;
-            }
-        }
+        /* Section Divider */
+        .section-divider { position: relative; height: 0; display: flex; align-items: center; justify-content: center; z-index: 10; }
+        .section-divider::before { content: ''; position: absolute; width: 200px; height: 1px; background: linear-gradient(90deg, transparent, #C1A365, transparent); }
+        .section-divider-dot { width: 8px; height: 8px; background: #C1A365; transform: rotate(45deg); position: relative; z-index: 1; }
+        .section-divider-lines { display: flex; align-items: center; gap: 12px; }
+        .section-divider-line { width: 60px; height: 1px; background: linear-gradient(90deg, transparent, rgba(193, 163, 101, 0.5)); }
+        .section-divider-line:last-child { background: linear-gradient(90deg, rgba(193, 163, 101, 0.5), transparent); }
 
-        .ar-btn-back {
-            background-color: rgba(0, 0, 0, 0.8);
-            color: #fff;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(8px);
-        }
-
-        .ar-btn-back:hover {
-            background-color: rgba(51, 51, 51, 1);
-        }
-
-        .ar-btn-activate {
-            background-color: #C1A365;
-            color: #000;
-            border: 1px solid #C1A365;
-        }
-
-        .ar-btn-activate:hover {
-            background-color: #fff;
-        }
-
-        .ar-btn svg {
-            width: 14px;
-            height: 14px;
-            flex-shrink: 0;
-        }
-
-        @media (min-width: 768px) {
-            .ar-btn svg {
-                width: 18px;
-                height: 18px;
-            }
-        }
-
-        /* Timeline reveal */
-        .timeline-item {
-            opacity: 0;
-            transform: translateX(-20px);
-            transition: opacity 0.35s ease-out, transform 0.35s ease-out;
-        }
-        .timeline-item.revealed {
-            opacity: 1;
-            transform: translateX(0);
-        }
-        [dir="rtl"] .timeline-item {
-            transform: translateX(20px);
-        }
-        [dir="rtl"] .timeline-item.revealed {
-            transform: translateX(0);
-        }
-
-        /* Contact card animations */
-        .contact-card {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.35s ease-out, transform 0.35s ease-out;
-        }
-        .contact-card.revealed {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Section title animations */
-        .section-title {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.4s ease-out, transform 0.4s ease-out;
-        }
-        .section-title.revealed {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Filter bar animation */
-        .filter-bar {
-            opacity: 0;
-            transform: translateY(15px);
-            transition: opacity 0.35s ease-out, transform 0.35s ease-out;
-        }
-        .filter-bar.revealed {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Active filter button - filled style */
-        .filter-btn-active {
-            background: linear-gradient(135deg, #C1A365 0%, #D4B978 100%);
-            color: #000 !important;
-            border-color: #C1A365 !important;
-            box-shadow: 0 2px 10px rgba(193, 163, 101, 0.3);
-        }
-
-        /* Ken Burns effect for hero images - smooth continuous zoom */
-        @keyframes kenBurnsZoom {
-            0% { transform: scale(1.0); }
-            100% { transform: scale(1.15); }
-        }
-        .hero-slide-container {
-            position: absolute;
-            inset: 0;
-            overflow: hidden;
-        }
-        .hero-slide-container img,
-        .hero-slide-container .img-blur-wrapper {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .hero-img-animator {
-            width: 100%;
-            height: 100%;
-            will-change: transform;
-            transform-origin: center center;
-        }
-        .hero-img-animator.active {
-            animation: kenBurnsZoom 5s ease-out forwards;
-        }
-        .hero-img-animator.inactive {
-            transform: scale(1.15);
-        }
-
-        /* Section Divider Decorations - Perfectly centered between sections */
-        .section-divider {
-            position: relative;
-            height: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 10;
-        }
-        .section-divider::before {
-            content: '';
-            position: absolute;
-            width: 200px;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, #C1A365, transparent);
-        }
-        .section-divider-dot {
-            width: 8px;
-            height: 8px;
-            background: #C1A365;
-            transform: rotate(45deg);
-            position: relative;
-            z-index: 1;
-        }
-        .section-divider-lines {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        .section-divider-line {
-            width: 60px;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(193, 163, 101, 0.5));
-        }
-        .section-divider-line:last-child {
-            background: linear-gradient(90deg, rgba(193, 163, 101, 0.5), transparent);
-        }
-
-        /* Mobile Bottom Navigation */
+        /* Mobile Bottom Nav */
         .mobile-bottom-nav {
-            position: fixed;
-            bottom: 24px;
-            left: 50%;
-            transform: translateX(-50%) translateY(120px);
-            z-index: 100;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            padding: 10px 16px;
-            background: rgba(15, 15, 15, 0.75);
-            backdrop-filter: blur(20px) saturate(180%);
-            -webkit-backdrop-filter: blur(20px) saturate(180%);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 50px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05);
-            opacity: 0;
-            visibility: hidden;
-            transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease, visibility 0.3s ease;
+            position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(200px); z-index: 100;
+            display: flex; align-items: center; justify-content: center; gap: 6px; padding: 10px 16px;
+            background: rgba(15, 15, 15, 0.85); backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 50px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            opacity: 0; visibility: hidden;
+            transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.4s ease, visibility 0.4s ease;
         }
-        .mobile-bottom-nav.visible {
-            transform: translateX(-50%) translateY(0);
-            opacity: 1;
-            visibility: visible;
-        }
-        .mobile-nav-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 8px 16px;
-            border-radius: 24px;
-            transition: all 0.25s ease;
-            text-decoration: none;
-            color: rgba(255, 255, 255, 0.45);
-            position: relative;
-            min-width: 56px;
-        }
-        .mobile-nav-item:active {
-            transform: scale(0.92);
-        }
-        .mobile-nav-item.active {
-            color: #C1A365;
-            background: rgba(193, 163, 101, 0.15);
-        }
-        .mobile-nav-item.active::before {
-            content: '';
-            position: absolute;
-            top: 2px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 20px;
-            height: 3px;
-            background: #C1A365;
-            border-radius: 3px;
-        }
-        .mobile-nav-item svg {
-            width: 22px;
-            height: 22px;
-            margin-bottom: 3px;
-            transition: transform 0.25s ease;
-            flex-shrink: 0;
-        }
-        .mobile-nav-item.active svg {
-            transform: scale(1.1);
-        }
-        .mobile-nav-item span {
-            font-size: 9px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            white-space: nowrap;
-        }
-        /* Language Toggle Button - Separate styling */
-        .mobile-lang-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 44px;
-            height: 44px;
-            margin-left: 8px;
-            padding: 0;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            border-radius: 50%;
-            transition: all 0.25s ease;
-            flex-shrink: 0;
-        }
-        .mobile-lang-btn:active {
-            transform: scale(0.9);
-            background: rgba(193, 163, 101, 0.2);
-        }
-        .mobile-lang-btn img {
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid rgba(255, 255, 255, 0.15);
-        }
+        .mobile-bottom-nav.visible { transform: translateX(-50%) translateY(0); opacity: 1; visibility: visible; }
+        .mobile-nav-item { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 8px 16px; border-radius: 24px; transition: all 0.25s ease; text-decoration: none; color: rgba(255, 255, 255, 0.5); position: relative; min-width: 56px; }
+        .mobile-nav-item:active { transform: scale(0.95); }
+        .mobile-nav-item.active { color: #C1A365; background: rgba(193, 163, 101, 0.15); }
+        .mobile-nav-item.active::before { content: ''; position: absolute; top: 2px; left: 50%; transform: translateX(-50%); width: 20px; height: 3px; background: #C1A365; border-radius: 3px; }
+        .mobile-nav-item svg { width: 22px; height: 22px; margin-bottom: 3px; transition: transform 0.25s ease; flex-shrink: 0; }
+        .mobile-nav-item.active svg { transform: scale(1.1); }
+        .mobile-nav-item span { font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap; }
+        .mobile-lang-btn { display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; margin-left: 8px; padding: 0; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 50%; transition: all 0.25s ease; flex-shrink: 0; }
+        .mobile-lang-btn:active { transform: scale(0.9); background: rgba(193, 163, 101, 0.2); }
+        .mobile-lang-btn img { width: 28px; height: 28px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(255, 255, 255, 0.15); }
 
-        /* LQIP - Low Quality Image Placeholder */
-        .img-blur-wrapper {
-            position: relative;
-            overflow: hidden;
-            background-color: #1a1a1a;
-        }
-        .img-blur-placeholder {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: blur(20px);
-            transform: scale(1.1);
-            transition: opacity 0.4s ease-out;
-            z-index: 1;
-        }
-        .img-blur-placeholder.loaded {
-            opacity: 0;
-            pointer-events: none;
-        }
-        .img-blur-main {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0;
-            transition: opacity 0.4s ease-out;
-        }
-        .img-blur-main.loaded {
-            opacity: 1;
-        }
+        /* LQIP Blur */
+        .img-blur-wrapper { position: relative; overflow: hidden; background-color: #1a1a1a; }
+        .img-blur-placeholder { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: blur(20px); transform: scale(1.1); transition: opacity 0.4s ease-out; z-index: 1; }
+        .img-blur-placeholder.loaded { opacity: 0; pointer-events: none; }
+        .img-blur-main { width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.4s ease-out; }
+        .img-blur-main.loaded { opacity: 1; }
 
-        /* Skills Section */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1rem;
-        }
-        @media (min-width: 640px) {
-            .skills-grid {
-                grid-template-columns: repeat(6, 1fr);
-                gap: 1.25rem;
-            }
-        }
-        @media (min-width: 1024px) {
-            .skills-grid {
-                grid-template-columns: repeat(8, 1fr);
-                gap: 1.5rem;
-            }
-        }
-        .skill-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 1rem 0.5rem;
-            border-radius: 0.75rem;
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: all 0.3s ease;
-            opacity: 0;
-            transform: translateY(15px);
-        }
-        .skill-item.revealed {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .skill-item:hover {
-            background: rgba(193, 163, 101, 0.1);
-            border-color: rgba(193, 163, 101, 0.3);
-            transform: translateY(-4px);
-        }
-        .skill-icon {
-            width: 36px;
-            height: 36px;
-            object-fit: contain;
-            filter: grayscale(100%) brightness(0.8);
-            transition: all 0.3s ease;
-        }
-        @media (min-width: 640px) {
-            .skill-icon {
-                width: 44px;
-                height: 44px;
-            }
-        }
-        .skill-item:hover .skill-icon {
-            filter: grayscale(0%) brightness(1);
-            transform: scale(1.1);
-        }
-        .skill-name {
-            font-size: 0.6rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: rgba(255, 255, 255, 0.5);
-            text-align: center;
-            transition: color 0.3s ease;
-        }
-        @media (min-width: 640px) {
-            .skill-name {
-                font-size: 0.65rem;
-            }
-        }
-        .skill-item:hover .skill-name {
-            color: #C1A365;
-        }
+        /* Skills Grid */
+        .skills-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+        @media (min-width: 640px) { .skills-grid { grid-template-columns: repeat(6, 1fr); gap: 1.25rem; } }
+        @media (min-width: 1024px) { .skills-grid { grid-template-columns: repeat(8, 1fr); gap: 1.5rem; } }
+        .skill-item { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; padding: 1rem 0.5rem; border-radius: 0.75rem; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); transition: all 0.3s ease; opacity: 0; transform: translateY(15px); }
+        .skill-item.revealed { opacity: 1; transform: translateY(0); }
+        .skill-item:hover { background: rgba(193, 163, 101, 0.1); border-color: rgba(193, 163, 101, 0.3); transform: translateY(-4px); }
+        .skill-icon { width: 36px; height: 36px; object-fit: contain; filter: grayscale(100%) brightness(0.8); transition: all 0.3s ease; }
+        @media (min-width: 640px) { .skill-icon { width: 44px; height: 44px; } }
+        .skill-item:hover .skill-icon { filter: grayscale(0%) brightness(1); transform: scale(1.1); }
+        .skill-name { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.05em; color: rgba(255, 255, 255, 0.5); text-align: center; transition: color 0.3s ease; }
+        @media (min-width: 640px) { .skill-name { font-size: 0.65rem; } }
+        .skill-item:hover .skill-name { color: #C1A365; }
     </style>
     
     <script>
@@ -677,12 +219,11 @@
     <div class="noise"></div>
 
     <script type="text/babel">
-        const { useState, useEffect, useRef, useCallback } = React;
+        const { useState, useEffect, useRef } = React;
 
         // --- ICONS ---
         const Icons = {
             Close: () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 6L6 18M6 6l12 12"/></svg>,
-            Menu: () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>,
             ArrowDown: () => <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>,
             ArrowRight: () => <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M9 18l6-6-6-6"/></svg>,
             ArrowLeft: () => <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M15 18l-6-6 6-6"/></svg>,
@@ -695,30 +236,31 @@
             Phone: () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>,
             AR: () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M2 8V5a3 3 0 0 1 3-3h3"/><path d="M2 16v3a3 3 0 0 0 3 3h3"/><path d="M22 8V5a3 3 0 0 0-3-3h-3"/><path d="M22 16v3a3 3 0 0 1-3 3h-3"/><path d="M12 8l-4 2 4 2 4-2-4-2z"/><path d="M8 10v4l4 2 4-2v-4"/></svg>,
             Back: () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>,
-            // Mobile Nav Icons
             Grid: () => <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>,
             User: () => <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>,
             MessageCircle: () => <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>,
-            Globe: () => <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            Globe: () => <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>,
+            Plus: () => <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
         };
 
         // --- CONTENT & DATA ---
         const content = {
             en: {
                 nav: { work: "Projects", about: "About", contact: "Connect" },
-                download: "Download Portfolio",
+                download: "Portfolio",
                 hero: { 
                     name: "ARIAN TABIB", 
                     roles: ["ARCHITECT", "3D VISUALIZER", "DESIGNER"],
                     desc: "Bridging conceptual innovation with technical precision to create immersive spatial narratives.",
                     ctaPrimary: "View Projects",
-                    ctaSecondary: "Download Resume"
+                    ctaSecondary: "Resume"
                 },
-                filters: { all: "All", arch: "Architecture", interior: "Interior Design", ai: "AI Projects", exec: "Executive", cgi: "3D Modeling", sketch: "Sketches", ads: "Product Ads" },
+                showMoreBtn: "Show More Projects",
+                filters: { all: "All", arch: "Architecture", interior: "Interior", ai: "AI Art", exec: "Executive", cgi: "3D CGI", sketch: "Sketches", ads: "Ads" },
                 contact: { title: "Let's Build Your Vision" },
                 about: {
                     title: "The Architect",
-                    bio: "I am an architectural designer operating at the intersection of built environments and digital artistry. With a high-honors academic background and a diverse portfolio of executive projects, my work bridges the gap between conceptual innovation and technical precision. From designing large-scale healthcare facilities to crafting bespoke luxury interiors and leading global 3D visualization campaigns, I am dedicated to creating spaces and images that tell a compelling story.",
+                    bio: "I am an architectural designer operating at the intersection of built environments and digital artistry. With a high-honors academic background and a diverse portfolio of executive projects, my work bridges the gap between conceptual innovation and technical precision.",
                     expTitle: "Work Experience",
                     eduTitle: "Education",
                     skillsTitle: "Tools & Technologies"
@@ -727,70 +269,62 @@
             },
             fa: {
                 nav: { work: "پروژه‌ها", about: "درباره من", contact: "ارتباط" },
-                download: "دانلود پورتفولیو",
+                download: "پورتفولیو",
                 hero: { 
                     name: "آرین طبیب", 
                     roles: ["معمار", "تصویرساز سه بعدی", "طراح"],
                     desc: "تلاقی نوآوری مفهومی و دقت فنی برای خلق روایت‌های فضایی تاثیرگذار.",
                     ctaPrimary: "مشاهده آثار",
-                    ctaSecondary: "دانلود رزومه"
+                    ctaSecondary: "رزومه"
                 },
-                filters: { all: "همه", arch: "پروژه های معماری", interior: "طراحی داخلی", ai: "پروژه های هوش مصنوعی", exec: "پروژه های اجرایی", cgi: "مدل سازی سه بعدی", sketch: "اسکیس", ads: "تبلیغات محصولات" },
+                showMoreBtn: "مشاهده همه پروژه‌ها",
+                filters: { all: "همه", arch: "معماری", interior: "داخلی", ai: "هوش مصنوعی", exec: "اجرایی", cgi: "3D CGI", sketch: "اسکیس", ads: "تبلیغات" },
                 contact: { title: "بیایید رویایی بسازیم" },
                 about: {
                     title: "درباره من",
-                    bio: "من طراح معماری هستم که در نقطه تلاقی محیط‌های ساخته‌شده و هنر دیجیتال فعالیت می‌کنم. با پیش‌زمینه‌ای آکادمیک و ممتاز و پورتفولیویی متنوع از پروژه‌های اجرایی، کار من پلی است میان نوآوری مفهومی و دقت فنی. از طراحی مراکز درمانی بزرگ‌مقیاس تا خلق فضاهای داخلی لوکس و سفارشی، و رهبری کمپین‌های جهانی تجسم سه‌بعدی، هدف من خلق فضاها و تصاویری است که داستانی گیرا را روایت می‌کنند.",
+                    bio: "من طراح معماری هستم که در نقطه تلاقی محیط‌های ساخته‌شده و هنر دیجیتال فعالیت می‌کنم. با پیش‌زمینه‌ای آکادمیک و ممتاز، کار من پلی است میان نوآوری مفهومی و دقت فنی.",
                     expTitle: "سوابق کاری",
                     eduTitle: "تحصیلات",
-                    skillsTitle: "ابزارها و تکنولوژی‌ها"
+                    skillsTitle: "ابزارها"
                 },
-                footer: "© ۱۴۰۳ آرین طبیب. تمامی حقوق محفوظ است."
+                footer: "© ۱۴۰۳ آرین طبیب."
             }
         };
 
         const timelineData = {
             en: {
                 experience: [
-                    { role: "Visual Strategy & Advertising Design", company: "Mix Plus", duration: "1+ Year" },
-                    { role: "Executive Interior & Architectural Design", company: "Freelance", duration: "1.5 Years" },
-                    { role: "Senior 3D Artist & Project Modeler", company: "NFINITE, France (Remote)", duration: "2 Years" },
-                    { role: "Interior Designer", company: "Farnoush Forootani Architecture Group", duration: "1 Year" },
-                    { role: "3D Modeler & Physical Model Maker", company: "Square Architect Firm", duration: "1 Year" }
+                    { role: "Visual Strategy & Advertising", company: "Mix Plus", duration: "1+ Yr" },
+                    { role: "Executive Architectural Design", company: "Freelance", duration: "1.5 Yrs" },
+                    { role: "Senior 3D Artist", company: "NFINITE, France", duration: "2 Yrs" },
+                    { role: "Interior Designer", company: "FFA Group", duration: "1 Yr" },
+                    { role: "3D Modeler", company: "Square Architect", duration: "1 Yr" }
                 ],
                 education: [
-                    { role: "Master of Architecture", company: "Azad University, North Tehran Branch", duration: "In Progress" },
-                    { role: "Bachelor of Architecture", company: "Azad University, North Tehran Branch", duration: "GPA: 17/20" }
+                    { role: "Master of Architecture", company: "Azad University, Tehran", duration: "In Progress" },
+                    { role: "Bachelor of Architecture", company: "Azad University, Tehran", duration: "GPA: 17/20" }
                 ]
             },
             fa: {
                 experience: [
-                    { role: "استراتژی بصری و طراحی تبلیغات", company: "میکس پلاس", duration: "۱+ سال" },
-                    { role: "طراحی اجرایی معماری و داخلی", company: "فریلنس", duration: "۱.۵ سال" },
-                    { role: "هنرمند ارشد سه‌بعدی و مدل‌ساز", company: "NFINITE فرانسه (ریموت)", duration: "۲ سال" },
-                    { role: "طراح داخلی", company: "گروه معماری فرنوش فروتنی", duration: "۱ سال" },
-                    { role: "مدل‌ساز سه‌بعدی و ماکت‌ساز", company: "شرکت معماری مربع", duration: "۱ سال" }
+                    { role: "استراتژی بصری و تبلیغات", company: "میکس پلاس", duration: "۱+ سال" },
+                    { role: "طراحی اجرایی معماری", company: "فریلنس", duration: "۱.۵ سال" },
+                    { role: "هنرمند ارشد سه‌بعدی", company: "NFINITE فرانسه", duration: "۲ سال" },
+                    { role: "طراح داخلی", company: "گروه FF", duration: "۱ سال" },
+                    { role: "مدل‌ساز سه‌بعدی", company: "شرکت معماری مربع", duration: "۱ سال" }
                 ],
                 education: [
-                    { role: "کارشناسی ارشد معماری", company: "دانشگاه آزاد تهران شمال", duration: "در حال تحصیل" },
-                    { role: "کارشناسی معماری", company: "دانشگاه آزاد تهران شمال", duration: "معدل: ۱۷/۲۰" }
+                    { role: "کارشناسی ارشد معماری", company: "دانشگاه آزاد تهران", duration: "در حال تحصیل" },
+                    { role: "کارشناسی معماری", company: "دانشگاه آزاد تهران", duration: "معدل: ۱۷/۲۰" }
                 ]
             }
         };
 
         const heroImages = {
-            desktop: [
-                "./images/hero-desktop-1.jpg",
-                "./images/hero-desktop-2.jpg",
-                "./images/hero-desktop-3.jpg"
-            ],
-            mobile: [
-                "./images/hero-mobile-1.jpg",
-                "./images/hero-mobile-2.jpg",
-                "./images/hero-mobile-3.jpg"
-            ]
+            desktop: ["./images/hero-desktop-1.jpg", "./images/hero-desktop-2.jpg", "./images/hero-desktop-3.jpg"],
+            mobile: ["./images/hero-mobile-1.jpg", "./images/hero-mobile-2.jpg", "./images/hero-mobile-3.jpg"]
         };
 
-        // Skills/Software Data
         const skillsData = [
             { id: "autocad", name: "AutoCAD", icon: "./images/skills/autocad.png" },
             { id: "revit", name: "Revit", icon: "./images/skills/revit.png" },
@@ -799,7 +333,7 @@
             { id: "unreal", name: "Unreal Engine", icon: "./images/skills/unreal.png" },
             { id: "lumion", name: "Lumion", icon: "./images/skills/lumion.png" },
             { id: "photoshop", name: "Photoshop", icon: "./images/skills/photoshop.png" },
-            { id: "premiere", name: "Premiere Pro", icon: "./images/skills/premiere.png" },
+            { id: "premiere", name: "Premiere", icon: "./images/skills/premiere.png" },
             { id: "illustrator", name: "Illustrator", icon: "./images/skills/illustrator.png" },
             { id: "aftereffects", name: "After Effects", icon: "./images/skills/aftereffects.png" },
             { id: "substance", name: "Substance", icon: "./images/skills/substance.png" },
@@ -811,7 +345,7 @@
             { id: "vr", name: "VR", icon: "./images/skills/vr.png" }
         ];
 
-        // Section Divider Component - Perfectly centered on section borders
+        // --- COMPONENTS ---
         const SectionDivider = ({ className = "" }) => (
             <div className={`section-divider ${className}`}>
                 <div className="section-divider-lines">
@@ -822,100 +356,51 @@
             </div>
         );
 
-        // LQIP BlurImage Component - Automatic blur placeholder system
         const BlurImage = ({ src, alt, className, onLoad: externalOnLoad, ...props }) => {
             const [isLoaded, setIsLoaded] = useState(false);
             const [placeholder, setPlaceholder] = useState('');
             const imgRef = useRef(null);
 
-            // Generate tiny placeholder from original image
             useEffect(() => {
                 const canvas = document.createElement('canvas');
                 const ctx = canvas.getContext('2d');
                 const img = new Image();
                 img.crossOrigin = 'anonymous';
-                
                 img.onload = () => {
-                    // Create a tiny 20px wide version for blur placeholder
                     const aspectRatio = img.height / img.width;
-                    canvas.width = 20;
-                    canvas.height = Math.round(20 * aspectRatio);
+                    canvas.width = 20; canvas.height = Math.round(20 * aspectRatio);
                     ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-                    
-                    try {
-                        const dataUrl = canvas.toDataURL('image/jpeg', 0.5);
-                        setPlaceholder(dataUrl);
-                    } catch (e) {
-                        // Fallback for CORS issues - use solid color
-                        setPlaceholder('');
-                    }
+                    try { setPlaceholder(canvas.toDataURL('image/jpeg', 0.5)); } catch (e) { setPlaceholder(''); }
                 };
-                
-                img.onerror = () => {
-                    setPlaceholder('');
-                };
-                
+                img.onerror = () => { setPlaceholder(''); };
                 img.src = src;
             }, [src]);
 
-            const handleLoad = () => {
-                setIsLoaded(true);
-                if (externalOnLoad) externalOnLoad();
-            };
-
+            const handleLoad = () => { setIsLoaded(true); if (externalOnLoad) externalOnLoad(); };
             return (
                 <div className="img-blur-wrapper" style={{ width: '100%', height: '100%' }}>
-                    {placeholder && (
-                        <img 
-                            src={placeholder}
-                            alt=""
-                            className={`img-blur-placeholder ${isLoaded ? 'loaded' : ''}`}
-                            aria-hidden="true"
-                        />
-                    )}
-                    <img 
-                        ref={imgRef}
-                        src={src}
-                        alt={alt}
-                        className={`img-blur-main ${isLoaded ? 'loaded' : ''} ${className || ''}`}
-                        onLoad={handleLoad}
-                        {...props}
-                    />
+                    {placeholder && <img src={placeholder} alt="" className={`img-blur-placeholder ${isLoaded ? 'loaded' : ''}`} aria-hidden="true"/>}
+                    <img ref={imgRef} src={src} alt={alt} className={`img-blur-main ${isLoaded ? 'loaded' : ''} ${className || ''}`} onLoad={handleLoad} {...props}/>
                 </div>
             );
         };
 
-        // Mobile Bottom Navigation Component
         const MobileBottomNav = ({ activeSection, onNavigate, lang, onLangToggle, isRTL, isVisible }) => {
             const navItems = [
                 { id: 'work', icon: <Icons.Grid />, label: { en: 'Work', fa: 'آثار' } },
                 { id: 'about', icon: <Icons.User />, label: { en: 'About', fa: 'درباره' } },
                 { id: 'contact', icon: <Icons.MessageCircle />, label: { en: 'Contact', fa: 'تماس' } },
             ];
-
             return (
                 <nav className={`mobile-bottom-nav md:hidden ${isVisible ? 'visible' : ''}`}>
                     {navItems.map((item) => (
-                        <a
-                            key={item.id}
-                            href={`#${item.id}`}
-                            onClick={(e) => onNavigate(e, item.id)}
-                            className={`mobile-nav-item ${activeSection === item.id ? 'active' : ''}`}
-                        >
+                        <a key={item.id} href={`#${item.id}`} onClick={(e) => onNavigate(e, item.id)} className={`mobile-nav-item ${activeSection === item.id ? 'active' : ''}`}>
                             {item.icon}
                             <span className={isRTL ? 'font-fa' : ''}>{item.label[lang]}</span>
                         </a>
                     ))}
-                    <button 
-                        onClick={onLangToggle}
-                        className="mobile-lang-btn"
-                        aria-label="Switch Language"
-                    >
-                        <img 
-                            src="./images/flag.jpg" 
-                            onError={(e) => { e.target.onerror = null; e.target.src = `https://placehold.co/40x40/222/C1A365?text=${lang === 'en' ? 'ف' : 'E'}`; }}
-                            alt={lang === 'en' ? 'Switch to Persian' : 'Switch to English'} 
-                        />
+                    <button onClick={onLangToggle} className="mobile-lang-btn" aria-label="Switch Language">
+                        <img src="./images/flag.jpg" onError={(e) => { e.target.onerror = null; e.target.src = `https://placehold.co/40x40/222/C1A365?text=${lang === 'en' ? 'ف' : 'E'}`; }} alt="Lang" />
                     </button>
                 </nav>
             );
@@ -939,10 +424,9 @@
             const [modalImageIndex, setModalImageIndex] = useState(0);
             const [isImageLoading, setIsImageLoading] = useState(false);
             const [showAR, setShowAR] = useState(false); 
-            const [loadProgress, setLoadProgress] = useState(0);
-            const [isLoaded, setIsLoaded] = useState(false); // Initial loading screen
-            const [projectsData, setProjectsData] = useState([]); // Dynamic Projects State
-            const [dataFetched, setDataFetched] = useState(false); // Track if data is fetched
+            const [isLoaded, setIsLoaded] = useState(false);
+            const [projectsData, setProjectsData] = useState([]);
+            const [dataFetched, setDataFetched] = useState(false);
             
             const [heroScale, setHeroScale] = useState(1);
             const [heroOpacity, setHeroOpacity] = useState(1);
@@ -951,122 +435,86 @@
             const [usdzDownloadProgress, setUsdzDownloadProgress] = useState(0);
             const [isDownloadingUsdz, setIsDownloadingUsdz] = useState(false);
             
-            // Typewriter State
+            // Typewriter
             const [text, setText] = useState('');
             const [roleIndex, setRoleIndex] = useState(0);
             const [isDeleting, setIsDeleting] = useState(false);
             const [typingSpeed, setTypingSpeed] = useState(150);
-
-            // Swipe state
-            const [touchStart, setTouchStart] = useState(null);
-            const [touchEnd, setTouchEnd] = useState(null);
-            const minSwipeDistance = 50;
 
             const cursorDotRef = useRef(null);
             const cursorOutlineRef = useRef(null);
             const modelViewerRef = useRef(null);
             const heroContentRef = useRef(null);
 
-            // Active section tracking for mobile nav
             const [activeSection, setActiveSection] = useState('work');
             const [mobileNavVisible, setMobileNavVisible] = useState(false);
+            
+            // State for Projects Grid Expansion
+            const [showAllProjects, setShowAllProjects] = useState(false);
 
             const t = content[lang];
             const timeline = timelineData[lang];
             const isRTL = lang === 'fa';
 
-            // Google Sheet CSV URL
             const GOOGLE_SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRG5pVpEgdXTzjQlWZBBU5aSNuCQNDGxbZ1DtICEH1htnaPoTFMHUT-0VWIaguFvb2VAEb8rm_3iVCd/pub?gid=0&single=true&output=csv";
 
-            // Fetch Projects from Google Sheet
+            // Fetch Data & Parse Size Column
             useEffect(() => {
                 const fetchProjects = async () => {
                     try {
                         const response = await fetch(GOOGLE_SHEET_CSV_URL);
                         const csvText = await response.text();
-                        
-                        // Parse CSV using PapaParse
-                        const parsedData = Papa.parse(csvText, {
-                            header: true,
-                            skipEmptyLines: true
-                        });
-
-                        // Transform data to match the structure of the app
+                        const parsedData = Papa.parse(csvText, { header: true, skipEmptyLines: true });
                         const transformedProjects = parsedData.data.map((row, index) => {
                             const id = row.ID ? row.ID.trim() : index + 1;
                             const galleryCount = parseInt(row.Gallery_Count || 0);
-                            
-                            // Generate gallery paths dynamically
                             const galleryPaths = [];
                             if (galleryCount > 0) {
-                                for (let i = 1; i <= galleryCount; i++) {
-                                    galleryPaths.push(`./images/project${id}-gallery${i}.jpg`);
-                                }
+                                for (let i = 1; i <= galleryCount; i++) galleryPaths.push(`./images/project${id}-gallery${i}.jpg`);
                             } else {
-                                // Fallback for projects with 0 gallery count specified but maybe have 1 default image
                                 galleryPaths.push(`./images/project${id}-gallery.jpg`);
                             }
-
-                            // Parse tags
-                            const tagsArray = row.Tags 
-                                ? row.Tags.split(',').map(tag => tag.trim().toLowerCase()) 
-                                : [];
-
+                            const tagsArray = row.Tags ? row.Tags.split(',').map(tag => tag.trim().toLowerCase()) : [];
                             const hasAR = row.HasAR && row.HasAR.toLowerCase() === 'true';
-
+                            // Read Size from CSV (Default 1)
+                            const size = parseInt(row.Size || 1);
+                            
                             return {
-                                id: id,
-                                order: parseInt(row.Order || 999),
-                                title: {
-                                    en: row.Title_EN || "Untitled Project",
-                                    fa: row.Title_Fa || "پروژه بدون عنوان"
-                                },
-                                desc: {
-                                    en: row.Desc_EN || "",
-                                    fa: row.Desc_Fa || ""
-                                },
-                                tags: tagsArray,
-                                loc: row.Loc || "",
-                                img: `./images/project${id}-img.jpg`, // Cover image
+                                id: id, order: parseInt(row.Order || 999),
+                                title: { en: row.Title_EN || "Untitled", fa: row.Title_Fa || "بدون عنوان" },
+                                desc: { en: row.Desc_EN || "", fa: row.Desc_Fa || "" },
+                                tags: tagsArray, loc: row.Loc || "",
+                                img: `./images/project${id}-img.jpg`,
                                 hasAR: hasAR,
                                 modelGLB: hasAR ? `./models/project${id}.glb` : null,
                                 modelUSDZ: hasAR ? `./models/project${id}.usdz` : null,
-                                gallery: galleryPaths
+                                gallery: galleryPaths,
+                                size: size
                             };
-                        }).filter(p => p.title.en !== "Untitled Project" || p.title.fa !== "پروژه بدون عنوان"); // Filter out empty rows
-
-                        // Sort by Order
+                        }).filter(p => p.title.en !== "Untitled" || p.title.fa !== "بدون عنوان");
                         transformedProjects.sort((a, b) => a.order - b.order);
-
                         setProjectsData(transformedProjects);
                         setDataFetched(true);
                     } catch (error) {
                         console.error("Error fetching projects:", error);
-                        setDataFetched(true); // Continue anyway to show UI
+                        setDataFetched(true);
                     }
                 };
-
                 fetchProjects();
             }, []);
 
-            // Check if mobile
             useEffect(() => {
-                const checkMobile = () => {
-                    setIsMobile(window.innerWidth < 768);
-                };
+                const checkMobile = () => setIsMobile(window.innerWidth < 768);
                 checkMobile();
                 window.addEventListener('resize', checkMobile);
                 return () => window.removeEventListener('resize', checkMobile);
             }, []);
 
-            // Detect iPhone
             useEffect(() => {
                 const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-                const isIOSDevice = /iPhone/i.test(userAgent) && !window.MSStream;
-                setIsIPhone(isIOSDevice);
+                setIsIPhone(/iPhone/i.test(userAgent) && !window.MSStream);
             }, []);
 
-            // Loading screen handler
             useEffect(() => {
                 const timer = setTimeout(() => {
                     setIsLoaded(true);
@@ -1075,23 +523,19 @@
                 return () => clearTimeout(timer);
             }, []);
 
-            // Hero parallax/collapse effect on scroll + active section tracking + mobile nav visibility
             useEffect(() => {
                 const handleScroll = () => {
                     const scrollY = window.scrollY;
                     const windowHeight = window.innerHeight;
                     const scrollProgress = Math.min(scrollY / (windowHeight * 0.6), 1);
-                    
                     const scale = 1 - (scrollProgress * 0.15);
                     const opacity = 1 - (scrollProgress * 0.8);
-                    
                     setHeroScale(scale);
                     setHeroOpacity(opacity);
-
-                    // Show mobile nav after scrolling past hero (80% of viewport height)
+                    
+                    // Mobile Nav Visibility Logic
                     setMobileNavVisible(scrollY > windowHeight * 0.8);
 
-                    // Track active section for mobile nav
                     const sections = ['work', 'about', 'contact'];
                     for (const sectionId of sections) {
                         const section = document.getElementById(sectionId);
@@ -1104,55 +548,34 @@
                         }
                     }
                 };
-
                 window.addEventListener('scroll', handleScroll, { passive: true });
                 return () => window.removeEventListener('scroll', handleScroll);
             }, []);
 
-            // Intersection Observer for scroll reveal animations - repeatable
             useEffect(() => {
-                const observerOptions = {
-                    threshold: 0.05,
-                    rootMargin: '0px 0px -20px 0px'
-                };
-
                 const observer = new IntersectionObserver((entries) => {
                     entries.forEach((entry) => {
-                        if (entry.isIntersecting) {
-                            entry.target.classList.add('revealed');
-                        } else {
-                            // Remove the class when out of view for repeatable animation
-                            entry.target.classList.remove('revealed');
-                        }
+                        if (entry.isIntersecting) entry.target.classList.add('revealed');
+                        else entry.target.classList.remove('revealed');
                     });
-                }, observerOptions);
+                }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
 
-                // Observe elements immediately
                 const elements = document.querySelectorAll('.reveal, .project-card, .timeline-item, .contact-card, .section-title, .filter-bar, .skill-item');
-                elements.forEach((el) => {
-                    observer.observe(el);
-                });
+                elements.forEach((el) => observer.observe(el));
+                return () => observer.disconnect();
+            }, [showAllProjects, filter, dataFetched, projectsData]); // Dependencies to re-observe
 
-                return () => {
-                    observer.disconnect();
-                };
-            }, [filter, dataFetched, projectsData]); // Re-run when data changes
-
-            // Staggered animation for project cards - minimal delay
             useEffect(() => {
                 const cards = document.querySelectorAll('.project-card');
                 cards.forEach((card, index) => {
-                    // Faster stagger with max cap
-                    const delay = Math.min(index * 0.03, 0.3);
+                    const delay = Math.min(index * 0.05, 0.4); // Slightly faster stagger
                     card.style.transitionDelay = `${delay}s`;
                 });
-            }, [filter, projectsData]);
+            }, [showAllProjects, filter, projectsData]);
 
-            // --- Typewriter Effect ---
             useEffect(() => {
                 const roles = t.hero.roles;
                 const currentRole = roles[roleIndex];
-                
                 const handleTyping = () => {
                     if (isDeleting) {
                         setText(currentRole.substring(0, text.length - 1));
@@ -1161,7 +584,6 @@
                         setText(currentRole.substring(0, text.length + 1));
                         setTypingSpeed(150);
                     }
-
                     if (!isDeleting && text === currentRole) {
                         setTimeout(() => setIsDeleting(true), 2000);
                     } else if (isDeleting && text === '') {
@@ -1169,22 +591,15 @@
                         setRoleIndex((prev) => (prev + 1) % roles.length);
                     }
                 };
-
                 const timer = setTimeout(handleTyping, typingSpeed);
                 return () => clearTimeout(timer);
             }, [text, isDeleting, roleIndex, t.hero.roles]);
 
-            // --- Cursor Logic ---
             useEffect(() => {
                 const moveCursor = (e) => {
                     const { clientX: x, clientY: y } = e;
-                    if (cursorDotRef.current) {
-                        cursorDotRef.current.style.left = `${x}px`;
-                        cursorDotRef.current.style.top = `${y}px`;
-                    }
-                    if (cursorOutlineRef.current) {
-                        cursorOutlineRef.current.animate({ left: `${x}px`, top: `${y}px` }, { duration: 500, fill: "forwards" });
-                    }
+                    if (cursorDotRef.current) { cursorDotRef.current.style.left = `${x}px`; cursorDotRef.current.style.top = `${y}px`; }
+                    if (cursorOutlineRef.current) { cursorOutlineRef.current.animate({ left: `${x}px`, top: `${y}px` }, { duration: 500, fill: "forwards" }); }
                 };
                 window.addEventListener('mousemove', moveCursor);
                 return () => window.removeEventListener('mousemove', moveCursor);
@@ -1196,96 +611,56 @@
             };
 
             useEffect(() => {
-                const interval = setInterval(() => {
-                    setCurrentSlide((prev) => (prev + 1) % heroImages.desktop.length);
-                }, 6000);
+                const interval = setInterval(() => setCurrentSlide((prev) => (prev + 1) % heroImages.desktop.length), 6000);
                 return () => clearInterval(interval);
             }, []);
 
-            // Keyboard navigation for modal
             useEffect(() => {
                 if (!selectedProject) return;
-                
                 const handleKeyDown = (e) => {
-                    // Don't trigger if user is in AR mode
                     if (showAR) return;
-                    
                     switch(e.key) {
-                        case 'Escape':
-                            setSelectedProject(null);
-                            setShowAR(false);
-                            break;
-                        case 'ArrowRight':
-                            e.preventDefault();
-                            nextMedia();
-                            break;
-                        case 'ArrowLeft':
-                            e.preventDefault();
-                            prevMedia();
-                            break;
-                        default:
-                            break;
+                        case 'Escape': setSelectedProject(null); setShowAR(false); break;
+                        case 'ArrowRight': e.preventDefault(); nextMedia(); break;
+                        case 'ArrowLeft': e.preventDefault(); prevMedia(); break;
+                        default: break;
                     }
                 };
-                
                 window.addEventListener('keydown', handleKeyDown);
                 return () => window.removeEventListener('keydown', handleKeyDown);
             }, [selectedProject, showAR, modalImageIndex]);
 
-            // Model loading state and progress
             useEffect(() => {
                 const modelViewer = modelViewerRef.current;
                 if (showAR && modelViewer) {
                     setIsImageLoading(true);
                     setLoadProgress(0);
-
                     const handleProgress = (event) => {
                         const progress = event.detail.totalProgress;
-                        if (typeof progress === 'number') {
-                            setLoadProgress(Math.round(progress * 100));
-                        }
+                        if (typeof progress === 'number') setLoadProgress(Math.round(progress * 100));
                     };
-
                     const handleLoad = () => {
-                         setLoadProgress(100);
-                         setTimeout(() => {
-                           setIsImageLoading(false);
-                         }, 500);
+                        setLoadProgress(100);
+                        setTimeout(() => { setIsImageLoading(false); }, 500);
                     };
-
                     modelViewer.addEventListener('progress', handleProgress);
                     modelViewer.addEventListener('load', handleLoad);
-
-                    if (modelViewer.loaded) {
-                         setLoadProgress(100);
-                         setTimeout(() => {
-                           setIsImageLoading(false);
-                         }, 500);
-                    }
-
+                    if (modelViewer.loaded) { setLoadProgress(100); setTimeout(() => { setIsImageLoading(false); }, 500); }
                     return () => {
                         modelViewer.removeEventListener('progress', handleProgress);
                         modelViewer.removeEventListener('load', handleLoad);
                     };
                 }
             }, [showAR, selectedProject, lang]);
-
-            const scrollToTop = (e) => {
-                e.preventDefault();
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            };
-
-            const scrollToProjects = () => {
-                document.getElementById('work').scrollIntoView({ behavior: 'smooth' });
-            };
             
+            const [loadProgress, setLoadProgress] = useState(0);
+
+            const scrollToTop = (e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); };
+            const scrollToProjects = () => { document.getElementById('work').scrollIntoView({ behavior: 'smooth' }); };
             const handleNavClick = (e, targetId) => {
                 e.preventDefault();
                 const element = document.getElementById(targetId);
-                if (element) {
-                    element.scrollIntoView({ behavior: 'smooth' });
-                }
-                if (menuOpen) setMenuOpen(false);
+                if (element) element.scrollIntoView({ behavior: 'smooth' });
             };
 
             const nextMedia = (e) => {
@@ -1306,29 +681,18 @@
                 }
             };
 
-            const onTouchStart = (e) => {
-                if (showAR) return;
-                setTouchEnd(null);
-                setTouchStart(e.targetTouches[0].clientX);
-            };
+            const onTouchStart = (e) => { if (showAR) return; setTouchEnd(null); setTouchStart(e.targetTouches[0].clientX); };
+            const [touchStart, setTouchStart] = useState(null);
+            const [touchEnd, setTouchEnd] = useState(null);
+            const minSwipeDistance = 50;
 
-            const onTouchMove = (e) => {
-                if (showAR) return;
-                setTouchEnd(e.targetTouches[0].clientX);
-            };
-
+            const onTouchMove = (e) => { if (showAR) return; setTouchEnd(e.targetTouches[0].clientX); };
             const onTouchEnd = () => {
                 if (showAR) return;
                 if (!touchStart || !touchEnd) return;
                 const distance = touchStart - touchEnd;
-                const isLeftSwipe = distance > minSwipeDistance;
-                const isRightSwipe = distance < -minSwipeDistance;
-                if (isLeftSwipe) {
-                    nextMedia();
-                }
-                if (isRightSwipe) {
-                    prevMedia();
-                }
+                if (distance > minSwipeDistance) nextMedia();
+                if (distance < -minSwipeDistance) prevMedia();
             };
 
             const openProject = (project) => {
@@ -1338,102 +702,67 @@
                 setShowAR(false);
             };
 
-            const handleImageLoad = () => {
-                setIsImageLoading(false);
-            };
+            const handleImageLoad = () => { setIsImageLoading(false); };
 
-            // iPhone USDZ download and AR launch
             const handleIPhoneAR = async (usdzUrl) => {
                 setIsDownloadingUsdz(true);
                 setUsdzDownloadProgress(0);
-                
                 try {
                     const response = await fetch(usdzUrl);
-                    
-                    if (!response.ok) {
-                        throw new Error('Failed to fetch USDZ file');
-                    }
-                    
+                    if (!response.ok) throw new Error('Failed to fetch USDZ');
                     const contentLength = response.headers.get('content-length');
                     const total = contentLength ? parseInt(contentLength, 10) : 0;
                     let loaded = 0;
-                    
                     const reader = response.body.getReader();
                     const chunks = [];
-                    
                     while (true) {
                         const { done, value } = await reader.read();
                         if (done) break;
                         chunks.push(value);
                         loaded += value.length;
-                        if (total > 0) {
-                            setUsdzDownloadProgress(Math.round((loaded / total) * 100));
-                        } else {
-                            // If no content-length, show indeterminate progress
-                            setUsdzDownloadProgress(Math.min(loaded / 1000000 * 100, 95));
-                        }
+                        if (total > 0) setUsdzDownloadProgress(Math.round((loaded / total) * 100));
+                        else setUsdzDownloadProgress(Math.min(loaded / 1000000 * 100, 95));
                     }
-                    
                     setUsdzDownloadProgress(100);
-                    
                     const blob = new Blob(chunks, { type: 'model/vnd.usdz+zip' });
                     const blobUrl = URL.createObjectURL(blob);
-                    
-                    // Create anchor for Quick Look
                     const anchor = document.createElement('a');
                     anchor.setAttribute('rel', 'ar');
                     anchor.setAttribute('href', blobUrl);
-                    
-                    // Add a child img element (required for Quick Look)
                     const img = document.createElement('img');
                     img.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
-                    img.style.width = '1px';
-                    img.style.height = '1px';
+                    img.style.width = '1px'; img.style.height = '1px';
                     anchor.appendChild(img);
-                    
                     document.body.appendChild(anchor);
                     anchor.click();
-                    
-                    // Cleanup
-                    setTimeout(() => {
-                        document.body.removeChild(anchor);
-                        URL.revokeObjectURL(blobUrl);
-                    }, 1000);
-                    
+                    setTimeout(() => { document.body.removeChild(anchor); URL.revokeObjectURL(blobUrl); }, 1000);
                 } catch (error) {
                     console.error('Error downloading USDZ:', error);
-                    alert(lang === 'en' ? 'Failed to load AR model. Please try again.' : 'خطا در بارگذاری مدل AR. لطفا دوباره تلاش کنید.');
+                    alert(lang === 'en' ? 'Failed to load AR model.' : 'خطا در بارگذاری مدل AR.');
                 } finally {
-                    setTimeout(() => {
-                        setIsDownloadingUsdz(false);
-                        setUsdzDownloadProgress(0);
-                    }, 500);
+                    setTimeout(() => { setIsDownloadingUsdz(false); setUsdzDownloadProgress(0); }, 500);
                 }
             };
 
-            // Handle 3D/AR button click
             const handleARButtonClick = () => {
-                if (isIPhone && selectedProject.modelUSDZ) {
-                    handleIPhoneAR(selectedProject.modelUSDZ);
-                } else {
-                    setShowAR(true);
-                }
+                if (isIPhone && selectedProject.modelUSDZ) handleIPhoneAR(selectedProject.modelUSDZ);
+                else setShowAR(true);
             };
 
             const handleBackdropClick = (e) => {
-                if (e.target === e.currentTarget) {
-                    setSelectedProject(null);
-                    setShowAR(false);
-                }
+                if (e.target === e.currentTarget) { setSelectedProject(null); setShowAR(false); }
             };
 
+            // Logic for showing projects
             const filteredProjects = projectsData
                 .filter(p => filter === 'all' || p.tags.includes(filter))
                 .sort((a, b) => a.order - b.order);
 
+            // Determine which projects to render based on 'showAllProjects' state
+            const projectsToRender = showAllProjects ? filteredProjects : filteredProjects.slice(0, 5);
+
             return (
                 <div className={`min-h-screen ${isRTL ? 'font-fa' : ''}`} dir={isRTL ? 'rtl' : 'ltr'}>
-                    
                     {/* Cursor */}
                     <div ref={cursorDotRef} className="cursor-dot hidden md:block"></div>
                     <div ref={cursorOutlineRef} className="cursor-outline hidden md:block"></div>
@@ -1441,139 +770,69 @@
                     {/* --- HEADER --- */}
                     <header className="fixed top-0 w-full z-40 py-6 header-fade transition-all duration-500">
                         <div className="container mx-auto px-6 md:px-12 flex justify-between items-center">
-                            <a href="#" onClick={scrollToTop} className="z-50 block w-12 h-12 cursor-none" onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)}>
-                                <img 
-                                    src="./images/logo.png" 
-                                    onError={(e) => { e.target.onerror = null; e.target.src = "https://placehold.co/100x100/white/black?text=AT"; }} 
-                                    alt="Arian Tabib" 
-                                    className="w-full h-full object-contain" 
-                                />
+                            <a href="#" onClick={scrollToTop} className="z-50 block w-10 h-10 md:w-12 md:h-12 cursor-none" onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)}>
+                                <img src="./images/logo.png" onError={(e) => { e.target.onerror = null; e.target.src = "https://placehold.co/100x100/white/black?text=AT"; }} alt="Arian Tabib" className="w-full h-full object-contain" />
                             </a>
-
                             <nav className="hidden md:flex items-center gap-8">
                                 {Object.entries(t.nav).map(([key, label]) => (
-                                    <a key={key} href={`#${key}`} onClick={(e) => handleNavClick(e, key)} className={`text-xs font-bold uppercase ${isRTL ? 'tracking-normal font-fa' : 'tracking-widest'} text-white/70 hover:text-white transition-colors`} onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)}>
+                                    <a key={key} href={`#${key}`} onClick={(e) => handleNavClick(e, key)} className={`text-[10px] md:text-xs font-light uppercase ${isRTL ? 'tracking-normal font-fa' : 'tracking-[0.2em]'} text-white/60 hover:text-white transition-colors`} onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)}>
                                         {label}
                                     </a>
                                 ))}
-                                
-                                <a 
-                                    href="./docs/portfolio.pdf" 
-                                    download 
-                                    className={`flex items-center gap-2 text-xs font-bold uppercase ${isRTL ? 'tracking-normal font-fa' : 'tracking-widest'} text-accent hover:text-white transition-colors border border-accent px-4 py-2 rounded-full`}
-                                    onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)}
-                                >
-                                    <span className="hidden lg:inline">{t.download}</span>
-                                    <span className="lg:hidden">PDF</span>
+                                <a href="./docs/portfolio.pdf" download className={`flex items-center gap-2 text-[10px] md:text-xs font-light uppercase ${isRTL ? 'tracking-normal font-fa' : 'tracking-[0.2em]'} text-accent hover:text-white transition-colors border border-white/10 hover:border-accent px-4 py-2 rounded-full`} onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)}>
+                                    <span>{t.download}</span>
                                     <Icons.Download />
                                 </a>
-
-                                <button onClick={() => setLang(lang === 'en' ? 'fa' : 'en')} className="w-8 h-8 rounded-full overflow-hidden border border-white/20 hover:scale-110 transition-transform" onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)}>
-                                    <img 
-                                        src="./images/flag.jpg" 
-                                        onError={(e) => { e.target.onerror = null; e.target.src = "https://placehold.co/50x50/white/black?text=" + (lang === 'en' ? 'FA' : 'EN'); }}
-                                        alt="Switch Language" 
-                                        className="w-full h-full object-cover" 
-                                    />
+                                <button onClick={() => setLang(lang === 'en' ? 'fa' : 'en')} className="w-6 h-6 md:w-8 md:h-8 rounded-full overflow-hidden border border-white/10 hover:scale-110 transition-transform" onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)}>
+                                    <img src="./images/flag.jpg" onError={(e) => { e.target.onerror = null; e.target.src = "https://placehold.co/50x50/white/black?text=" + (lang === 'en' ? 'FA' : 'EN'); }} alt="Switch Language" className="w-full h-full object-cover" />
                                 </button>
                             </nav>
-
                         </div>
                     </header>
 
                     {/* --- HERO --- */}
-                    <section className="relative h-screen w-full overflow-hidden flex flex-col justify-center items-center text-center px-6">
-                        {/* Desktop Hero Images with Ken Burns effect */}
+                    <section className="relative h-screen w-full overflow-hidden flex flex-col justify-center items-center text-center px-4 md:px-6">
                         {heroImages.desktop.map((img, index) => {
                             const isActive = currentSlide === index;
-                            
                             return (
-                                <div 
-                                    key={`desktop-${index}`} 
-                                    className={`hero-slide-container transition-opacity duration-[1200ms] ease-in-out hidden md:block ${isActive ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
-                                    style={{ zIndex: isActive ? 2 : 1 }}
-                                >
-                                    <div className="absolute inset-0 bg-black/60 z-10"></div>
+                                <div key={`desktop-${index}`} className={`hero-slide-container transition-opacity duration-[1200ms] ease-in-out hidden md:block ${isActive ? 'opacity-100' : 'opacity-0 pointer-events-none'}`} style={{ zIndex: isActive ? 2 : 1 }}>
+                                    <div className="absolute inset-0 bg-black/70 z-10"></div>
                                     <div className={`hero-img-animator ${isActive ? 'active' : 'inactive'}`}>
-                                        <BlurImage 
-                                            src={img} 
-                                            alt="Hero"
-                                        />
+                                        <BlurImage src={img} alt="Hero" />
                                     </div>
                                 </div>
                             );
                         })}
-
-                        {/* Mobile Hero Images with Ken Burns effect */}
                         {heroImages.mobile.map((img, index) => {
                             const isActive = currentSlide === index;
-                            
                             return (
-                                <div 
-                                    key={`mobile-${index}`} 
-                                    className={`hero-slide-container transition-opacity duration-[1200ms] ease-in-out md:hidden ${isActive ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
-                                    style={{ zIndex: isActive ? 2 : 1 }}
-                                >
-                                    <div className="absolute inset-0 bg-black/60 z-10"></div>
+                                <div key={`mobile-${index}`} className={`hero-slide-container transition-opacity duration-[1200ms] ease-in-out md:hidden ${isActive ? 'opacity-100' : 'opacity-0 pointer-events-none'}`} style={{ zIndex: isActive ? 2 : 1 }}>
+                                    <div className="absolute inset-0 bg-black/70 z-10"></div>
                                     <div className={`hero-img-animator ${isActive ? 'active' : 'inactive'}`}>
-                                        <BlurImage 
-                                            src={img} 
-                                            alt="Hero"
-                                        />
+                                        <BlurImage src={img} alt="Hero" />
                                     </div>
                                 </div>
                             );
                         })}
-
-                        <div 
-                            ref={heroContentRef}
-                            className="relative z-20 max-w-4xl flex flex-col items-center hero-content"
-                            style={{
-                                transform: `scale(${heroScale}) translateY(${(1 - heroScale) * -50}px)`,
-                                opacity: heroOpacity
-                            }}
-                        >
-                            
-                            {/* Name Title */}
-                            <h1 className={`text-5xl md:text-7xl lg:text-9xl font-bold text-white tracking-tight leading-none ${isRTL ? 'font-fa' : ''} mb-4`}>
-                                {t.hero.name}
-                            </h1>
-
-                            {/* Typewriter Subtitle */}
-                            <div className={`text-lg md:text-2xl text-accent font-medium uppercase tracking-widest min-h-[1.5em] mb-6 ${isRTL ? 'font-fa tracking-normal' : ''}`}>
-                                {text}
-                                <span className="typing-cursor"></span>
+                        <div ref={heroContentRef} className="relative z-20 max-w-4xl flex flex-col items-center hero-content" style={{ transform: `scale(${heroScale}) translateY(${(1 - heroScale) * -50}px)`, opacity: heroOpacity }}>
+                            <h1 className={`text-3xl md:text-5xl lg:text-7xl font-light text-white tracking-tight leading-none mb-3 md:mb-4 ${isRTL ? 'font-fa' : ''}`}>{t.hero.name}</h1>
+                            <div className={`text-xs md:text-lg text-white/80 font-light tracking-[0.2em] min-h-[1.5em] mb-4 md:mb-6 uppercase ${isRTL ? 'font-fa tracking-normal' : ''}`}>
+                                {text}<span className="typing-cursor"></span>
                             </div>
-
-                            {/* Description */}
-                            <p className={`text-white/80 text-sm md:text-lg max-w-2xl leading-relaxed mb-10 ${isRTL ? 'font-fa' : ''}`}>
-                                {t.hero.desc}
-                            </p>
-
-                            {/* CTA Buttons */}
-                            <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-                                <button 
-                                    onClick={scrollToProjects}
-                                    className={`px-8 py-3 bg-accent text-black font-bold uppercase rounded-full hover:bg-white transition-all shadow-lg hover:shadow-xl hover:scale-105 ${isRTL ? 'font-fa tracking-normal' : 'tracking-widest text-sm'}`}
-                                >
+                            <p className={`text-white/40 text-[10px] md:text-sm max-w-xl leading-relaxed mb-8 md:mb-10 font-light ${isRTL ? 'font-fa' : ''}`}>{t.hero.desc}</p>
+                            
+                            {/* CENTERED HERO BUTTONS */}
+                            <div className="flex flex-row justify-center gap-3 md:gap-4 w-full sm:w-auto">
+                                <button onClick={scrollToProjects} className={`px-6 py-2 md:px-8 md:py-2.5 border border-white/30 text-white text-[10px] md:text-xs font-light uppercase tracking-widest rounded-full hover:bg-white hover:text-black hover:border-white transition-all duration-300 ${isRTL ? 'font-fa tracking-normal' : ''}`}>
                                     {t.hero.ctaPrimary}
                                 </button>
-                                <a 
-                                    href="./docs/portfolio.pdf" 
-                                    download
-                                    className={`px-8 py-3 border border-white text-white font-bold uppercase rounded-full hover:bg-white/10 transition-all ${isRTL ? 'font-fa tracking-normal' : 'tracking-widest text-sm'}`}
-                                >
+                                <a href="./docs/portfolio.pdf" download className={`px-6 py-2 md:px-8 md:py-2.5 border border-white/10 text-white/60 text-[10px] md:text-xs font-light uppercase tracking-widest rounded-full hover:border-accent hover:text-accent transition-all duration-300 ${isRTL ? 'font-fa tracking-normal' : ''}`}>
                                     {t.hero.ctaSecondary}
                                 </a>
                             </div>
                         </div>
-                        
                         <div className="absolute bottom-12 left-0 right-0 z-20 flex justify-center" style={{ opacity: heroOpacity }}>
-                            <button 
-                                onClick={scrollToProjects}
-                                className="text-white/50 hover:text-white transition-colors animate-bounce cursor-none"
-                                onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)}
-                            >
+                            <button onClick={scrollToProjects} className="text-white/30 hover:text-white transition-colors animate-bounce cursor-none" onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)}>
                                 <Icons.ArrowDown />
                             </button>
                         </div>
@@ -1584,48 +843,67 @@
 
                     {/* --- PROJECTS --- */}
                     <section id="work" className="pt-12 pb-12 px-4 md:px-12 container mx-auto">
-                        <div className="filter-bar flex flex-wrap gap-4 gap-y-3 mb-12 justify-center md:justify-start pb-4 border-b border-white/10">
-                            {Object.keys(t.filters).map((key) => (
-                                <button 
-                                    key={key}
-                                    onClick={() => setFilter(key)}
-                                    className={`text-xs font-bold uppercase ${isRTL ? 'tracking-normal font-fa' : 'tracking-widest'} transition-all duration-300 px-4 py-1.5 rounded-full border ${filter === key ? 'filter-btn-active' : 'border-white/20 text-secondary hover:text-white hover:border-white/40'}`}
-                                    onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)}
-                                >
-                                    {t.filters[key]}
-                                </button>
-                            ))}
-                        </div>
-
-                        {/* Show loading state if data not fetched yet */}
-                        {!dataFetched ? (
-                            <div className="text-center py-20 text-white/50">Loading Projects...</div>
-                        ) : (
-                            <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-                                {filteredProjects.map((project, index) => (
-                                    <div 
-                                        key={project.id} 
-                                        className="project-card group relative cursor-none aspect-[3/4] overflow-hidden bg-surface"
-                                        onClick={() => openProject(project)}
-                                        onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)}
-                                    >
-                                        <div className="w-full h-full transition-transform duration-700 group-hover:scale-110">
-                                            <BlurImage 
-                                                src={project.img} 
-                                                alt={project.title[lang]} 
-                                                loading="lazy"
-                                                className="opacity-90 group-hover:opacity-100"
-                                            />
-                                        </div>
-                                        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                                            <span className={`text-accent text-[10px] uppercase ${isRTL ? 'tracking-normal font-fa' : 'tracking-widest'} mb-1`}>{project.loc}</span>
-                                            <h3 className={`text-sm md:text-lg font-bold text-white ${isRTL ? 'font-fa' : ''}`}>
-                                                {project.title[lang]}
-                                            </h3>
-                                        </div>
-                                    </div>
+                        
+                        {/* FILTERS: Only visible when showAllProjects is true */}
+                        {showAllProjects && (
+                            <div className="filter-bar flex flex-wrap gap-4 gap-y-3 mb-12 justify-center md:justify-start pb-4 border-b border-white/10">
+                                {Object.keys(t.filters).map((key) => (
+                                    <button key={key} onClick={() => setFilter(key)} className={`text-[10px] md:text-xs font-light uppercase ${isRTL ? 'tracking-normal font-fa' : 'tracking-widest'} transition-all duration-300 px-3 py-1 md:px-4 md:py-1.5 rounded-full border ${filter === key ? 'filter-btn-active' : 'border-white/10 text-secondary hover:text-white hover:border-white/30'}`} onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)}>
+                                        {t.filters[key]}
+                                    </button>
                                 ))}
                             </div>
+                        )}
+
+                        {!dataFetched ? (
+                            <div className="text-center py-20 text-white/30 text-xs tracking-widest">Loading Projects...</div>
+                        ) : (
+                            <>
+                                {/* GRID: Dynamic Layout */}
+                                <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-4 auto-rows-[minmax(200px,_1fr)] grid-flow-dense">
+                                    {projectsToRender.map((project, index) => {
+                                        // Logic for Grid Spans
+                                        // Size 1: Mobile 1x1, Desktop 1x1
+                                        // Size 2: Mobile 2x2 (Full Width, Tall), Desktop 2x2 (Half Width, Tall)
+                                        const isLarge = project.size === 2;
+                                        
+                                        return (
+                                            <div 
+                                                key={project.id} 
+                                                className={`project-card group relative cursor-none overflow-hidden bg-surface
+                                                    ${isLarge ? 'col-span-2 row-span-2' : 'col-span-1 row-span-1'}
+                                                `}
+                                                onClick={() => openProject(project)} 
+                                                onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)}
+                                            >
+                                                <div className="w-full h-full transition-transform duration-700 group-hover:scale-105">
+                                                    <BlurImage src={project.img} alt={project.title[lang]} loading="lazy" className="opacity-90 group-hover:opacity-100" />
+                                                </div>
+                                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4 md:p-6">
+                                                    <span className={`text-accent text-[9px] md:text-[10px] uppercase ${isRTL ? 'tracking-normal font-fa' : 'tracking-widest'} mb-1`}>{project.loc}</span>
+                                                    <h3 className={`text-xs md:text-sm font-light text-white leading-tight ${isRTL ? 'font-fa' : ''}`}>{project.title[lang]}</h3>
+                                                </div>
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+
+                                {/* SHOW MORE BUTTON */}
+                                {!showAllProjects && (
+                                    <div className="mt-12 flex justify-center reveal">
+                                        <button 
+                                            onClick={() => setShowAllProjects(true)} 
+                                            className={`group flex items-center gap-3 px-8 py-3 border border-white/20 text-white/70 text-xs font-light uppercase tracking-widest rounded-full hover:border-accent hover:text-accent hover:bg-white/5 transition-all duration-300 ${isRTL ? 'font-fa' : ''}`}
+                                            onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)}
+                                        >
+                                            <span>{t.showMoreBtn}</span>
+                                            <div className="w-5 h-5 flex items-center justify-center rounded-full border border-white/20 group-hover:border-accent transition-colors">
+                                                <Icons.Plus />
+                                            </div>
+                                        </button>
+                                    </div>
+                                )}
+                            </>
                         )}
                     </section>
 
@@ -1635,24 +913,16 @@
                     {/* --- CONTACT --- */}
                     <section id="contact" className="pt-12 pb-12 px-6 bg-surface">
                         <div className="container mx-auto max-w-5xl">
-                            <h2 className={`section-title text-3xl md:text-5xl font-bold mb-16 text-center text-white ${isRTL ? 'font-fa' : ''}`}>
+                            <h2 className={`section-title text-2xl md:text-4xl font-light mb-12 md:mb-16 text-center text-white ${isRTL ? 'font-fa' : ''}`}>
                                 {t.contact.title}
                             </h2>
-                            
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" dir="ltr">
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" dir="ltr">
                                 {socialLinks.map((item, index) => (
-                                    <a 
-                                        key={index} 
-                                        href={item.href} 
-                                        target="_blank"
-                                        className="contact-card flex items-center gap-4 p-6 rounded-xl border border-white/10 hover:border-accent/70 hover:bg-white/5 transition-all duration-300 group cursor-none text-left backdrop-blur-sm bg-white/[0.02] shadow-[0_0_1px_rgba(255,255,255,0.1)]"
-                                        style={{ transitionDelay: `${index * 0.05}s` }}
-                                        onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)}
-                                    >
-                                        <span className="text-secondary group-hover:text-accent transition-colors scale-110">{item.icon}</span>
+                                    <a key={index} href={item.href} target="_blank" className="contact-card flex items-center gap-4 p-5 rounded-lg border border-white/5 hover:border-accent/50 hover:bg-white/[0.02] transition-all duration-300 group cursor-none text-left backdrop-blur-sm bg-white/[0.01]" style={{ transitionDelay: `${index * 0.05}s` }} onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)}>
+                                        <span className="text-secondary group-hover:text-accent transition-colors scale-100">{item.icon}</span>
                                         <div className="flex flex-col items-start">
-                                            <span className={`text-[10px] uppercase ${isRTL ? 'tracking-normal font-fa' : 'tracking-widest'} text-secondary`}>{item.label}</span>
-                                            <span className="text-sm font-medium text-white">{item.text}</span>
+                                            <span className={`text-[9px] uppercase ${isRTL ? 'tracking-normal font-fa' : 'tracking-widest'} text-secondary mb-1`}>{item.label}</span>
+                                            <span className="text-xs md:text-sm font-light text-white">{item.text}</span>
                                         </div>
                                     </a>
                                 ))}
@@ -1661,50 +931,44 @@
                     </section>
 
                     {/* Section Divider */}
-                    <div className="bg-surface">
-                        <SectionDivider />
-                    </div>
+                    <div className="bg-surface"><SectionDivider /></div>
 
                     {/* --- ABOUT ME --- */}
                     <section id="about" className="pt-12 pb-16 px-6 bg-[#080808]">
                         <div className="container mx-auto max-w-6xl">
-                            <div className={`flex flex-col md:flex-row gap-12 md:gap-20`}>
+                            <div className={`flex flex-col md:flex-row gap-10 md:gap-20`}>
                                 <div className={`reveal w-full md:w-1/3 aspect-[3/4] md:aspect-[4/5] relative self-start ${isRTL ? 'order-first' : ''}`}>
-                                    <div className="absolute top-4 left-4 w-full h-full border border-white/10 z-0"></div>
-                                    <img src="./images/me.jpg" alt="Arian Tabib" className="w-full h-full object-cover relative z-10" />
+                                    <div className="absolute top-2 left-2 w-full h-full border border-white/5 z-0"></div>
+                                    <img src="./images/me.jpg" alt="Arian Tabib" className="w-full h-full object-cover relative z-10 grayscale hover:grayscale-0 transition-all duration-700" />
                                 </div>
                                 
                                 <div className={`w-full md:w-2/3 ${isRTL ? 'text-right' : 'text-left'}`}>
-                                    <h2 className={`reveal text-sm text-accent uppercase ${isRTL ? 'tracking-normal font-fa' : 'tracking-widest'} mb-4`}>{t.about.title}</h2>
-                                    <p className={`reveal reveal-delay-1 text-lg md:text-xl text-white/80 leading-loose mb-8 ${isRTL ? 'font-fa' : ''}`}>
-                                        {t.about.bio}
-                                    </p>
+                                    <h2 className={`reveal text-xs text-accent uppercase ${isRTL ? 'tracking-normal font-fa' : 'tracking-[0.2em]'} mb-3`}>{t.about.title}</h2>
+                                    <p className={`reveal text-sm md:text-base text-white/60 leading-loose mb-8 font-light ${isRTL ? 'font-fa' : ''}`}>{t.about.bio}</p>
 
-                                    {/* TIMELINE: WORK EXPERIENCE */}
-                                    <div className="mt-16">
-                                        <h3 className={`reveal text-xl font-bold text-white mb-8 border-b border-white/10 pb-2 ${isRTL ? 'font-fa' : ''}`}>{t.about.expTitle}</h3>
-                                        <div className={`space-y-8 relative ${isRTL ? 'border-r mr-2 pr-8' : 'border-l ml-2 pl-8'} border-white/10`}>
+                                    <div className="mt-12">
+                                        <h3 className={`reveal text-base md:text-lg font-light text-white mb-6 border-b border-white/5 pb-2 ${isRTL ? 'font-fa' : ''}`}>{t.about.expTitle}</h3>
+                                        <div className={`space-y-6 relative ${isRTL ? 'border-r mr-2 pr-6' : 'border-l ml-2 pl-6'} border-white/5`}>
                                             {timeline.experience.map((job, i) => (
                                                 <div key={i} className="timeline-item relative" style={{ transitionDelay: `${i * 0.1}s` }}>
-                                                    <span className={`absolute ${isRTL ? '-right-[37px]' : '-left-[37px]'} top-1.5 w-3 h-3 bg-accent rounded-full border-2 border-black`}></span>
-                                                    <h4 className={`text-lg font-bold text-white ${isRTL ? 'font-fa' : ''}`}>{job.role}</h4>
-                                                    <p className="text-accent text-sm mt-1">{job.company}</p>
-                                                    <span className={`text-xs text-secondary uppercase ${isRTL ? 'tracking-normal font-fa' : 'tracking-widest'} mt-1 block`}>{job.duration}</span>
+                                                    <span className={`absolute ${isRTL ? '-right-[31px]' : '-left-[31px]'} top-1.5 w-2.5 h-2.5 bg-white/20 hover:bg-accent rounded-full border border-black transition-colors`}></span>
+                                                    <h4 className={`text-sm font-medium text-white ${isRTL ? 'font-fa' : ''}`}>{job.role}</h4>
+                                                    <p className="text-white/40 text-xs mt-1">{job.company}</p>
+                                                    <span className={`text-[10px] text-secondary uppercase ${isRTL ? 'tracking-normal font-fa' : 'tracking-wider'} mt-1 block`}>{job.duration}</span>
                                                 </div>
                                             ))}
                                         </div>
                                     </div>
 
-                                    {/* TIMELINE: EDUCATION */}
-                                    <div className="mt-16">
-                                        <h3 className={`reveal text-xl font-bold text-white mb-8 border-b border-white/10 pb-2 ${isRTL ? 'font-fa' : ''}`}>{t.about.eduTitle}</h3>
-                                        <div className={`space-y-8 relative ${isRTL ? 'border-r mr-2 pr-8' : 'border-l ml-2 pl-8'} border-white/10`}>
+                                    <div className="mt-12">
+                                        <h3 className={`reveal text-base md:text-lg font-light text-white mb-6 border-b border-white/5 pb-2 ${isRTL ? 'font-fa' : ''}`}>{t.about.eduTitle}</h3>
+                                        <div className={`space-y-6 relative ${isRTL ? 'border-r mr-2 pr-6' : 'border-l ml-2 pl-6'} border-white/5`}>
                                             {timeline.education.map((edu, i) => (
                                                 <div key={i} className="timeline-item relative" style={{ transitionDelay: `${i * 0.1}s` }}>
-                                                    <span className={`absolute ${isRTL ? '-right-[37px]' : '-left-[37px]'} top-1.5 w-3 h-3 bg-white rounded-full border-2 border-black`}></span>
-                                                    <h4 className={`text-lg font-bold text-white ${isRTL ? 'font-fa' : ''}`}>{edu.role}</h4>
-                                                    <p className="text-accent text-sm mt-1">{edu.company}</p>
-                                                    <span className={`text-xs text-secondary uppercase ${isRTL ? 'tracking-normal font-fa' : 'tracking-widest'} mt-1 block`}>{edu.duration}</span>
+                                                    <span className={`absolute ${isRTL ? '-right-[31px]' : '-left-[31px]'} top-1.5 w-2.5 h-2.5 bg-accent rounded-full border border-black`}></span>
+                                                    <h4 className={`text-sm font-medium text-white ${isRTL ? 'font-fa' : ''}`}>{edu.role}</h4>
+                                                    <p className="text-white/40 text-xs mt-1">{edu.company}</p>
+                                                    <span className={`text-[10px] text-secondary uppercase ${isRTL ? 'tracking-normal font-fa' : 'tracking-wider'} mt-1 block`}>{edu.duration}</span>
                                                 </div>
                                             ))}
                                         </div>
@@ -1713,28 +977,12 @@
                             </div>
 
                             {/* SKILLS SECTION */}
-                            <div className="mt-24">
-                                <h3 className={`reveal text-xl font-bold text-white mb-10 text-center ${isRTL ? 'font-fa' : ''}`}>
-                                    {t.about.skillsTitle}
-                                </h3>
+                            <div className="mt-20">
+                                <h3 className={`reveal text-base md:text-lg font-light text-white mb-8 text-center ${isRTL ? 'font-fa' : ''}`}>{t.about.skillsTitle}</h3>
                                 <div className="skills-grid" dir="ltr">
                                     {skillsData.map((skill, index) => (
-                                        <div 
-                                            key={skill.id} 
-                                            className="skill-item"
-                                            style={{ transitionDelay: `${index * 0.03}s` }}
-                                            onMouseEnter={() => handleHover(true)} 
-                                            onMouseLeave={() => handleHover(false)}
-                                        >
-                                            <img 
-                                                src={skill.icon} 
-                                                alt={skill.name}
-                                                className="skill-icon"
-                                                onError={(e) => { 
-                                                    e.target.onerror = null; 
-                                                    e.target.src = `https://placehold.co/44x44/1a1a1a/C1A365?text=${skill.name.charAt(0)}`; 
-                                                }}
-                                            />
+                                        <div key={skill.id} className="skill-item" style={{ transitionDelay: `${index * 0.03}s` }} onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)}>
+                                            <img src={skill.icon} alt={skill.name} className="skill-icon" onError={(e) => { e.target.onerror = null; e.target.src = `https://placehold.co/44x44/1a1a1a/C1A365?text=${skill.name.charAt(0)}`; }} />
                                             <span className="skill-name">{skill.name}</span>
                                         </div>
                                     ))}
@@ -1745,206 +993,86 @@
 
                     {/* --- FOOTER --- */}
                     <footer className="py-8 pb-28 md:pb-8 text-center bg-bg border-t border-white/5">
-                        <p className={`reveal text-xs text-white/20 uppercase ${isRTL ? 'tracking-normal font-fa' : 'tracking-widest'}`}>{t.footer}</p>
+                        <p className={`reveal text-[10px] text-white/20 uppercase ${isRTL ? 'tracking-normal font-fa' : 'tracking-[0.2em]'}`}>{t.footer}</p>
                     </footer>
 
                     {/* --- MOBILE BOTTOM NAVIGATION --- */}
-                    <MobileBottomNav 
-                        activeSection={activeSection}
-                        onNavigate={handleNavClick}
-                        lang={lang}
-                        onLangToggle={() => setLang(lang === 'en' ? 'fa' : 'en')}
-                        isRTL={isRTL}
-                        isVisible={mobileNavVisible && !selectedProject}
-                    />
+                    <MobileBottomNav activeSection={activeSection} onNavigate={handleNavClick} lang={lang} onLangToggle={() => setLang(lang === 'en' ? 'fa' : 'en')} isRTL={isRTL} isVisible={mobileNavVisible && !selectedProject} />
 
                     {/* iPhone USDZ Download Progress Overlay */}
                     {isDownloadingUsdz && (
                         <div className="fixed inset-0 z-[200] flex flex-col items-center justify-center bg-black/95 backdrop-blur-xl">
                             <div className="flex flex-col items-center max-w-sm px-8">
-                                {/* AR Icon Animation */}
-                                <div className="mb-8 text-accent animate-pulse">
-                                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                                        <path d="M2 8V5a3 3 0 0 1 3-3h3"/>
-                                        <path d="M2 16v3a3 3 0 0 0 3 3h3"/>
-                                        <path d="M22 8V5a3 3 0 0 0-3-3h-3"/>
-                                        <path d="M22 16v3a3 3 0 0 1-3 3h-3"/>
-                                        <path d="M12 8l-4 2 4 2 4-2-4-2z"/>
-                                        <path d="M8 10v4l4 2 4-2v-4"/>
-                                    </svg>
+                                <div className="mb-6 text-accent animate-pulse"><Icons.AR /></div>
+                                <div className="w-full h-1 bg-white/10 rounded-full overflow-hidden mb-3">
+                                    <div className="h-full bg-gradient-to-r from-accent to-yellow-400 transition-all duration-150 ease-out rounded-full" style={{ width: `${usdzDownloadProgress}%` }}></div>
                                 </div>
-                                
-                                {/* Progress Bar */}
-                                <div className="w-full h-1.5 bg-white/10 rounded-full overflow-hidden mb-4">
-                                    <div 
-                                        className="h-full bg-gradient-to-r from-accent to-yellow-400 transition-all duration-150 ease-out rounded-full"
-                                        style={{ width: `${usdzDownloadProgress}%` }}
-                                    ></div>
-                                </div>
-                                
-                                {/* Progress Text */}
-                                <p className={`text-white text-sm font-bold uppercase tracking-widest mb-2 ${isRTL ? 'font-fa tracking-normal' : ''}`}>
-                                    {lang === 'en' ? 'Preparing AR Experience' : 'آماده‌سازی تجربه AR'}
-                                </p>
-                                <p className="text-accent text-2xl font-mono font-bold">
-                                    {usdzDownloadProgress}%
-                                </p>
-                                
-                                {/* Subtitle */}
-                                <p className={`text-white/50 text-xs mt-4 text-center ${isRTL ? 'font-fa' : ''}`}>
-                                    {lang === 'en' ? 'Downloading 3D model for AR viewing...' : 'در حال دانلود مدل سه‌بعدی برای نمایش AR...'}
-                                </p>
+                                <p className={`text-white text-xs font-light uppercase tracking-widest mb-1 ${isRTL ? 'font-fa tracking-normal' : ''}`}>{lang === 'en' ? 'Preparing AR Experience' : 'آماده‌سازی تجربه AR'}</p>
+                                <p className="text-accent text-lg font-mono font-light">{usdzDownloadProgress}%</p>
                             </div>
                         </div>
                     )}
 
                     {/* --- MODAL --- */}
                     {selectedProject && (
-                        <div 
-                            className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-8 bg-black/90 backdrop-blur-xl animate-fade-in"
-                            onClick={handleBackdropClick}
-                        >
+                        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-8 bg-black/90 backdrop-blur-xl animate-fade-in" onClick={handleBackdropClick}>
                             <div className="w-full h-full max-w-[1920px] p-4 md:p-12 flex flex-col md:flex-row gap-8 items-center justify-center relative pointer-events-none">
-                                
-                                {/* Close Button */}
                                 {!showAR && (
-                                    <button 
-                                        className="absolute top-6 right-6 z-50 p-3 bg-black/20 hover:bg-accent text-white rounded-full transition-all backdrop-blur-md border border-white/10 pointer-events-auto group"
-                                        onClick={() => setSelectedProject(null)}
-                                    >
+                                    <button className="absolute top-4 right-4 z-50 p-2 bg-black/20 hover:bg-white text-white/80 hover:text-black rounded-full transition-all backdrop-blur-md border border-white/10 pointer-events-auto" onClick={() => setSelectedProject(null)}>
                                         <Icons.Close />
                                     </button>
                                 )}
 
-                                {/* Media Section */}
                                 <div className="flex-1 w-full h-[50vh] md:h-full flex items-center justify-center relative pointer-events-auto" onClick={(e) => e.stopPropagation()} onTouchStart={onTouchStart} onTouchMove={onTouchMove} onTouchEnd={onTouchEnd}>
-                                    
-                                    {/* PROGRESS LOADING BAR FOR AR ONLY */}
                                     {isImageLoading && showAR && (
                                         <div className="absolute inset-0 flex flex-col items-center justify-center z-[110] bg-black/80 backdrop-blur-sm transition-opacity duration-300">
-                                            <div className="w-64 h-1 bg-white/20 rounded-full overflow-hidden mb-4">
-                                                <div 
-                                                    className="h-full bg-accent transition-all duration-100 ease-out" 
-                                                    style={{ width: `${loadProgress}%` }}
-                                                ></div>
+                                            <div className="w-48 h-0.5 bg-white/10 rounded-full overflow-hidden mb-3">
+                                                <div className="h-full bg-accent transition-all duration-100 ease-out" style={{ width: `${loadProgress}%` }}></div>
                                             </div>
-                                            <p className="text-white text-xs font-bold uppercase tracking-widest mb-1">
-                                                {lang === 'en' ? 'Downloading 3D Model' : 'در حال دانلود مدل سه بعدی'}
-                                            </p>
-                                            <p className="text-accent text-xs font-mono">
-                                                {loadProgress}%
-                                            </p>
+                                            <p className="text-white/70 text-[10px] font-light uppercase tracking-widest mb-0.5">{lang === 'en' ? 'Loading Model' : 'در حال بارگذاری'}</p>
+                                            <p className="text-accent text-xs font-mono">{loadProgress}%</p>
                                         </div>
                                     )}
-
-                                    {/* Simple Spinner for Images */}
                                     {isImageLoading && !showAR && (
                                          <div className="absolute inset-0 flex items-center justify-center z-10">
-                                            <div className="w-10 h-10 border-4 border-accent border-t-transparent rounded-full animate-spin"></div>
+                                            <div className="w-8 h-8 border-2 border-accent border-t-transparent rounded-full animate-spin"></div>
                                         </div>
                                     )}
-
-                                    {/* AR Viewer or Image/Video */}
                                     {showAR && selectedProject.hasAR ? (
                                         <div className="w-full h-full relative" dir="ltr">
-                                            <model-viewer
-                                                ref={modelViewerRef}
-                                                src={selectedProject.modelGLB}
-                                                ios-src={selectedProject.modelUSDZ}
-                                                ar
-                                                ar-modes="webxr scene-viewer quick-look"
-                                                ar-scale="auto"
-                                                ar-placement="floor"
-                                                camera-controls
-                                                auto-rotate
-                                                shadow-intensity="1"
-                                                interaction-prompt="none"
-                                                alt={`3D model of ${selectedProject.title[lang]}`}
-                                                style={{width: '100%', height: '100%'}}
-                                            >
-                                                {/* AR Buttons Container - Only visible on mobile */}
+                                            <model-viewer ref={modelViewerRef} src={selectedProject.modelGLB} ios-src={selectedProject.modelUSDZ} ar ar-modes="webxr scene-viewer quick-look" ar-scale="auto" ar-placement="floor" camera-controls auto-rotate shadow-intensity="1" interaction-prompt="none" alt={`3D model of ${selectedProject.title[lang]}`} style={{width: '100%', height: '100%'}}>
                                                 <div slot="ar-button" className="ar-buttons-container md:hidden">
-                                                    {/* Back Button */}
-                                                    <button 
-                                                        onClick={(e) => { e.stopPropagation(); setShowAR(false); }}
-                                                        className="ar-btn ar-btn-back"
-                                                    >
-                                                        <Icons.Back />
-                                                        <span>{lang === 'en' ? 'Back' : 'بازگشت'}</span>
+                                                    <button onClick={(e) => { e.stopPropagation(); setShowAR(false); }} className="ar-btn ar-btn-back">
+                                                        <Icons.Back /><span>{lang === 'en' ? 'Back' : 'بازگشت'}</span>
                                                     </button>
-                                                    
-                                                    {/* Activate AR Button */}
-                                                    <button className="ar-btn ar-btn-activate">
-                                                        <span>{lang === 'en' ? 'View in AR' : 'واقعیت افزوده'}</span>
-                                                        <Icons.AR />
-                                                    </button>
+                                                    <button className="ar-btn ar-btn-activate"><span>{lang === 'en' ? 'View in AR' : 'واقعیت افزوده'}</span><Icons.AR /></button>
                                                 </div>
                                             </model-viewer>
-                                            
-                                            {/* Desktop Back Button - Always visible on desktop */}
-                                            <button 
-                                                onClick={() => setShowAR(false)}
-                                                className="hidden md:flex absolute top-6 left-6 z-[60] px-6 py-3 bg-black hover:bg-[#333] text-white rounded-full transition-all items-center gap-3 shadow-lg pointer-events-auto font-bold uppercase tracking-widest text-xs border border-white/10"
-                                            >
-                                                <Icons.Back />
-                                                <span>{lang === 'en' ? 'Back to Gallery' : 'بازگشت به گالری'}</span>
-                                            </button>
-
-                                            {/* Mobile Back Button - Shows outside of model-viewer slot when not in AR mode */}
-                                            <button 
-                                                onClick={() => setShowAR(false)}
-                                                className="md:hidden absolute top-4 left-4 z-[60] ar-btn ar-btn-back pointer-events-auto"
-                                            >
-                                                <Icons.Back />
-                                                <span>{lang === 'en' ? 'Back' : 'بازگشت'}</span>
+                                            <button onClick={() => setShowAR(false)} className="hidden md:flex absolute top-4 left-4 z-[60] px-4 py-2 bg-black hover:bg-[#222] text-white rounded-full transition-all items-center gap-2 shadow-lg pointer-events-auto text-[10px] font-light uppercase tracking-widest border border-white/10">
+                                                <Icons.Back /><span>{lang === 'en' ? 'Back to Gallery' : 'بازگشت'}</span>
                                             </button>
                                         </div>
                                     ) : (
                                         <>
                                             {selectedProject.video && modalImageIndex === selectedProject.gallery.length ? (
-                                                <video 
-                                                    src={selectedProject.video} 
-                                                    controls 
-                                                    autoPlay 
-                                                    className="max-w-full max-h-full w-auto h-auto object-contain shadow-2xl transition-opacity duration-300"
-                                                    onLoadedData={handleImageLoad}
-                                                ></video>
+                                                <video src={selectedProject.video} controls autoPlay className="max-w-full max-h-full w-auto h-auto object-contain shadow-2xl transition-opacity duration-300" onLoadedData={handleImageLoad}></video>
                                             ) : (
-                                                <img 
-                                                    src={selectedProject.gallery[modalImageIndex]} 
-                                                    onLoad={handleImageLoad}
-                                                    className={`max-w-full max-h-full w-auto h-auto object-contain shadow-2xl transition-opacity duration-300 ${isImageLoading ? 'opacity-0' : 'opacity-100'}`}
-                                                    alt="Project Detail" 
-                                                />
+                                                <img src={selectedProject.gallery[modalImageIndex]} onLoad={handleImageLoad} className={`max-w-full max-h-full w-auto h-auto object-contain shadow-2xl transition-opacity duration-300 ${isImageLoading ? 'opacity-0' : 'opacity-100'}`} alt="Project Detail" />
                                             )}
-                                            
-                                            {/* Navigation Buttons */}
                                             {(selectedProject.gallery.length + (selectedProject.video ? 1 : 0)) > 1 && (
                                                 <>
-                                                    <button 
-                                                        onClick={prevMedia}
-                                                        className="absolute left-4 top-1/2 -translate-y-1/2 p-2 md:p-3 bg-transparent md:bg-black/50 text-white/70 hover:text-white hover:bg-black/20 md:hover:bg-black/80 backdrop-blur-none md:backdrop-blur-md rounded-full transition-all z-20 cursor-pointer"
-                                                    >
+                                                    <button onClick={prevMedia} className="absolute left-4 top-1/2 -translate-y-1/2 p-2 bg-black/20 hover:bg-white/20 backdrop-blur-md rounded-full transition-all z-20 cursor-pointer text-white/70 hover:text-white">
                                                         <Icons.ArrowLeft />
                                                     </button>
-                                                    <button 
-                                                        onClick={nextMedia}
-                                                        className="absolute right-4 top-1/2 -translate-y-1/2 p-2 md:p-3 bg-transparent md:bg-black/50 text-white/70 hover:text-white hover:bg-black/20 md:hover:bg-black/80 backdrop-blur-none md:backdrop-blur-md rounded-full transition-all z-20 cursor-pointer"
-                                                    >
+                                                    <button onClick={nextMedia} className="absolute right-4 top-1/2 -translate-y-1/2 p-2 bg-black/20 hover:bg-white/20 backdrop-blur-md rounded-full transition-all z-20 cursor-pointer text-white/70 hover:text-white">
                                                         <Icons.ArrowRight />
                                                     </button>
-                                                    
                                                     <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-20">
                                                         {selectedProject.gallery.map((_, idx) => (
-                                                            <div 
-                                                                key={idx} 
-                                                                className={`w-1.5 h-1.5 rounded-full transition-all ${idx === modalImageIndex ? 'bg-accent w-4' : 'bg-white/50'}`}
-                                                            ></div>
+                                                            <div key={idx} className={`w-1 h-1 rounded-full transition-all ${idx === modalImageIndex ? 'bg-accent w-3' : 'bg-white/30'}`}></div>
                                                         ))}
                                                         {selectedProject.video && (
-                                                            <div 
-                                                                className={`w-1.5 h-1.5 rounded-full transition-all ${selectedProject.gallery.length === modalImageIndex ? 'bg-accent w-4' : 'bg-white/50'}`}
-                                                            ></div>
+                                                            <div className={`w-1 h-1 rounded-full transition-all ${selectedProject.gallery.length === modalImageIndex ? 'bg-accent w-3' : 'bg-white/30'}`}></div>
                                                         )}
                                                     </div>
                                                 </>
@@ -1953,39 +1081,28 @@
                                     )}
                                 </div>
 
-                                {/* Info Section */}
                                 {!showAR && (
-                                    <div 
-                                        className={`w-full md:w-[400px] lg:w-[450px] max-h-[40vh] md:max-h-[80vh] flex flex-col bg-[#111] border border-white/10 shadow-2xl rounded-sm overflow-hidden pointer-events-auto ${isRTL ? 'text-right font-fa' : 'text-left'}`}
-                                        dir={isRTL ? 'rtl' : 'ltr'}
-                                        onClick={(e) => e.stopPropagation()}
-                                    >
-                                        {/* Scrollable Content */}
-                                        <div className="p-5 md:p-10 overflow-y-auto flex-1 modal-scroll flex flex-col">
-                                            <span className={`text-accent text-xs uppercase ${isRTL ? 'tracking-normal font-fa' : 'tracking-[0.2em]'} mb-2 md:mb-4 block opacity-80`}>{selectedProject.loc}</span>
-                                            <h2 className={`text-xl md:text-4xl font-bold mb-4 md:mb-8 text-white leading-tight ${isRTL ? 'font-fa' : ''}`}>{selectedProject.title[lang]}</h2>
+                                    <div className={`w-full md:w-[360px] lg:w-[400px] max-h-[40vh] md:max-h-[80vh] flex flex-col bg-[#0a0a0a] border border-white/5 shadow-2xl rounded-sm overflow-hidden pointer-events-auto ${isRTL ? 'text-right font-fa' : 'text-left'}`} dir={isRTL ? 'rtl' : 'ltr'} onClick={(e) => e.stopPropagation()}>
+                                        <div className="p-5 md:p-8 overflow-y-auto flex-1 modal-scroll flex flex-col">
+                                            <span className={`text-accent text-[10px] uppercase ${isRTL ? 'tracking-normal font-fa' : 'tracking-[0.15em]'} mb-2 md:mb-3 block opacity-70`}>{selectedProject.loc}</span>
+                                            <h2 className={`text-lg md:text-3xl font-light mb-4 md:mb-6 text-white leading-tight ${isRTL ? 'font-fa' : ''}`}>{selectedProject.title[lang]}</h2>
                                             
-                                            <div className={`text-secondary text-sm md:text-base leading-7 md:leading-[2.5] ${isRTL ? 'font-fa' : ''}`}>
+                                            <div className={`text-white/50 text-sm leading-7 ${isRTL ? 'font-fa' : ''}`}>
                                                 {selectedProject.desc[lang]}
                                             </div>
 
-                                            <div className="mt-auto pt-6 md:pt-12"></div> 
+                                            <div className="mt-auto pt-4 md:pt-8"></div> 
 
-                                            <div className={`border-t border-white/10 pt-4 md:pt-6 grid grid-cols-1 gap-1.5 md:gap-3 text-xs text-white/40 font-mono ${isRTL ? 'tracking-normal' : 'tracking-wider'}`}>
-                                                <div className="flex justify-between"><span>ROLE:</span> <span className="text-white/70">Lead Architect</span></div>
-                                                <div className="flex justify-between"><span>STATUS:</span> <span className="text-white/70">Completed</span></div>
+                                            <div className={`border-t border-white/5 pt-3 md:pt-5 grid grid-cols-1 gap-1 text-[10px] text-white/30 font-mono ${isRTL ? 'tracking-normal' : 'tracking-wide'}`}>
+                                                <div className="flex justify-between"><span>ROLE:</span> <span className="text-white/60">Lead Architect</span></div>
+                                                <div className="flex justify-between"><span>STATUS:</span> <span className="text-white/60">Completed</span></div>
                                             </div>
                                         </div>
 
-                                        {/* AR Button - Only shows when hasAR is true */}
                                         {selectedProject.hasAR && (
-                                            <div className="p-4 md:p-6 border-t border-white/10 bg-[#111] flex justify-end">
-                                                <button 
-                                                    onClick={handleARButtonClick}
-                                                    disabled={isDownloadingUsdz}
-                                                    className={`px-4 py-2 md:px-6 md:py-3 bg-accent hover:bg-white text-black rounded-full transition-all flex items-center gap-2 md:gap-3 shadow-lg pointer-events-auto font-bold uppercase ${isRTL ? 'tracking-normal font-fa' : 'tracking-widest'} text-[10px] md:text-xs border border-accent disabled:opacity-50 disabled:cursor-not-allowed`}
-                                                >
-                                                    <span>{isIPhone ? (lang === 'en' ? 'View in AR' : 'مشاهده در AR') : (lang === 'en' ? 'View in 3D' : 'مشاهده سه بعدی')}</span>
+                                            <div className="p-3 md:p-5 border-t border-white/5 bg-[#0a0a0a] flex justify-end">
+                                                <button onClick={handleARButtonClick} disabled={isDownloadingUsdz} className={`px-4 py-2 md:px-5 md:py-2.5 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-accent text-white hover:text-accent rounded-full transition-all flex items-center gap-2 pointer-events-auto font-light uppercase text-[10px] md:text-xs ${isRTL ? 'font-fa tracking-normal' : 'tracking-widest'} disabled:opacity-50 disabled:cursor-not-allowed`}>
+                                                    <span>{isIPhone ? (lang === 'en' ? 'AR' : 'واقعیت افزوده') : (lang === 'en' ? '3D View' : 'نمای سه بعدی')}</span>
                                                     <Icons.AR />
                                                 </button>
                                             </div>
