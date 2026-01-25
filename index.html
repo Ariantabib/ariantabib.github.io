@@ -225,6 +225,7 @@
         const Icons = {
             Close: () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 6L6 18M6 6l12 12"/></svg>,
             ArrowDown: () => <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>,
+            ArrowUp: () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 15l-6-6-6 6"/></svg>,
             ArrowRight: () => <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M9 18l6-6-6-6"/></svg>,
             ArrowLeft: () => <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M15 18l-6-6 6-6"/></svg>,
             Download: () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>,
@@ -256,6 +257,7 @@
                     ctaSecondary: "Resume"
                 },
                 showMoreBtn: "Show More Projects",
+                collapseBtn: "Show Less",
                 filters: { all: "All", arch: "Architecture", interior: "Interior", ai: "AI Art", exec: "Executive", cgi: "3D CGI", sketch: "Sketches", ads: "Ads" },
                 contact: { title: "Let's Build Your Vision" },
                 about: {
@@ -278,6 +280,7 @@
                     ctaSecondary: "رزومه"
                 },
                 showMoreBtn: "مشاهده همه پروژه‌ها",
+                collapseBtn: "بستن لیست",
                 filters: { all: "همه", arch: "معماری", interior: "داخلی", ai: "هوش مصنوعی", exec: "اجرایی", cgi: "3D CGI", sketch: "اسکیس", ads: "تبلیغات" },
                 contact: { title: "بیایید رویایی بسازیم" },
                 about: {
@@ -478,6 +481,8 @@
                             const hasAR = row.HasAR && row.HasAR.toLowerCase() === 'true';
                             // Read Size from CSV (Default 1)
                             const size = parseInt(row.Size || 1);
+                            // Read Featured Column (Default false)
+                            const isFeatured = row.Featured && row.Featured.toLowerCase() === 'true';
                             
                             return {
                                 id: id, order: parseInt(row.Order || 999),
@@ -489,9 +494,16 @@
                                 modelGLB: hasAR ? `./models/project${id}.glb` : null,
                                 modelUSDZ: hasAR ? `./models/project${id}.usdz` : null,
                                 gallery: galleryPaths,
-                                size: size
+                                size: size,
+                                isFeatured: isFeatured
                             };
                         }).filter(p => p.title.en !== "Untitled" || p.title.fa !== "بدون عنوان");
+                        
+                        // Safety: If sheet not updated with 'Featured' column, default first item to true to show something
+                        if (transformedProjects.length > 0 && !transformedProjects.some(p => p.isFeatured)) {
+                            transformedProjects[0].isFeatured = true;
+                        }
+
                         transformedProjects.sort((a, b) => a.order - b.order);
                         setProjectsData(transformedProjects);
                         setDataFetched(true);
@@ -758,8 +770,13 @@
                 .filter(p => filter === 'all' || p.tags.includes(filter))
                 .sort((a, b) => a.order - b.order);
 
-            // Determine which projects to render based on 'showAllProjects' state
-            const projectsToRender = showAllProjects ? filteredProjects : filteredProjects.slice(0, 5);
+            // Determine which projects to render based on 'showAllProjects' state and 'Featured' column
+            const featuredProjects = filteredProjects.filter(p => p.isFeatured);
+            const projectsToRender = showAllProjects ? filteredProjects : featuredProjects;
+            
+            // Button Visibility Logic
+            const hasFeaturedProjects = featuredProjects.length > 0;
+            const hasMoreProjects = filteredProjects.length > featuredProjects.length;
 
             return (
                 <div className={`min-h-screen ${isRTL ? 'font-fa' : ''}`} dir={isRTL ? 'rtl' : 'ltr'}>
@@ -863,8 +880,6 @@
                                 <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-4 auto-rows-[minmax(200px,_1fr)] grid-flow-dense">
                                     {projectsToRender.map((project, index) => {
                                         // Logic for Grid Spans
-                                        // Size 1: Mobile 1x1, Desktop 1x1
-                                        // Size 2: Mobile 2x2 (Full Width, Tall), Desktop 2x2 (Half Width, Tall)
                                         const isLarge = project.size === 2;
                                         
                                         return (
@@ -888,9 +903,11 @@
                                     })}
                                 </div>
 
-                                {/* SHOW MORE BUTTON */}
-                                {!showAllProjects && (
-                                    <div className="mt-12 flex justify-center reveal">
+                                {/* BUTTONS AREA */}
+                                <div className="mt-12 flex flex-col items-center gap-4 reveal">
+                                    
+                                    {/* Show More Button */}
+                                    {!showAllProjects && hasMoreProjects && hasFeaturedProjects && (
                                         <button 
                                             onClick={() => setShowAllProjects(true)} 
                                             className={`group flex items-center gap-3 px-8 py-3 border border-white/20 text-white/70 text-xs font-light uppercase tracking-widest rounded-full hover:border-accent hover:text-accent hover:bg-white/5 transition-all duration-300 ${isRTL ? 'font-fa' : ''}`}
@@ -901,8 +918,23 @@
                                                 <Icons.Plus />
                                             </div>
                                         </button>
-                                    </div>
-                                )}
+                                    )}
+
+                                    {/* Collapse Button (Minimal) */}
+                                    {showAllProjects && hasMoreProjects && (
+                                        <button 
+                                            onClick={() => {
+                                                setShowAllProjects(false);
+                                                window.scrollTo({ top: document.getElementById('work').offsetTop - 100, behavior: 'smooth' });
+                                            }} 
+                                            className={`flex items-center gap-2 text-white/40 text-[10px] font-light uppercase tracking-widest hover:text-accent transition-all duration-300 ${isRTL ? 'font-fa' : ''}`}
+                                            onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)}
+                                        >
+                                            <span>{t.collapseBtn}</span>
+                                            <Icons.ArrowUp />
+                                        </button>
+                                    )}
+                                </div>
                             </>
                         )}
                     </section>
@@ -939,7 +971,8 @@
                             <div className={`flex flex-col md:flex-row gap-10 md:gap-20`}>
                                 <div className={`reveal w-full md:w-1/3 aspect-[3/4] md:aspect-[4/5] relative self-start ${isRTL ? 'order-first' : ''}`}>
                                     <div className="absolute top-2 left-2 w-full h-full border border-white/5 z-0"></div>
-                                    <img src="./images/me.jpg" alt="Arian Tabib" className="w-full h-full object-cover relative z-10 grayscale hover:grayscale-0 transition-all duration-700" />
+                                    {/* MODIFIED: Removed grayscale class */}
+                                    <img src="./images/me.jpg" alt="Arian Tabib" className="w-full h-full object-cover relative z-10 transition-all duration-700 hover:scale-[1.02]" />
                                 </div>
                                 
                                 <div className={`w-full md:w-2/3 ${isRTL ? 'text-right' : 'text-left'}`}>
