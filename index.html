@@ -782,7 +782,7 @@
                             </a>
                             <nav className="hidden md:flex items-center gap-8">
                                 {['work', 'contact', 'about'].map((key) => (
-                                    <a key={key} href={`#${key}`} onClick={(e) => handleNavClick(e, key)} className={`text-[10px] md:text-xs font-light uppercase ${isRTL ? 'tracking-normal font-fa md:font-bold' : 'tracking-[0.2em]'} text-white/60 hover:text-white transition-colors`} onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)}>
+                                    <a key={key} href={`#${key}`} onClick={(e) => handleNavClick(e, key)} className={`text-[10px] md:text-xs font-bold uppercase ${isRTL ? 'tracking-normal font-fa md:font-bold' : 'tracking-[0.2em]'} text-white/60 hover:text-white transition-colors`} onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)}>
                                         {t.nav[key]}
                                     </a>
                                 ))}
