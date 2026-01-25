@@ -260,7 +260,7 @@
                 filters: { all: "All", arch: "Architecture", interior: "Interior", ai: "AI Art", exec: "Executive", cgi: "3D CGI", sketch: "Sketches", ads: "Ads" },
                 contact: { title: "Let's Build Your Vision" },
                 about: {
-                    title: "The Architect",
+                    title: "About Me", // Changed from "The Architect"
                     bio: "I am an architectural designer operating at the intersection of built environments and digital artistry. With a high-honors academic background and a diverse portfolio of executive projects, my work bridges the gap between conceptual innovation and technical precision.",
                     expTitle: "Work Experience",
                     eduTitle: "Education",
@@ -388,14 +388,12 @@
         };
 
         const MobileBottomNav = ({ activeSection, onNavigate, lang, onLangToggle, isRTL, isVisible }) => {
-            // STRICT ORDER: Work, Contact, About for both languages
             const navOrder = ['work', 'contact', 'about'];
             
             return (
                 <nav className={`mobile-bottom-nav md:hidden ${isVisible ? 'visible' : ''}`}>
                     {navOrder.map((key) => (
                         <a key={key} href={`#${key}`} onClick={(e) => onNavigate(e, key)} className={`mobile-nav-item ${activeSection === key ? 'active' : ''}`}>
-                            {/* Dynamically assign icon based on key */}
                             {key === 'work' && <Icons.Grid />}
                             {key === 'about' && <Icons.User />}
                             {key === 'contact' && <Icons.MessageCircle />}
@@ -453,7 +451,6 @@
             const [activeSection, setActiveSection] = useState('work');
             const [mobileNavVisible, setMobileNavVisible] = useState(false);
             
-            // State for Projects Grid Expansion
             const [showAllProjects, setShowAllProjects] = useState(false);
 
             const t = content[lang];
@@ -462,7 +459,6 @@
 
             const GOOGLE_SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRG5pVpEgdXTzjQlWZBBU5aSNuCQNDGxbZ1DtICEH1htnaPoTFMHUT-0VWIaguFvb2VAEb8rm_3iVCd/pub?gid=0&single=true&output=csv";
 
-            // Fetch Data & Parse Size Column
             useEffect(() => {
                 const fetchProjects = async () => {
                     try {
@@ -480,9 +476,7 @@
                             }
                             const tagsArray = row.Tags ? row.Tags.split(',').map(tag => tag.trim().toLowerCase()) : [];
                             const hasAR = row.HasAR && row.HasAR.toLowerCase() === 'true';
-                            // Read Size from CSV (Default 1)
                             const size = parseInt(row.Size || 1);
-                            // Read Featured Column (Default false)
                             const isFeatured = row.Featured && row.Featured.toLowerCase() === 'true';
                             
                             return {
@@ -500,7 +494,6 @@
                             };
                         }).filter(p => p.title.en !== "Untitled" || p.title.fa !== "بدون عنوان");
                         
-                        // Safety: If sheet not updated with 'Featured' column, default first item to true to show something
                         if (transformedProjects.length > 0 && !transformedProjects.some(p => p.isFeatured)) {
                             transformedProjects[0].isFeatured = true;
                         }
@@ -546,7 +539,6 @@
                     setHeroScale(scale);
                     setHeroOpacity(opacity);
                     
-                    // Mobile Nav Visibility Logic
                     setMobileNavVisible(scrollY > windowHeight * 0.8);
 
                     const sections = ['work', 'about', 'contact'];
@@ -576,12 +568,12 @@
                 const elements = document.querySelectorAll('.reveal, .project-card, .timeline-item, .contact-card, .section-title, .filter-bar, .skill-item');
                 elements.forEach((el) => observer.observe(el));
                 return () => observer.disconnect();
-            }, [showAllProjects, filter, dataFetched, projectsData]); // Dependencies to re-observe
+            }, [showAllProjects, filter, dataFetched, projectsData]); 
 
             useEffect(() => {
                 const cards = document.querySelectorAll('.project-card');
                 cards.forEach((card, index) => {
-                    const delay = Math.min(index * 0.05, 0.4); // Slightly faster stagger
+                    const delay = Math.min(index * 0.05, 0.4); 
                     card.style.transitionDelay = `${delay}s`;
                 });
             }, [showAllProjects, filter, projectsData]);
@@ -766,16 +758,13 @@
                 if (e.target === e.currentTarget) { setSelectedProject(null); setShowAR(false); }
             };
 
-            // Logic for showing projects
             const filteredProjects = projectsData
                 .filter(p => filter === 'all' || p.tags.includes(filter))
                 .sort((a, b) => a.order - b.order);
 
-            // Determine which projects to render based on 'showAllProjects' state and 'Featured' column
             const featuredProjects = filteredProjects.filter(p => p.isFeatured);
             const projectsToRender = showAllProjects ? filteredProjects : featuredProjects;
             
-            // Button Visibility Logic
             const hasFeaturedProjects = featuredProjects.length > 0;
             const hasMoreProjects = filteredProjects.length > featuredProjects.length;
 
@@ -792,7 +781,6 @@
                                 <img src="./images/logo.png" onError={(e) => { e.target.onerror = null; e.target.src = "https://placehold.co/100x100/white/black?text=AT"; }} alt="Arian Tabib" className="w-full h-full object-contain" />
                             </a>
                             <nav className="hidden md:flex items-center gap-8">
-                                {/* STRICT ORDER: Work, Contact, About for both languages */}
                                 {['work', 'contact', 'about'].map((key) => (
                                     <a key={key} href={`#${key}`} onClick={(e) => handleNavClick(e, key)} className={`text-[10px] md:text-xs font-light uppercase ${isRTL ? 'tracking-normal font-fa md:font-bold' : 'tracking-[0.2em]'} text-white/60 hover:text-white transition-colors`} onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)}>
                                         {t.nav[key]}
@@ -834,20 +822,41 @@
                             );
                         })}
                         <div ref={heroContentRef} className="relative z-20 max-w-4xl flex flex-col items-center hero-content" style={{ transform: `scale(${heroScale}) translateY(${(1 - heroScale) * -50}px)`, opacity: heroOpacity }}>
-                            {/* Name: Bold for Persian (Mobile & Desktop) */}
-                            <h1 className={`text-3xl md:text-5xl lg:text-7xl font-light text-white tracking-tight leading-none mb-3 md:mb-4 ${isRTL ? 'font-bold font-fa' : ''}`}>{t.hero.name}</h1>
-                            <div className={`text-xs md:text-lg text-white/80 font-light tracking-[0.2em] min-h-[1.5em] mb-4 md:mb-6 uppercase ${isRTL ? 'font-bold font-fa' : ''}`}>
+                            {/* 
+                              2. Hero Name (Persian only): Bold + Slightly Larger 
+                            */}
+                            <h1 className={`text-3xl md:text-5xl lg:text-7xl font-light text-white tracking-tight leading-none mb-3 md:mb-4 ${isRTL ? 'font-bold text-4xl md:text-6xl lg:text-8xl font-fa' : ''}`}>
+                                {t.hero.name}
+                            </h1>
+                            
+                            {/* 
+                              3. Typewriter: 
+                                 - Persian: Remove tracking (kerning fix) + Bold
+                                 - English: Keep tracking + Light
+                            */}
+                            <div className={`text-xs md:text-lg text-white/80 font-light min-h-[1.5em] mb-4 md:mb-6 uppercase ${isRTL ? 'tracking-normal font-bold font-fa text-lg md:text-2xl' : 'tracking-[0.2em]'}`}>
                                 {text}<span className="typing-cursor"></span>
                             </div>
-                            {/* Desc: Bold for Persian (same size) */}
-                            <p className={`text-white/40 text-[10px] md:text-sm max-w-xl leading-relaxed mb-8 md:mb-10 font-light ${isRTL ? 'font-bold font-fa' : ''}`}>{t.hero.desc}</p>
                             
-                            {/* CENTERED HERO BUTTONS: Bigger & Bold for Persian Desktop */}
+                            {/* 
+                              4. Hero Description: 
+                                 - Both Languages: Pure White (text-white instead of text-white/40)
+                                 - Persian: Bold
+                            */}
+                            <p className={`text-white text-[10px] md:text-sm max-w-xl leading-relaxed mb-8 md:mb-10 ${isRTL ? 'font-bold font-fa' : 'font-light'}`}>
+                                {t.hero.desc}
+                            </p>
+                            
+                            {/* 
+                              5. Hero Buttons: 
+                                 - Both: Bold
+                                 - Persian: Slightly larger (text-[11px] md:text-[15px])
+                            */}
                             <div className="flex flex-row justify-center gap-3 md:gap-4 w-full sm:w-auto">
-                                <button onClick={scrollToProjects} className={`px-6 py-2 md:px-8 md:py-2.5 border border-white/30 text-white text-[10px] md:text-sm font-light uppercase tracking-widest rounded-full hover:bg-white hover:text-black hover:border-white transition-all duration-300 ${isRTL ? 'font-bold font-fa' : ''}`}>
+                                <button onClick={scrollToProjects} className={`px-6 py-2 md:px-8 md:py-2.5 border border-white/30 text-white font-bold uppercase tracking-widest rounded-full hover:bg-white hover:text-black hover:border-white transition-all duration-300 ${isRTL ? 'text-[11px] md:text-[15px] font-fa' : 'text-[10px] md:text-sm'}`}>
                                     {t.hero.ctaPrimary}
                                 </button>
-                                <a href="./docs/portfolio.pdf" download className={`px-6 py-2 md:px-8 md:py-2.5 border border-white/10 text-white/60 text-[10px] md:text-sm font-light uppercase tracking-widest rounded-full hover:border-accent hover:text-accent transition-all duration-300 ${isRTL ? 'font-bold font-fa' : ''}`}>
+                                <a href="./docs/portfolio.pdf" download className={`px-6 py-2 md:px-8 md:py-2.5 border border-white/10 text-white font-bold uppercase tracking-widest rounded-full hover:border-accent hover:text-accent transition-all duration-300 ${isRTL ? 'text-[11px] md:text-[15px] font-fa' : 'text-[10px] md:text-sm'}`}>
                                     {t.hero.ctaSecondary}
                                 </a>
                             </div>
@@ -865,7 +874,6 @@
                     {/* --- PROJECTS --- */}
                     <section id="work" className="pt-12 pb-12 px-4 md:px-12 container mx-auto">
                         
-                        {/* FILTERS: Only visible when showAllProjects is true */}
                         {showAllProjects && (
                             <div className="filter-bar flex flex-wrap gap-4 gap-y-3 mb-12 justify-center md:justify-start pb-4 border-b border-white/10">
                                 {Object.keys(t.filters).map((key) => (
@@ -880,12 +888,9 @@
                             <div className="text-center py-20 text-white/30 text-xs tracking-widest">Loading Projects...</div>
                         ) : (
                             <>
-                                {/* GRID: Dynamic Layout */}
                                 <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-4 auto-rows-[minmax(200px,_1fr)] grid-flow-dense">
                                     {projectsToRender.map((project, index) => {
-                                        // Logic for Grid Spans
                                         const isLarge = project.size === 2;
-                                        
                                         return (
                                             <div 
                                                 key={project.id} 
@@ -907,10 +912,7 @@
                                     })}
                                 </div>
 
-                                {/* BUTTONS AREA */}
                                 <div className="mt-12 flex flex-col items-center gap-4 reveal">
-                                    
-                                    {/* Show More Button */}
                                     {!showAllProjects && hasMoreProjects && hasFeaturedProjects && (
                                         <button 
                                             onClick={() => setShowAllProjects(true)} 
@@ -924,7 +926,6 @@
                                         </button>
                                     )}
 
-                                    {/* Collapse Button (Minimal) */}
                                     {showAllProjects && hasMoreProjects && (
                                         <button 
                                             onClick={() => {
@@ -975,13 +976,19 @@
                             <div className={`flex flex-col md:flex-row gap-10 md:gap-20`}>
                                 <div className={`reveal w-full md:w-1/3 aspect-[3/4] md:aspect-[4/5] relative self-start ${isRTL ? 'order-first' : ''}`}>
                                     <div className="absolute top-2 left-2 w-full h-full border border-white/5 z-0"></div>
-                                    {/* MODIFIED: Removed grayscale class */}
                                     <img src="./images/me.jpg" alt="Arian Tabib" className="w-full h-full object-cover relative z-10 transition-all duration-700 hover:scale-[1.02]" />
                                 </div>
                                 
                                 <div className={`w-full md:w-2/3 ${isRTL ? 'text-right' : 'text-left'}`}>
-                                    {/* MODIFIED: Larger font size for Persian About Title */}
-                                    <h2 className={`reveal text-xs md:text-sm text-accent uppercase ${isRTL ? 'tracking-normal font-fa font-bold' : 'tracking-[0.2em]'} mb-3`}>{t.about.title}</h2>
+                                    {/* 
+                                      1. About Me Title: 
+                                         - Text changed to "About Me" (English)
+                                         - Larger Size (text-2xl md:text-4xl)
+                                         - Bold
+                                    */}
+                                    <h2 className={`reveal text-2xl md:text-4xl text-accent uppercase ${isRTL ? 'tracking-normal font-fa font-bold' : 'tracking-[0.2em] font-bold'} mb-3`}>
+                                        {t.about.title}
+                                    </h2>
                                     <p className={`reveal text-sm md:text-base text-white/60 leading-loose mb-8 font-light ${isRTL ? 'font-fa' : ''}`}>{t.about.bio}</p>
 
                                     <div className="mt-12">
