@@ -389,17 +389,33 @@
         };
 
         const MobileBottomNav = ({ activeSection, onNavigate, lang, onLangToggle, isRTL, isVisible }) => {
-            const navItems = [
+            // CHANGE: Reordered Nav Items for Persian (RTL) specifically
+            // Request: Contact Middle, About Right.
+            // In RTL: Start=Right, End=Left. So Right(Middle), Mid(Contact), Left(Work).
+            // Array: [About, Contact, Work]
+            
+            const baseNavItems = [
                 { id: 'work', icon: <Icons.Grid />, label: { en: 'Work', fa: 'آثار' } },
-                { id: 'about', icon: <Icons.User />, label: { en: 'About', fa: 'درباره' } },
                 { id: 'contact', icon: <Icons.MessageCircle />, label: { en: 'Contact', fa: 'تماس' } },
+                { id: 'about', icon: <Icons.User />, label: { en: 'About', fa: 'درباره' } },
             ];
+            
+            // Adjust order based on language to match user request for FA
+            let navItems = baseNavItems;
+            if (isRTL) {
+                 // RTL Order: About(Right) | Contact(Mid) | Work(Left)
+                 navItems = [baseNavItems[2], baseNavItems[1], baseNavItems[0]];
+            } else {
+                // English/Default Order: Work(Left) | About(Mid) | Contact(Right)
+                navItems = [baseNavItems[0], baseNavItems[2], baseNavItems[1]];
+            }
+
             return (
                 <nav className={`mobile-bottom-nav md:hidden ${isVisible ? 'visible' : ''}`}>
                     {navItems.map((item) => (
                         <a key={item.id} href={`#${item.id}`} onClick={(e) => onNavigate(e, item.id)} className={`mobile-nav-item ${activeSection === item.id ? 'active' : ''}`}>
                             {item.icon}
-                            <span className={isRTL ? 'font-fa' : ''}>{item.label[lang]}</span>
+                            <span className={`font-bold ${isRTL ? 'font-fa' : ''}`}>{item.label[lang]}</span>
                         </a>
                     ))}
                     <button onClick={onLangToggle} className="mobile-lang-btn" aria-label="Switch Language">
@@ -792,11 +808,11 @@
                             </a>
                             <nav className="hidden md:flex items-center gap-8">
                                 {Object.entries(t.nav).map(([key, label]) => (
-                                    <a key={key} href={`#${key}`} onClick={(e) => handleNavClick(e, key)} className={`text-[10px] md:text-xs font-light uppercase ${isRTL ? 'tracking-normal font-fa' : 'tracking-[0.2em]'} text-white/60 hover:text-white transition-colors`} onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)}>
+                                    <a key={key} href={`#${key}`} onClick={(e) => handleNavClick(e, key)} className={`text-[10px] md:text-xs font-light uppercase ${isRTL ? 'tracking-normal font-fa md:font-bold' : 'tracking-[0.2em]'} text-white/60 hover:text-white transition-colors`} onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)}>
                                         {label}
                                     </a>
                                 ))}
-                                <a href="./docs/portfolio.pdf" download className={`flex items-center gap-2 text-[10px] md:text-xs font-light uppercase ${isRTL ? 'tracking-normal font-fa' : 'tracking-[0.2em]'} text-accent hover:text-white transition-colors border border-white/10 hover:border-accent px-4 py-2 rounded-full`} onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)}>
+                                <a href="./docs/portfolio.pdf" download className={`flex items-center gap-2 text-[10px] md:text-xs font-light uppercase ${isRTL ? 'tracking-normal font-fa md:font-bold' : 'tracking-[0.2em]'} text-accent hover:text-white transition-colors border border-white/10 hover:border-accent px-4 py-2 rounded-full`} onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)}>
                                     <span>{t.download}</span>
                                     <Icons.Download />
                                 </a>
@@ -832,18 +848,18 @@
                             );
                         })}
                         <div ref={heroContentRef} className="relative z-20 max-w-4xl flex flex-col items-center hero-content" style={{ transform: `scale(${heroScale}) translateY(${(1 - heroScale) * -50}px)`, opacity: heroOpacity }}>
-                            <h1 className={`text-3xl md:text-5xl lg:text-7xl font-light text-white tracking-tight leading-none mb-3 md:mb-4 ${isRTL ? 'font-fa' : ''}`}>{t.hero.name}</h1>
-                            <div className={`text-xs md:text-lg text-white/80 font-light tracking-[0.2em] min-h-[1.5em] mb-4 md:mb-6 uppercase ${isRTL ? 'font-fa tracking-normal' : ''}`}>
+                            <h1 className={`text-3xl md:text-5xl lg:text-7xl font-light text-white tracking-tight leading-none mb-3 md:mb-4 ${isRTL ? 'font-fa md:font-bold' : ''}`}>{t.hero.name}</h1>
+                            <div className={`text-xs md:text-lg text-white/80 font-light tracking-[0.2em] min-h-[1.5em] mb-4 md:mb-6 uppercase ${isRTL ? 'font-fa font-bold' : ''}`}>
                                 {text}<span className="typing-cursor"></span>
                             </div>
                             <p className={`text-white/40 text-[10px] md:text-sm max-w-xl leading-relaxed mb-8 md:mb-10 font-light ${isRTL ? 'font-fa' : ''}`}>{t.hero.desc}</p>
                             
                             {/* CENTERED HERO BUTTONS */}
                             <div className="flex flex-row justify-center gap-3 md:gap-4 w-full sm:w-auto">
-                                <button onClick={scrollToProjects} className={`px-6 py-2 md:px-8 md:py-2.5 border border-white/30 text-white text-[10px] md:text-xs font-light uppercase tracking-widest rounded-full hover:bg-white hover:text-black hover:border-white transition-all duration-300 ${isRTL ? 'font-fa tracking-normal' : ''}`}>
+                                <button onClick={scrollToProjects} className={`px-6 py-2 md:px-8 md:py-2.5 border border-white/30 text-white text-[10px] md:text-xs font-light uppercase tracking-widest rounded-full hover:bg-white hover:text-black hover:border-white transition-all duration-300 ${isRTL ? 'font-fa font-bold' : ''}`}>
                                     {t.hero.ctaPrimary}
                                 </button>
-                                <a href="./docs/portfolio.pdf" download className={`px-6 py-2 md:px-8 md:py-2.5 border border-white/10 text-white/60 text-[10px] md:text-xs font-light uppercase tracking-widest rounded-full hover:border-accent hover:text-accent transition-all duration-300 ${isRTL ? 'font-fa tracking-normal' : ''}`}>
+                                <a href="./docs/portfolio.pdf" download className={`px-6 py-2 md:px-8 md:py-2.5 border border-white/10 text-white/60 text-[10px] md:text-xs font-light uppercase tracking-widest rounded-full hover:border-accent hover:text-accent transition-all duration-300 ${isRTL ? 'font-fa font-bold' : ''}`}>
                                     {t.hero.ctaSecondary}
                                 </a>
                             </div>
@@ -865,7 +881,7 @@
                         {showAllProjects && (
                             <div className="filter-bar flex flex-wrap gap-4 gap-y-3 mb-12 justify-center md:justify-start pb-4 border-b border-white/10">
                                 {Object.keys(t.filters).map((key) => (
-                                    <button key={key} onClick={() => setFilter(key)} className={`text-[10px] md:text-xs font-light uppercase ${isRTL ? 'tracking-normal font-fa' : 'tracking-widest'} transition-all duration-300 px-3 py-1 md:px-4 md:py-1.5 rounded-full border ${filter === key ? 'filter-btn-active' : 'border-white/10 text-secondary hover:text-white hover:border-white/30'}`} onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)}>
+                                    <button key={key} onClick={() => setFilter(key)} className={`text-[10px] md:text-xs font-light uppercase ${isRTL ? 'tracking-normal font-fa font-bold md:font-bold' : 'tracking-widest'} transition-all duration-300 px-3 py-1 md:px-4 md:py-1.5 rounded-full border ${filter === key ? 'filter-btn-active' : 'border-white/10 text-secondary hover:text-white hover:border-white/30'}`} onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)}>
                                         {t.filters[key]}
                                     </button>
                                 ))}
@@ -895,8 +911,8 @@
                                                     <BlurImage src={project.img} alt={project.title[lang]} loading="lazy" className="opacity-90 group-hover:opacity-100" />
                                                 </div>
                                                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4 md:p-6">
-                                                    <span className={`text-accent text-[9px] md:text-[10px] uppercase ${isRTL ? 'tracking-normal font-fa' : 'tracking-widest'} mb-1`}>{project.loc}</span>
-                                                    <h3 className={`text-xs md:text-sm font-light text-white leading-tight ${isRTL ? 'font-fa' : ''}`}>{project.title[lang]}</h3>
+                                                    <span className={`text-accent text-[9px] md:text-[10px] uppercase ${isRTL ? 'tracking-normal font-fa font-bold' : 'tracking-widest'} mb-1`}>{project.loc}</span>
+                                                    <h3 className={`text-xs md:text-sm font-light text-white leading-tight ${isRTL ? 'font-fa md:font-bold' : ''}`}>{project.title[lang]}</h3>
                                                 </div>
                                             </div>
                                         );
@@ -910,7 +926,7 @@
                                     {!showAllProjects && hasMoreProjects && hasFeaturedProjects && (
                                         <button 
                                             onClick={() => setShowAllProjects(true)} 
-                                            className={`group flex items-center gap-3 px-8 py-3 border border-white/20 text-white/70 text-xs font-light uppercase tracking-widest rounded-full hover:border-accent hover:text-accent hover:bg-white/5 transition-all duration-300 ${isRTL ? 'font-fa' : ''}`}
+                                            className={`group flex items-center gap-3 px-8 py-3 border border-white/20 text-white/70 text-xs font-light uppercase tracking-widest rounded-full hover:border-accent hover:text-accent hover:bg-white/5 transition-all duration-300 ${isRTL ? 'font-fa font-bold' : ''}`}
                                             onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)}
                                         >
                                             <span>{t.showMoreBtn}</span>
@@ -927,7 +943,7 @@
                                                 setShowAllProjects(false);
                                                 window.scrollTo({ top: document.getElementById('work').offsetTop - 100, behavior: 'smooth' });
                                             }} 
-                                            className={`flex items-center gap-2 text-white/40 text-[10px] font-light uppercase tracking-widest hover:text-accent transition-all duration-300 ${isRTL ? 'font-fa' : ''}`}
+                                            className={`flex items-center gap-2 text-white/40 text-[10px] font-light uppercase tracking-widest hover:text-accent transition-all duration-300 ${isRTL ? 'font-fa font-bold' : ''}`}
                                             onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)}
                                         >
                                             <span>{t.collapseBtn}</span>
@@ -945,7 +961,7 @@
                     {/* --- CONTACT --- */}
                     <section id="contact" className="pt-12 pb-12 px-6 bg-surface">
                         <div className="container mx-auto max-w-5xl">
-                            <h2 className={`section-title text-2xl md:text-4xl font-light mb-12 md:mb-16 text-center text-white ${isRTL ? 'font-fa' : ''}`}>
+                            <h2 className={`section-title text-2xl md:text-4xl font-light mb-12 md:mb-16 text-center text-white ${isRTL ? 'font-fa md:font-bold' : ''}`}>
                                 {t.contact.title}
                             </h2>
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" dir="ltr">
@@ -953,7 +969,7 @@
                                     <a key={index} href={item.href} target="_blank" className="contact-card flex items-center gap-4 p-5 rounded-lg border border-white/5 hover:border-accent/50 hover:bg-white/[0.02] transition-all duration-300 group cursor-none text-left backdrop-blur-sm bg-white/[0.01]" style={{ transitionDelay: `${index * 0.05}s` }} onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)}>
                                         <span className="text-secondary group-hover:text-accent transition-colors scale-100">{item.icon}</span>
                                         <div className="flex flex-col items-start">
-                                            <span className={`text-[9px] uppercase ${isRTL ? 'tracking-normal font-fa' : 'tracking-widest'} text-secondary mb-1`}>{item.label}</span>
+                                            <span className={`text-[9px] uppercase ${isRTL ? 'tracking-normal font-fa font-bold' : 'tracking-widest'} text-secondary mb-1`}>{item.label}</span>
                                             <span className="text-xs md:text-sm font-light text-white">{item.text}</span>
                                         </div>
                                     </a>
@@ -976,16 +992,16 @@
                                 </div>
                                 
                                 <div className={`w-full md:w-2/3 ${isRTL ? 'text-right' : 'text-left'}`}>
-                                    <h2 className={`reveal text-xs text-accent uppercase ${isRTL ? 'tracking-normal font-fa' : 'tracking-[0.2em]'} mb-3`}>{t.about.title}</h2>
+                                    <h2 className={`reveal text-xs text-accent uppercase ${isRTL ? 'tracking-normal font-fa md:font-bold' : 'tracking-[0.2em]'} mb-3`}>{t.about.title}</h2>
                                     <p className={`reveal text-sm md:text-base text-white/60 leading-loose mb-8 font-light ${isRTL ? 'font-fa' : ''}`}>{t.about.bio}</p>
 
                                     <div className="mt-12">
-                                        <h3 className={`reveal text-base md:text-lg font-light text-white mb-6 border-b border-white/5 pb-2 ${isRTL ? 'font-fa' : ''}`}>{t.about.expTitle}</h3>
+                                        <h3 className={`reveal text-base md:text-lg font-light text-white mb-6 border-b border-white/5 pb-2 ${isRTL ? 'font-fa md:font-bold' : ''}`}>{t.about.expTitle}</h3>
                                         <div className={`space-y-6 relative ${isRTL ? 'border-r mr-2 pr-6' : 'border-l ml-2 pl-6'} border-white/5`}>
                                             {timeline.experience.map((job, i) => (
                                                 <div key={i} className="timeline-item relative" style={{ transitionDelay: `${i * 0.1}s` }}>
                                                     <span className={`absolute ${isRTL ? '-right-[31px]' : '-left-[31px]'} top-1.5 w-2.5 h-2.5 bg-white/20 hover:bg-accent rounded-full border border-black transition-colors`}></span>
-                                                    <h4 className={`text-sm font-medium text-white ${isRTL ? 'font-fa' : ''}`}>{job.role}</h4>
+                                                    <h4 className={`text-sm font-medium text-white ${isRTL ? 'font-fa md:font-bold' : ''}`}>{job.role}</h4>
                                                     <p className="text-white/40 text-xs mt-1">{job.company}</p>
                                                     <span className={`text-[10px] text-secondary uppercase ${isRTL ? 'tracking-normal font-fa' : 'tracking-wider'} mt-1 block`}>{job.duration}</span>
                                                 </div>
@@ -994,12 +1010,12 @@
                                     </div>
 
                                     <div className="mt-12">
-                                        <h3 className={`reveal text-base md:text-lg font-light text-white mb-6 border-b border-white/5 pb-2 ${isRTL ? 'font-fa' : ''}`}>{t.about.eduTitle}</h3>
+                                        <h3 className={`reveal text-base md:text-lg font-light text-white mb-6 border-b border-white/5 pb-2 ${isRTL ? 'font-fa md:font-bold' : ''}`}>{t.about.eduTitle}</h3>
                                         <div className={`space-y-6 relative ${isRTL ? 'border-r mr-2 pr-6' : 'border-l ml-2 pl-6'} border-white/5`}>
                                             {timeline.education.map((edu, i) => (
                                                 <div key={i} className="timeline-item relative" style={{ transitionDelay: `${i * 0.1}s` }}>
                                                     <span className={`absolute ${isRTL ? '-right-[31px]' : '-left-[31px]'} top-1.5 w-2.5 h-2.5 bg-accent rounded-full border border-black`}></span>
-                                                    <h4 className={`text-sm font-medium text-white ${isRTL ? 'font-fa' : ''}`}>{edu.role}</h4>
+                                                    <h4 className={`text-sm font-medium text-white ${isRTL ? 'font-fa md:font-bold' : ''}`}>{edu.role}</h4>
                                                     <p className="text-white/40 text-xs mt-1">{edu.company}</p>
                                                     <span className={`text-[10px] text-secondary uppercase ${isRTL ? 'tracking-normal font-fa' : 'tracking-wider'} mt-1 block`}>{edu.duration}</span>
                                                 </div>
@@ -1011,7 +1027,7 @@
 
                             {/* SKILLS SECTION */}
                             <div className="mt-20">
-                                <h3 className={`reveal text-base md:text-lg font-light text-white mb-8 text-center ${isRTL ? 'font-fa' : ''}`}>{t.about.skillsTitle}</h3>
+                                <h3 className={`reveal text-base md:text-lg font-light text-white mb-8 text-center ${isRTL ? 'font-fa md:font-bold' : ''}`}>{t.about.skillsTitle}</h3>
                                 <div className="skills-grid" dir="ltr">
                                     {skillsData.map((skill, index) => (
                                         <div key={skill.id} className="skill-item" style={{ transitionDelay: `${index * 0.03}s` }} onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)}>
@@ -1040,7 +1056,7 @@
                                 <div className="w-full h-1 bg-white/10 rounded-full overflow-hidden mb-3">
                                     <div className="h-full bg-gradient-to-r from-accent to-yellow-400 transition-all duration-150 ease-out rounded-full" style={{ width: `${usdzDownloadProgress}%` }}></div>
                                 </div>
-                                <p className={`text-white text-xs font-light uppercase tracking-widest mb-1 ${isRTL ? 'font-fa tracking-normal' : ''}`}>{lang === 'en' ? 'Preparing AR Experience' : 'آماده‌سازی تجربه AR'}</p>
+                                <p className={`text-white text-xs font-light uppercase tracking-widest mb-1 ${isRTL ? 'font-fa font-bold' : ''}`}>{lang === 'en' ? 'Preparing AR Experience' : 'آماده‌سازی تجربه AR'}</p>
                                 <p className="text-accent text-lg font-mono font-light">{usdzDownloadProgress}%</p>
                             </div>
                         </div>
@@ -1117,8 +1133,8 @@
                                 {!showAR && (
                                     <div className={`w-full md:w-[360px] lg:w-[400px] max-h-[40vh] md:max-h-[80vh] flex flex-col bg-[#0a0a0a] border border-white/5 shadow-2xl rounded-sm overflow-hidden pointer-events-auto ${isRTL ? 'text-right font-fa' : 'text-left'}`} dir={isRTL ? 'rtl' : 'ltr'} onClick={(e) => e.stopPropagation()}>
                                         <div className="p-5 md:p-8 overflow-y-auto flex-1 modal-scroll flex flex-col">
-                                            <span className={`text-accent text-[10px] uppercase ${isRTL ? 'tracking-normal font-fa' : 'tracking-[0.15em]'} mb-2 md:mb-3 block opacity-70`}>{selectedProject.loc}</span>
-                                            <h2 className={`text-lg md:text-3xl font-light mb-4 md:mb-6 text-white leading-tight ${isRTL ? 'font-fa' : ''}`}>{selectedProject.title[lang]}</h2>
+                                            <span className={`text-accent text-[10px] uppercase ${isRTL ? 'tracking-normal font-fa font-bold' : 'tracking-[0.15em]'} mb-2 md:mb-3 block opacity-70`}>{selectedProject.loc}</span>
+                                            <h2 className={`text-lg md:text-3xl font-light mb-4 md:mb-6 text-white leading-tight ${isRTL ? 'font-fa md:font-bold' : ''}`}>{selectedProject.title[lang]}</h2>
                                             
                                             <div className={`text-white/50 text-sm leading-7 ${isRTL ? 'font-fa' : ''}`}>
                                                 {selectedProject.desc[lang]}
@@ -1126,7 +1142,7 @@
 
                                             <div className="mt-auto pt-4 md:pt-8"></div> 
 
-                                            <div className={`border-t border-white/5 pt-3 md:pt-5 grid grid-cols-1 gap-1 text-[10px] text-white/30 font-mono ${isRTL ? 'tracking-normal' : 'tracking-wide'}`}>
+                                            <div className={`border-t border-white/5 pt-3 md:pt-5 grid grid-cols-1 gap-1 text-[10px] text-white/30 font-mono ${isRTL ? 'tracking-normal font-fa' : 'tracking-wide'}`}>
                                                 <div className="flex justify-between"><span>ROLE:</span> <span className="text-white/60">Lead Architect</span></div>
                                                 <div className="flex justify-between"><span>STATUS:</span> <span className="text-white/60">Completed</span></div>
                                             </div>
@@ -1134,7 +1150,7 @@
 
                                         {selectedProject.hasAR && (
                                             <div className="p-3 md:p-5 border-t border-white/5 bg-[#0a0a0a] flex justify-end">
-                                                <button onClick={handleARButtonClick} disabled={isDownloadingUsdz} className={`px-4 py-2 md:px-5 md:py-2.5 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-accent text-white hover:text-accent rounded-full transition-all flex items-center gap-2 pointer-events-auto font-light uppercase text-[10px] md:text-xs ${isRTL ? 'font-fa tracking-normal' : 'tracking-widest'} disabled:opacity-50 disabled:cursor-not-allowed`}>
+                                                <button onClick={handleARButtonClick} disabled={isDownloadingUsdz} className={`px-4 py-2 md:px-5 md:py-2.5 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-accent text-white hover:text-accent rounded-full transition-all flex items-center gap-2 pointer-events-auto font-light uppercase text-[10px] md:text-xs ${isRTL ? 'font-fa font-bold' : 'tracking-widest'} disabled:opacity-50 disabled:cursor-not-allowed`}>
                                                     <span>{isIPhone ? (lang === 'en' ? 'AR' : 'واقعیت افزوده') : (lang === 'en' ? '3D View' : 'نمای سه بعدی')}</span>
                                                     <Icons.AR />
                                                 </button>
