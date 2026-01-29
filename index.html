@@ -234,19 +234,7 @@
         @media (min-width: 640px) { .skill-name { font-size: 0.65rem; } }
         .skill-item:hover .skill-name { color: #C1A365; }
 
-        /* Modal swipe indicator */
-        .swipe-indicator {
-            width: 40px;
-            height: 4px;
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 2px;
-            margin: 0 auto 16px;
-        }
-
-        /* Modal drag state */
-        .modal-dragging {
-            transition: none !important;
-        }
+        /* Modal styles */
 
         /* Reduced motion */
         @media (prefers-reduced-motion: reduce) {
@@ -606,10 +594,7 @@
             
             const [showAllProjects, setShowAllProjects] = useState(false);
 
-            // Modal swipe-to-close state
-            const [modalDragY, setModalDragY] = useState(0);
-            const [isDraggingModal, setIsDraggingModal] = useState(false);
-            const modalDragStart = useRef(null);
+            // Modal state (swipe-to-close removed)
 
             const t = content[lang];
             const timeline = timelineData[lang];
@@ -871,39 +856,12 @@
                 if (distance < -minSwipeDistance) prevMedia();
             };
 
-            // Modal swipe-to-close (vertical)
-            const handleModalTouchStart = (e) => {
-                if (showAR) return;
-                modalDragStart.current = e.touches[0].clientY;
-                setIsDraggingModal(true);
-            };
-
-            const handleModalTouchMove = (e) => {
-                if (showAR || !modalDragStart.current) return;
-                const currentY = e.touches[0].clientY;
-                const diff = currentY - modalDragStart.current;
-                // Only allow downward drag
-                if (diff > 0) {
-                    setModalDragY(diff);
-                }
-            };
-
-            const handleModalTouchEnd = () => {
-                if (showAR) return;
-                setIsDraggingModal(false);
-                // If dragged more than 150px down, close modal
-                if (modalDragY > 150) {
-                    haptic.medium();
-                    closeModal();
-                }
-                setModalDragY(0);
-                modalDragStart.current = null;
-            };
+            // Modal close function
+            
 
             const closeModal = () => {
                 setSelectedProject(null);
                 setShowAR(false);
-                setModalDragY(0);
             };
 
             const openProject = (project) => {
@@ -988,8 +946,8 @@
             const hasFeaturedProjects = featuredProjects.length > 0;
             const hasMoreProjects = filteredProjects.length > featuredProjects.length;
 
-            // Calculate modal opacity based on drag
-            const modalOpacity = Math.max(0.3, 1 - (modalDragY / 300));
+            // Modal opacity (fixed, no drag)
+            const modalOpacity = 1;
 
             return (
                 <div className={`min-h-screen ${isRTL ? 'font-fa' : ''}`} dir={isRTL ? 'rtl' : 'ltr'}>
@@ -1274,18 +1232,8 @@
                             style={{ opacity: modalOpacity }}
                         >
                             <div 
-                                className={`w-full h-full max-w-[1920px] p-4 md:p-12 flex flex-col md:flex-row gap-8 items-center justify-center relative pointer-events-none ${isDraggingModal ? 'modal-dragging' : ''}`}
-                                style={{ transform: `translateY(${modalDragY}px)` }}
-                                onTouchStart={handleModalTouchStart}
-                                onTouchMove={handleModalTouchMove}
-                                onTouchEnd={handleModalTouchEnd}
+                                className="w-full h-full max-w-[1920px] p-4 md:p-12 flex flex-col md:flex-row gap-8 items-center justify-center relative pointer-events-none"
                             >
-                                {/* Swipe indicator for mobile */}
-                                {!showAR && isMobile && (
-                                    <div className="absolute top-2 left-1/2 -translate-x-1/2 pointer-events-none">
-                                        <div className="swipe-indicator"></div>
-                                    </div>
-                                )}
 
                                 {!showAR && (
                                     <button className="absolute top-4 right-4 z-50 p-2 bg-black/20 hover:bg-white text-white/80 hover:text-black rounded-full transition-all backdrop-blur-md border border-white/10 pointer-events-auto" onClick={() => { haptic.light(); closeModal(); }}>
@@ -1310,18 +1258,6 @@
                                     )}
                                     {showAR && selectedProject.hasAR ? (
                                         <div className="w-full h-full relative" dir="ltr">
-                                            {/* FIX: Back button is now OUTSIDE the model-viewer, preventing AR trigger */}
-                                            <div className="ar-buttons-container md:hidden">
-                                                <button 
-                                                    onClick={handleCloseARView} 
-                                                    className="ar-btn ar-btn-back"
-                                                    style={{ pointerEvents: 'auto' }}
-                                                >
-                                                    <Icons.Back />
-                                                    <span>{lang === 'en' ? 'Back' : 'بازگشت'}</span>
-                                                </button>
-                                            </div>
-                                            
                                             <model-viewer 
                                                 ref={modelViewerRef} 
                                                 src={selectedProject.modelGLB} 
@@ -1337,16 +1273,26 @@
                                                 alt={`3D model of ${selectedProject.title[lang]}`} 
                                                 style={{width: '100%', height: '100%'}}
                                             >
-                                                {/* Only the AR activation button inside slot="ar-button" */}
+                                                {/* AR activation button - this is the ONLY thing in the slot */}
                                                 <button 
                                                     slot="ar-button" 
                                                     className="ar-btn ar-btn-activate"
-                                                    style={{ position: 'absolute', top: '1rem', right: '1rem', zIndex: 60 }}
+                                                    style={{ position: 'absolute', bottom: '16px', left: '50%', transform: 'translateX(-50%)', zIndex: 60 }}
                                                 >
                                                     <span>{lang === 'en' ? 'View in AR' : 'واقعیت افزوده'}</span>
                                                     <Icons.AR />
                                                 </button>
                                             </model-viewer>
+                                            
+                                            {/* Back button - COMPLETELY OUTSIDE model-viewer to prevent AR trigger */}
+                                            <button 
+                                                onClick={handleCloseARView} 
+                                                className="md:hidden ar-btn ar-btn-back"
+                                                style={{ position: 'absolute', top: '16px', left: '16px', zIndex: 100, pointerEvents: 'auto' }}
+                                            >
+                                                <Icons.Back />
+                                                <span>{lang === 'en' ? 'Back' : 'بازگشت'}</span>
+                                            </button>
                                             
                                             {/* Desktop back button */}
                                             <button onClick={handleCloseARView} className="hidden md:flex absolute top-4 left-4 z-[60] px-4 py-2 bg-black hover:bg-[#222] text-white rounded-full transition-all items-center gap-2 shadow-lg pointer-events-auto text-[10px] font-light uppercase tracking-widest border border-white/10">
