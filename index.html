@@ -77,14 +77,45 @@
         }
         .project-card.revealed { opacity: 1; transform: translateY(0) scale(1); }
 
+        /* Skeleton Loading */
+        .skeleton {
+            background: linear-gradient(90deg, #1a1a1a 25%, #252525 50%, #1a1a1a 75%);
+            background-size: 200% 100%;
+            animation: skeletonShimmer 1.5s ease-in-out infinite;
+        }
+        @keyframes skeletonShimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+        .skeleton-card {
+            position: relative;
+            overflow: hidden;
+            background-color: #101010;
+            border-radius: 2px;
+        }
+        .skeleton-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.03), transparent);
+            animation: skeletonShimmer 1.5s ease-in-out infinite;
+            background-size: 200% 100%;
+        }
+
         /* Hero Parallax */
         .hero-content { transition: transform 0.1s linear, opacity 0.1s linear; will-change: transform, opacity; }
 
-        /* Custom Cursor */
-        .cursor-dot, .cursor-outline { position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; z-index: 9998; pointer-events: none; }
-        .cursor-dot { width: 6px; height: 6px; background-color: #fff; }
-        .cursor-outline { width: 40px; height: 40px; border: 1px solid rgba(255, 255, 255, 0.3); transition: width 0.2s, height 0.2s, background-color 0.2s; }
-        body.hovering .cursor-outline { width: 60px; height: 60px; background-color: rgba(255, 255, 255, 0.1); border-color: transparent; backdrop-filter: blur(2px); }
+        /* Custom Cursor - Only on devices that support hover (not touch) */
+        @media (hover: hover) and (pointer: fine) {
+            .cursor-dot, .cursor-outline { position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; z-index: 9998; pointer-events: none; }
+            .cursor-dot { width: 6px; height: 6px; background-color: #fff; }
+            .cursor-outline { width: 40px; height: 40px; border: 1px solid rgba(255, 255, 255, 0.3); transition: width 0.2s, height 0.2s, background-color 0.2s; }
+            body.hovering .cursor-outline { width: 60px; height: 60px; background-color: rgba(255, 255, 255, 0.1); border-color: transparent; backdrop-filter: blur(2px); }
+        }
+        @media (hover: none) or (pointer: coarse) {
+            body { cursor: auto; }
+            .cursor-dot, .cursor-outline { display: none !important; }
+        }
 
         /* Utilities */
         .header-fade { background: linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.6) 50%, transparent 100%); }
@@ -146,17 +177,22 @@
         .section-divider-line { width: 60px; height: 1px; background: linear-gradient(90deg, transparent, rgba(193, 163, 101, 0.5)); }
         .section-divider-line:last-child { background: linear-gradient(90deg, rgba(193, 163, 101, 0.5), transparent); }
 
-        /* Mobile Bottom Nav */
+        /* Mobile Bottom Nav - ONLY visible on mobile */
         .mobile-bottom-nav {
             position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(200px); z-index: 100;
-            display: flex; align-items: center; justify-content: center; gap: 6px; padding: 10px 16px;
+            display: none; /* Hidden by default */
+            align-items: center; justify-content: center; gap: 6px; padding: 10px 16px;
             background: rgba(15, 15, 15, 0.85); backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%);
             border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 50px;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05);
             opacity: 0; visibility: hidden;
             transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.4s ease, visibility 0.4s ease;
         }
-        .mobile-bottom-nav.visible { transform: translateX(-50%) translateY(0); opacity: 1; visibility: visible; }
+        /* Only show on mobile devices */
+        @media (max-width: 767px) {
+            .mobile-bottom-nav { display: flex; }
+            .mobile-bottom-nav.visible { transform: translateX(-50%) translateY(0); opacity: 1; visibility: visible; }
+        }
         .mobile-nav-item { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 8px 16px; border-radius: 24px; transition: all 0.25s ease; text-decoration: none; color: rgba(255, 255, 255, 0.5); position: relative; min-width: 56px; }
         .mobile-nav-item:active { transform: scale(0.95); }
         .mobile-nav-item.active { color: #C1A365; background: rgba(193, 163, 101, 0.15); }
@@ -175,6 +211,15 @@
         .img-blur-main { width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.4s ease-out; }
         .img-blur-main.loaded { opacity: 1; }
 
+        /* Lazy Load Image */
+        .lazy-image {
+            opacity: 0;
+            transition: opacity 0.5s ease-out;
+        }
+        .lazy-image.loaded {
+            opacity: 1;
+        }
+
         /* Skills Grid */
         .skills-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
         @media (min-width: 640px) { .skills-grid { grid-template-columns: repeat(6, 1fr); gap: 1.25rem; } }
@@ -188,6 +233,33 @@
         .skill-name { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.05em; color: rgba(255, 255, 255, 0.5); text-align: center; transition: color 0.3s ease; }
         @media (min-width: 640px) { .skill-name { font-size: 0.65rem; } }
         .skill-item:hover .skill-name { color: #C1A365; }
+
+        /* Modal swipe indicator */
+        .swipe-indicator {
+            width: 40px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 2px;
+            margin: 0 auto 16px;
+        }
+
+        /* Modal drag state */
+        .modal-dragging {
+            transition: none !important;
+        }
+
+        /* Reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            .hero-img-animator { animation: none !important; }
+            .reveal, .project-card, .timeline-item, .contact-card, .section-title, .filter-bar, .skill-item {
+                transition: opacity 0.3s ease-out !important;
+                transform: none !important;
+            }
+            .reveal.revealed, .project-card.revealed, .timeline-item.revealed, .contact-card.revealed, .section-title.revealed, .filter-bar.revealed, .skill-item.revealed {
+                opacity: 1;
+            }
+            .skeleton { animation: none; background: #1a1a1a; }
+        }
     </style>
     
     <script>
@@ -218,7 +290,20 @@
     <div class="noise"></div>
 
     <script type="text/babel">
-        const { useState, useEffect, useRef } = React;
+        const { useState, useEffect, useRef, useCallback } = React;
+
+        // --- HAPTIC FEEDBACK UTILITY ---
+        const haptic = {
+            light: () => {
+                if ('vibrate' in navigator) navigator.vibrate(10);
+            },
+            medium: () => {
+                if ('vibrate' in navigator) navigator.vibrate(20);
+            },
+            heavy: () => {
+                if ('vibrate' in navigator) navigator.vibrate([30, 10, 30]);
+            }
+        };
 
         // --- ICONS ---
         const Icons = {
@@ -260,7 +345,7 @@
                 filters: { all: "All", arch: "Architecture", interior: "Interior", ai: "AI Art", exec: "Executive", cgi: "3D CGI", sketch: "Sketches", ads: "Ads" },
                 contact: { title: "Let's Build Your Vision" },
                 about: {
-                    title: "About Me", // Changed from "The Architect"
+                    title: "About Me",
                     bio: "I am an architectural designer operating at the intersection of built environments and digital artistry. With a high-honors academic background and a diverse portfolio of executive projects, my work bridges the gap between conceptual innovation and technical precision.",
                     expTitle: "Work Experience",
                     eduTitle: "Education",
@@ -358,50 +443,118 @@
             </div>
         );
 
-        const BlurImage = ({ src, alt, className, onLoad: externalOnLoad, ...props }) => {
+        // --- LAZY IMAGE COMPONENT with Intersection Observer ---
+        const LazyImage = ({ src, alt, className, onLoad: externalOnLoad, ...props }) => {
             const [isLoaded, setIsLoaded] = useState(false);
+            const [isInView, setIsInView] = useState(false);
             const [placeholder, setPlaceholder] = useState('');
             const imgRef = useRef(null);
+            const containerRef = useRef(null);
 
+            // Intersection Observer for lazy loading
             useEffect(() => {
+                const observer = new IntersectionObserver(
+                    (entries) => {
+                        entries.forEach((entry) => {
+                            if (entry.isIntersecting) {
+                                setIsInView(true);
+                                observer.unobserve(entry.target);
+                            }
+                        });
+                    },
+                    { rootMargin: '100px', threshold: 0.01 }
+                );
+
+                if (containerRef.current) {
+                    observer.observe(containerRef.current);
+                }
+
+                return () => observer.disconnect();
+            }, []);
+
+            // Generate placeholder
+            useEffect(() => {
+                if (!isInView) return;
+                
                 const canvas = document.createElement('canvas');
                 const ctx = canvas.getContext('2d');
                 const img = new Image();
                 img.crossOrigin = 'anonymous';
                 img.onload = () => {
                     const aspectRatio = img.height / img.width;
-                    canvas.width = 20; canvas.height = Math.round(20 * aspectRatio);
+                    canvas.width = 20;
+                    canvas.height = Math.round(20 * aspectRatio);
                     ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-                    try { setPlaceholder(canvas.toDataURL('image/jpeg', 0.5)); } catch (e) { setPlaceholder(''); }
+                    try {
+                        setPlaceholder(canvas.toDataURL('image/jpeg', 0.5));
+                    } catch (e) {
+                        setPlaceholder('');
+                    }
                 };
-                img.onerror = () => { setPlaceholder(''); };
+                img.onerror = () => setPlaceholder('');
                 img.src = src;
-            }, [src]);
+            }, [src, isInView]);
 
-            const handleLoad = () => { setIsLoaded(true); if (externalOnLoad) externalOnLoad(); };
+            const handleLoad = () => {
+                setIsLoaded(true);
+                if (externalOnLoad) externalOnLoad();
+            };
+
             return (
-                <div className="img-blur-wrapper" style={{ width: '100%', height: '100%' }}>
-                    {placeholder && <img src={placeholder} alt="" className={`img-blur-placeholder ${isLoaded ? 'loaded' : ''}`} aria-hidden="true"/>}
-                    <img ref={imgRef} src={src} alt={alt} className={`img-blur-main ${isLoaded ? 'loaded' : ''} ${className || ''}`} onLoad={handleLoad} {...props}/>
+                <div ref={containerRef} className="img-blur-wrapper" style={{ width: '100%', height: '100%' }}>
+                    {placeholder && (
+                        <img
+                            src={placeholder}
+                            alt=""
+                            className={`img-blur-placeholder ${isLoaded ? 'loaded' : ''}`}
+                            aria-hidden="true"
+                        />
+                    )}
+                    {isInView && (
+                        <img
+                            ref={imgRef}
+                            src={src}
+                            alt={alt}
+                            className={`img-blur-main ${isLoaded ? 'loaded' : ''} ${className || ''}`}
+                            onLoad={handleLoad}
+                            {...props}
+                        />
+                    )}
                 </div>
             );
         };
 
+        // --- SKELETON COMPONENT ---
+        const ProjectSkeleton = ({ isLarge = false }) => (
+            <div className={`skeleton-card ${isLarge ? 'col-span-2 row-span-2' : 'col-span-1 row-span-1'}`}>
+                <div className="w-full h-full min-h-[200px] skeleton"></div>
+            </div>
+        );
+
         const MobileBottomNav = ({ activeSection, onNavigate, lang, onLangToggle, isRTL, isVisible }) => {
             const navOrder = ['work', 'contact', 'about'];
             
+            const handleNavClick = (e, key) => {
+                haptic.light();
+                onNavigate(e, key);
+            };
+
+            const handleLangToggle = () => {
+                haptic.medium();
+                onLangToggle();
+            };
+            
             return (
-                <nav className={`mobile-bottom-nav md:hidden ${isVisible ? 'visible' : ''}`}>
+                <nav className={`mobile-bottom-nav ${isVisible ? 'visible' : ''}`}>
                     {navOrder.map((key) => (
-                        <a key={key} href={`#${key}`} onClick={(e) => onNavigate(e, key)} className={`mobile-nav-item ${activeSection === key ? 'active' : ''}`}>
+                        <a key={key} href={`#${key}`} onClick={(e) => handleNavClick(e, key)} className={`mobile-nav-item ${activeSection === key ? 'active' : ''}`}>
                             {key === 'work' && <Icons.Grid />}
                             {key === 'about' && <Icons.User />}
                             {key === 'contact' && <Icons.MessageCircle />}
-                            
                             <span className={`font-bold ${isRTL ? 'font-fa' : ''}`}>{content[lang].nav[key]}</span>
                         </a>
                     ))}
-                    <button onClick={onLangToggle} className="mobile-lang-btn" aria-label="Switch Language">
+                    <button onClick={handleLangToggle} className="mobile-lang-btn" aria-label="Switch Language">
                         <img src="./images/flag.jpg" onError={(e) => { e.target.onerror = null; e.target.src = `https://placehold.co/40x40/222/C1A365?text=${lang === 'en' ? 'ف' : 'E'}`; }} alt="Lang" />
                     </button>
                 </nav>
@@ -452,6 +605,11 @@
             const [mobileNavVisible, setMobileNavVisible] = useState(false);
             
             const [showAllProjects, setShowAllProjects] = useState(false);
+
+            // Modal swipe-to-close state
+            const [modalDragY, setModalDragY] = useState(0);
+            const [isDraggingModal, setIsDraggingModal] = useState(false);
+            const modalDragStart = useRef(null);
 
             const t = content[lang];
             const timeline = timelineData[lang];
@@ -625,7 +783,7 @@
                 const handleKeyDown = (e) => {
                     if (showAR) return;
                     switch(e.key) {
-                        case 'Escape': setSelectedProject(null); setShowAR(false); break;
+                        case 'Escape': closeModal(); break;
                         case 'ArrowRight': e.preventDefault(); nextMedia(); break;
                         case 'ArrowLeft': e.preventDefault(); prevMedia(); break;
                         default: break;
@@ -661,7 +819,10 @@
             const [loadProgress, setLoadProgress] = useState(0);
 
             const scrollToTop = (e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); };
-            const scrollToProjects = () => { document.getElementById('work').scrollIntoView({ behavior: 'smooth' }); };
+            const scrollToProjects = () => { 
+                haptic.light();
+                document.getElementById('work').scrollIntoView({ behavior: 'smooth' }); 
+            };
             const handleNavClick = (e, targetId) => {
                 e.preventDefault();
                 const element = document.getElementById(targetId);
@@ -670,6 +831,7 @@
 
             const nextMedia = (e) => {
                 if (e) e.stopPropagation();
+                haptic.light();
                 if (selectedProject) {
                     const totalMedia = selectedProject.gallery.length + (selectedProject.video ? 1 : 0);
                     setModalImageIndex((prev) => (prev + 1) % totalMedia);
@@ -679,6 +841,7 @@
 
             const prevMedia = (e) => {
                 if (e) e.stopPropagation();
+                haptic.light();
                 if (selectedProject) {
                     const totalMedia = selectedProject.gallery.length + (selectedProject.video ? 1 : 0);
                     setModalImageIndex((prev) => (prev - 1 + totalMedia) % totalMedia);
@@ -686,12 +849,20 @@
                 }
             };
 
-            const onTouchStart = (e) => { if (showAR) return; setTouchEnd(null); setTouchStart(e.targetTouches[0].clientX); };
+            // Gallery swipe (horizontal)
             const [touchStart, setTouchStart] = useState(null);
             const [touchEnd, setTouchEnd] = useState(null);
             const minSwipeDistance = 50;
 
-            const onTouchMove = (e) => { if (showAR) return; setTouchEnd(e.targetTouches[0].clientX); };
+            const onTouchStart = (e) => { 
+                if (showAR) return; 
+                setTouchEnd(null); 
+                setTouchStart(e.targetTouches[0].clientX); 
+            };
+            const onTouchMove = (e) => { 
+                if (showAR) return; 
+                setTouchEnd(e.targetTouches[0].clientX); 
+            };
             const onTouchEnd = () => {
                 if (showAR) return;
                 if (!touchStart || !touchEnd) return;
@@ -700,7 +871,43 @@
                 if (distance < -minSwipeDistance) prevMedia();
             };
 
+            // Modal swipe-to-close (vertical)
+            const handleModalTouchStart = (e) => {
+                if (showAR) return;
+                modalDragStart.current = e.touches[0].clientY;
+                setIsDraggingModal(true);
+            };
+
+            const handleModalTouchMove = (e) => {
+                if (showAR || !modalDragStart.current) return;
+                const currentY = e.touches[0].clientY;
+                const diff = currentY - modalDragStart.current;
+                // Only allow downward drag
+                if (diff > 0) {
+                    setModalDragY(diff);
+                }
+            };
+
+            const handleModalTouchEnd = () => {
+                if (showAR) return;
+                setIsDraggingModal(false);
+                // If dragged more than 150px down, close modal
+                if (modalDragY > 150) {
+                    haptic.medium();
+                    closeModal();
+                }
+                setModalDragY(0);
+                modalDragStart.current = null;
+            };
+
+            const closeModal = () => {
+                setSelectedProject(null);
+                setShowAR(false);
+                setModalDragY(0);
+            };
+
             const openProject = (project) => {
+                haptic.light();
                 setSelectedProject(project);
                 setModalImageIndex(0);
                 setIsImageLoading(true);
@@ -710,6 +917,7 @@
             const handleImageLoad = () => { setIsImageLoading(false); };
 
             const handleIPhoneAR = async (usdzUrl) => {
+                haptic.medium();
                 setIsDownloadingUsdz(true);
                 setUsdzDownloadProgress(0);
                 try {
@@ -750,12 +958,24 @@
             };
 
             const handleARButtonClick = () => {
+                haptic.medium();
                 if (isIPhone && selectedProject.modelUSDZ) handleIPhoneAR(selectedProject.modelUSDZ);
                 else setShowAR(true);
             };
 
+            // FIX: Close AR view properly without triggering AR again
+            const handleCloseARView = (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                haptic.light();
+                setShowAR(false);
+            };
+
             const handleBackdropClick = (e) => {
-                if (e.target === e.currentTarget) { setSelectedProject(null); setShowAR(false); }
+                if (e.target === e.currentTarget) { 
+                    haptic.light();
+                    closeModal(); 
+                }
             };
 
             const filteredProjects = projectsData
@@ -768,9 +988,12 @@
             const hasFeaturedProjects = featuredProjects.length > 0;
             const hasMoreProjects = filteredProjects.length > featuredProjects.length;
 
+            // Calculate modal opacity based on drag
+            const modalOpacity = Math.max(0.3, 1 - (modalDragY / 300));
+
             return (
                 <div className={`min-h-screen ${isRTL ? 'font-fa' : ''}`} dir={isRTL ? 'rtl' : 'ltr'}>
-                    {/* Cursor */}
+                    {/* Cursor - Only on non-touch devices */}
                     <div ref={cursorDotRef} className="cursor-dot hidden md:block"></div>
                     <div ref={cursorOutlineRef} className="cursor-outline hidden md:block"></div>
 
@@ -805,7 +1028,7 @@
                                 <div key={`desktop-${index}`} className={`hero-slide-container transition-opacity duration-[1200ms] ease-in-out hidden md:block ${isActive ? 'opacity-100' : 'opacity-0 pointer-events-none'}`} style={{ zIndex: isActive ? 2 : 1 }}>
                                     <div className="absolute inset-0 bg-black/70 z-10"></div>
                                     <div className={`hero-img-animator ${isActive ? 'active' : 'inactive'}`}>
-                                        <BlurImage src={img} alt="Hero" />
+                                        <LazyImage src={img} alt="Hero" />
                                     </div>
                                 </div>
                             );
@@ -816,47 +1039,29 @@
                                 <div key={`mobile-${index}`} className={`hero-slide-container transition-opacity duration-[1200ms] ease-in-out md:hidden ${isActive ? 'opacity-100' : 'opacity-0 pointer-events-none'}`} style={{ zIndex: isActive ? 2 : 1 }}>
                                     <div className="absolute inset-0 bg-black/70 z-10"></div>
                                     <div className={`hero-img-animator ${isActive ? 'active' : 'inactive'}`}>
-                                        <BlurImage src={img} alt="Hero" />
+                                        <LazyImage src={img} alt="Hero" />
                                     </div>
                                 </div>
                             );
                         })}
                         <div ref={heroContentRef} className="relative z-20 max-w-4xl flex flex-col items-center hero-content" style={{ transform: `scale(${heroScale}) translateY(${(1 - heroScale) * -50}px)`, opacity: heroOpacity }}>
-                            {/* 
-                              2. Hero Name (Persian only): Bold + Slightly Larger 
-                            */}
                             <h1 className={`text-white tracking-tight leading-none mb-3 md:mb-4 text-3xl md:text-5xl lg:text-7xl ${isRTL ? 'font-bold font-fa text-4xl md:text-6xl lg:text-8xl' : 'font-light'}`}>
-    {t.hero.name}
-</h1>
+                                {t.hero.name}
+                            </h1>
                             
-                            {/* 
-                              3. Typewriter: 
-                                 - Persian: Remove tracking (kerning fix) + Bold
-                                 - English: Keep tracking + Light
-                            */}
                             <div className={`text-xs md:text-lg text-white/80 font-light min-h-[1.5em] mb-4 md:mb-6 uppercase ${isRTL ? 'tracking-normal font-bold font-fa text-lg md:text-2xl' : 'tracking-[0.2em]'}`}>
                                 {text}<span className="typing-cursor"></span>
                             </div>
                             
-                            {/* 
-                              4. Hero Description: 
-                                 - Both Languages: Pure White (text-white instead of text-white/40)
-                                 - Persian: Bold
-                            */}
                             <p className={`text-white text-[10px] md:text-sm max-w-xl leading-relaxed mb-8 md:mb-10 ${isRTL ? 'font-bold font-fa' : 'font-light'}`}>
                                 {t.hero.desc}
                             </p>
                             
-                            {/* 
-                              5. Hero Buttons: 
-                                 - Both: Bold
-                                 - Persian: Slightly larger (text-[11px] md:text-[15px])
-                            */}
                             <div className="flex flex-row justify-center gap-3 md:gap-4 w-full sm:w-auto">
                                 <button onClick={scrollToProjects} className={`px-6 py-2 md:px-8 md:py-2.5 border border-white/30 text-white font-bold uppercase tracking-widest rounded-full hover:bg-white hover:text-black hover:border-white transition-all duration-300 ${isRTL ? 'text-[11px] md:text-[15px] font-fa' : 'text-[10px] md:text-sm'}`}>
                                     {t.hero.ctaPrimary}
                                 </button>
-                                <a href="./docs/portfolio.pdf" download className={`px-6 py-2 md:px-8 md:py-2.5 border border-white/10 text-white font-bold uppercase tracking-widest rounded-full hover:border-accent hover:text-accent transition-all duration-300 ${isRTL ? 'text-[11px] md:text-[15px] font-fa' : 'text-[10px] md:text-sm'}`}>
+                                <a href="./docs/portfolio.pdf" download onClick={() => haptic.light()} className={`px-6 py-2 md:px-8 md:py-2.5 border border-white/10 text-white font-bold uppercase tracking-widest rounded-full hover:border-accent hover:text-accent transition-all duration-300 ${isRTL ? 'text-[11px] md:text-[15px] font-fa' : 'text-[10px] md:text-sm'}`}>
                                     {t.hero.ctaSecondary}
                                 </a>
                             </div>
@@ -877,7 +1082,7 @@
                         {showAllProjects && (
                             <div className="filter-bar flex flex-wrap gap-4 gap-y-3 mb-12 justify-center md:justify-start pb-4 border-b border-white/10">
                                 {Object.keys(t.filters).map((key) => (
-                                    <button key={key} onClick={() => setFilter(key)} className={`text-[10px] md:text-xs font-light uppercase ${isRTL ? 'tracking-normal font-fa font-bold md:font-bold' : 'tracking-widest'} transition-all duration-300 px-3 py-1 md:px-4 md:py-1.5 rounded-full border ${filter === key ? 'filter-btn-active' : 'border-white/10 text-secondary hover:text-white hover:border-white/30'}`} onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)}>
+                                    <button key={key} onClick={() => { haptic.light(); setFilter(key); }} className={`text-[10px] md:text-xs font-light uppercase ${isRTL ? 'tracking-normal font-fa font-bold md:font-bold' : 'tracking-widest'} transition-all duration-300 px-3 py-1 md:px-4 md:py-1.5 rounded-full border ${filter === key ? 'filter-btn-active' : 'border-white/10 text-secondary hover:text-white hover:border-white/30'}`} onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)}>
                                         {t.filters[key]}
                                     </button>
                                 ))}
@@ -885,7 +1090,15 @@
                         )}
 
                         {!dataFetched ? (
-                            <div className="text-center py-20 text-white/30 text-xs tracking-widest">Loading Projects...</div>
+                            // Skeleton Loading
+                            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-4 auto-rows-[minmax(200px,_1fr)] grid-flow-dense">
+                                <ProjectSkeleton isLarge={true} />
+                                <ProjectSkeleton />
+                                <ProjectSkeleton />
+                                <ProjectSkeleton isLarge={true} />
+                                <ProjectSkeleton />
+                                <ProjectSkeleton />
+                            </div>
                         ) : (
                             <>
                                 <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-4 auto-rows-[minmax(200px,_1fr)] grid-flow-dense">
@@ -901,7 +1114,7 @@
                                                 onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)}
                                             >
                                                 <div className="w-full h-full transition-transform duration-700 group-hover:scale-105">
-                                                    <BlurImage src={project.img} alt={project.title[lang]} loading="lazy" className="opacity-90 group-hover:opacity-100" />
+                                                    <LazyImage src={project.img} alt={project.title[lang]} className="opacity-90 group-hover:opacity-100" />
                                                 </div>
                                                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4 md:p-6">
                                                     <span className={`text-accent text-[9px] md:text-[10px] uppercase ${isRTL ? 'tracking-normal font-fa font-bold' : 'tracking-widest'} mb-1`}>{project.loc}</span>
@@ -915,7 +1128,7 @@
                                 <div className="mt-12 flex flex-col items-center gap-4 reveal">
                                     {!showAllProjects && hasMoreProjects && hasFeaturedProjects && (
                                         <button 
-                                            onClick={() => setShowAllProjects(true)} 
+                                            onClick={() => { haptic.medium(); setShowAllProjects(true); }} 
                                             className={`group flex items-center gap-3 px-8 py-3 border border-white/20 text-white/70 text-xs font-light uppercase tracking-widest rounded-full hover:border-accent hover:text-accent hover:bg-white/5 transition-all duration-300 ${isRTL ? 'font-fa font-bold' : ''}`}
                                             onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)}
                                         >
@@ -929,6 +1142,7 @@
                                     {showAllProjects && hasMoreProjects && (
                                         <button 
                                             onClick={() => {
+                                                haptic.light();
                                                 setShowAllProjects(false);
                                                 window.scrollTo({ top: document.getElementById('work').offsetTop - 100, behavior: 'smooth' });
                                             }} 
@@ -955,7 +1169,7 @@
                             </h2>
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" dir="ltr">
                                 {socialLinks.map((item, index) => (
-                                    <a key={index} href={item.href} target="_blank" className="contact-card flex items-center gap-4 p-5 rounded-lg border border-white/5 hover:border-accent/50 hover:bg-white/[0.02] transition-all duration-300 group cursor-none text-left backdrop-blur-sm bg-white/[0.01]" style={{ transitionDelay: `${index * 0.05}s` }} onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)}>
+                                    <a key={index} href={item.href} target="_blank" onClick={() => haptic.light()} className="contact-card flex items-center gap-4 p-5 rounded-lg border border-white/5 hover:border-accent/50 hover:bg-white/[0.02] transition-all duration-300 group cursor-none text-left backdrop-blur-sm bg-white/[0.01]" style={{ transitionDelay: `${index * 0.05}s` }} onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)}>
                                         <span className="text-secondary group-hover:text-accent transition-colors scale-100">{item.icon}</span>
                                         <div className="flex flex-col items-start">
                                             <span className={`text-[9px] uppercase ${isRTL ? 'tracking-normal font-fa font-bold' : 'tracking-widest'} text-secondary mb-1`}>{item.label}</span>
@@ -980,12 +1194,6 @@
                                 </div>
                                 
                                 <div className={`w-full md:w-2/3 ${isRTL ? 'text-right' : 'text-left'}`}>
-                                    {/* 
-                                      1. About Me Title: 
-                                         - Text changed to "About Me" (English)
-                                         - Larger Size (text-2xl md:text-4xl)
-                                         - Bold
-                                    */}
                                     <h2 className={`reveal text-2xl md:text-4xl text-accent uppercase ${isRTL ? 'tracking-normal font-fa font-bold' : 'tracking-[0.2em] font-bold'} mb-3`}>
                                         {t.about.title}
                                     </h2>
@@ -1060,10 +1268,27 @@
 
                     {/* --- MODAL --- */}
                     {selectedProject && (
-                        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-8 bg-black/90 backdrop-blur-xl animate-fade-in" onClick={handleBackdropClick}>
-                            <div className="w-full h-full max-w-[1920px] p-4 md:p-12 flex flex-col md:flex-row gap-8 items-center justify-center relative pointer-events-none">
+                        <div 
+                            className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-8 bg-black/90 backdrop-blur-xl animate-fade-in" 
+                            onClick={handleBackdropClick}
+                            style={{ opacity: modalOpacity }}
+                        >
+                            <div 
+                                className={`w-full h-full max-w-[1920px] p-4 md:p-12 flex flex-col md:flex-row gap-8 items-center justify-center relative pointer-events-none ${isDraggingModal ? 'modal-dragging' : ''}`}
+                                style={{ transform: `translateY(${modalDragY}px)` }}
+                                onTouchStart={handleModalTouchStart}
+                                onTouchMove={handleModalTouchMove}
+                                onTouchEnd={handleModalTouchEnd}
+                            >
+                                {/* Swipe indicator for mobile */}
+                                {!showAR && isMobile && (
+                                    <div className="absolute top-2 left-1/2 -translate-x-1/2 pointer-events-none">
+                                        <div className="swipe-indicator"></div>
+                                    </div>
+                                )}
+
                                 {!showAR && (
-                                    <button className="absolute top-4 right-4 z-50 p-2 bg-black/20 hover:bg-white text-white/80 hover:text-black rounded-full transition-all backdrop-blur-md border border-white/10 pointer-events-auto" onClick={() => setSelectedProject(null)}>
+                                    <button className="absolute top-4 right-4 z-50 p-2 bg-black/20 hover:bg-white text-white/80 hover:text-black rounded-full transition-all backdrop-blur-md border border-white/10 pointer-events-auto" onClick={() => { haptic.light(); closeModal(); }}>
                                         <Icons.Close />
                                     </button>
                                 )}
@@ -1085,15 +1310,46 @@
                                     )}
                                     {showAR && selectedProject.hasAR ? (
                                         <div className="w-full h-full relative" dir="ltr">
-                                            <model-viewer ref={modelViewerRef} src={selectedProject.modelGLB} ios-src={selectedProject.modelUSDZ} ar ar-modes="webxr scene-viewer quick-look" ar-scale="auto" ar-placement="floor" camera-controls auto-rotate shadow-intensity="1" interaction-prompt="none" alt={`3D model of ${selectedProject.title[lang]}`} style={{width: '100%', height: '100%'}}>
-                                                <div slot="ar-button" className="ar-buttons-container md:hidden">
-                                                    <button onClick={(e) => { e.stopPropagation(); setShowAR(false); }} className="ar-btn ar-btn-back">
-                                                        <Icons.Back /><span>{lang === 'en' ? 'Back' : 'بازگشت'}</span>
-                                                    </button>
-                                                    <button className="ar-btn ar-btn-activate"><span>{lang === 'en' ? 'View in AR' : 'واقعیت افزوده'}</span><Icons.AR /></button>
-                                                </div>
+                                            {/* FIX: Back button is now OUTSIDE the model-viewer, preventing AR trigger */}
+                                            <div className="ar-buttons-container md:hidden">
+                                                <button 
+                                                    onClick={handleCloseARView} 
+                                                    className="ar-btn ar-btn-back"
+                                                    style={{ pointerEvents: 'auto' }}
+                                                >
+                                                    <Icons.Back />
+                                                    <span>{lang === 'en' ? 'Back' : 'بازگشت'}</span>
+                                                </button>
+                                            </div>
+                                            
+                                            <model-viewer 
+                                                ref={modelViewerRef} 
+                                                src={selectedProject.modelGLB} 
+                                                ios-src={selectedProject.modelUSDZ} 
+                                                ar 
+                                                ar-modes="webxr scene-viewer quick-look" 
+                                                ar-scale="auto" 
+                                                ar-placement="floor" 
+                                                camera-controls 
+                                                auto-rotate 
+                                                shadow-intensity="1" 
+                                                interaction-prompt="none" 
+                                                alt={`3D model of ${selectedProject.title[lang]}`} 
+                                                style={{width: '100%', height: '100%'}}
+                                            >
+                                                {/* Only the AR activation button inside slot="ar-button" */}
+                                                <button 
+                                                    slot="ar-button" 
+                                                    className="ar-btn ar-btn-activate"
+                                                    style={{ position: 'absolute', top: '1rem', right: '1rem', zIndex: 60 }}
+                                                >
+                                                    <span>{lang === 'en' ? 'View in AR' : 'واقعیت افزوده'}</span>
+                                                    <Icons.AR />
+                                                </button>
                                             </model-viewer>
-                                            <button onClick={() => setShowAR(false)} className="hidden md:flex absolute top-4 left-4 z-[60] px-4 py-2 bg-black hover:bg-[#222] text-white rounded-full transition-all items-center gap-2 shadow-lg pointer-events-auto text-[10px] font-light uppercase tracking-widest border border-white/10">
+                                            
+                                            {/* Desktop back button */}
+                                            <button onClick={handleCloseARView} className="hidden md:flex absolute top-4 left-4 z-[60] px-4 py-2 bg-black hover:bg-[#222] text-white rounded-full transition-all items-center gap-2 shadow-lg pointer-events-auto text-[10px] font-light uppercase tracking-widest border border-white/10">
                                                 <Icons.Back /><span>{lang === 'en' ? 'Back to Gallery' : 'بازگشت'}</span>
                                             </button>
                                         </div>
